@@ -1,201 +1,103 @@
-# 🇮🇳 Samvidhan - The Constitution of India
+# Samvidhan
 
-An interactive and responsive multi-page website that simplifies the **Constitution of India** and its core values for everyone.
-This project presents complex constitutional concepts in **easy language**, along with real-life examples, quizzes, case studies, and more.
+Samvidhan is a Django website for learning about the Constitution of India. It includes educational pages, an AI-generated Constitution quiz, a user survey, and a staff-only survey results dashboard.
 
----
+## Features
 
-## 🌐 Live Website
+- Educational pages about Fundamental Rights and Duties, constitutional values, articles, cases, crimes, freedom fighters, and helplines.
+- Account registration and password login, plus Google sign-in.
+- Login required to take the quiz or submit a survey.
+- A fresh set of 10 multiple-choice questions is requested from Gemini when the quiz page opens. Quiz answers are sent to Gemini for scoring; the answer key stays in the server-side session and the returned score is checked against it.
+- Survey responses are saved to SQLite. Recorded audio is stored in the database (up to 8 MB per recording); it is not uploaded to Cloudinary.
+- Survey results and saved audio playback are restricted to staff accounts. Staff can also manage submissions through Django Admin.
+- A survey thank-you page appears after submission and returns the user to the home page after a short delay.
 
-🔗 [Visit Website](PASTE_YOUR_LIVE_LINK_HERE)
+## Technology
 
----
+- Python and Django 6.1.1
+- SQLite
+- HTML, CSS, and vanilla JavaScript
+- Tailwind CSS CDN on selected pages
+- Google OAuth and Gemini API (server-side requests)
 
-## 🚀 Features
+## Local setup (Windows PowerShell)
 
-✨ **Multi-Page Website**
-
-* Separate pages for all major constitutional topics
-
-📘 **Core Values Explained**
-
-* Sovereignty
-* Secularism
-* Socialism
-* Democracy
-* Republic
-* Justice
-* Liberty
-* Equality
-* Fraternity
-* Dignity of Individual
-* Unity & Integrity
-
-⚖️ **Fundamental Rights & Duties**
-
-* Explained in simple words
-* Real-life relatable examples
-
-🚔 **Crimes & Punishments**
-
-* Awareness about common crimes
-* Simple explanation of legal consequences
-
-📑 **Real-Life Case Studies**
-
-* Report-style case presentation
-* Animated sections
-
-📜 **Important Articles & Schedules**
-
-* Key articles like 14, 19, 21 explained
-* Easy breakdown of schedules
-
-📞 **Emergency Helpline Page**
-
-* Important Indian helpline numbers
-* Click-to-call feature
-
-🧠 **Interactive Quiz**
-
-* Constitution-based MCQs
-* Score tracking
-
-🧾 **Freedom Fighters Section**
-
-* Stories and contributions
-* Role in independence & constitution
-
-📝 **Survey System**
-
-* User input (Name, Email, Phone)
-* Opinion-based questions
-* Audio response support
-
-📊 **Survey Results Dashboard**
-
-* Displays submitted responses
-* Report-style format using localStorage
-
----
-
-## 🎨 Tech Stack
-
-* **HTML5**
-* **Tailwind CSS (CDN)**
-* **Vanilla JavaScript**
-
----
-
-## 📱 Responsiveness
-
-✔ Fully responsive
-✔ Mobile-friendly
-✔ Works on all screen sizes
-
----
-
-## 🎯 Purpose of the Project
-
-This project aims to:
-
-* Make constitutional knowledge **accessible**
-* Spread awareness about **rights & duties**
-* Educate users in an **interactive way**
-* Promote constitutional values among youth 🇮🇳
-
----
-
-## 💡 Future Improvements
-
-* Backend integration (Django / Node.js)
-* Database storage for survey results
-* User authentication
-* More quizzes & gamification
-
----
-
-## 🙌 Contribution
-
-Feel free to fork this repo and improve it 🚀
-Pull requests are welcome!
-
----
-
-## 📜 License
-
-This project is open-source and available under the MIT License.
-
----
-
-## 👨‍💻 Author
-
-**Laxmi Narayan Verma**
-
----
-
-## 🧭 Frontend Structure
-
-The site remains a root-level static HTML project so relative links continue to work with Live Server, GitHub Pages, and Netlify.
-
-```text
-templates/
-├── base.html
-├── components/
-│   ├── navbar.html
-│   ├── mobile_menu.html
-│   ├── footer.html
-│   └── preamble_nav.html
-└── README.md
-
-static/
-├── css/
-├── global.css       # Shared tokens, reset, focus states, tricolor, motion utilities
-│   └── components.css # Shared navigation and constitutional-value components
-└── js/
-├── main.js          # Shared page initialization
-├── navigation.js    # Active navigation and mobile-menu behavior
-├── animations.js    # Shared IntersectionObserver animations
-└── storage.js       # Safe localStorage adapter for future Django replacement
-```
-
-The constitutional-value pages use the shared CSS and JavaScript foundation from `static/`. Their page-specific content and expand/collapse behavior remain local to preserve the existing experience. The survey uses browser media APIs and Django form submission; recorded survey audio is stored in the database.
-
-The existing frontend assets are also copied into `static/assets/` for Django static serving. The original `assets/` directory remains available to legacy root pages during migration.
-
-The legacy HTML pages and their original assets are now grouped under `frontend/`. Django serves them through compatibility routes so existing `.html` links continue to work.
-
-## Django + SQLite
-
-The project now includes a Django application without authentication or user accounts. Survey submissions are saved as `SurveyResponse` rows in SQLite, and the response ID for the latest submission is stored in the current Django session.
-
-### Setup
-
-The local `.venv/` was created automatically and Django is pinned in `requirements.txt`. To reproduce the environment:
+Use a Python version supported by Django 6.1.1.
 
 ```powershell
 py -m venv .venv
-.venv\Scripts\python.exe -m pip install -r requirements.txt
-.venv\Scripts\python.exe manage.py migrate
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+Copy-Item .env.example .env
 ```
 
-### Run
+Open `.env` and set the credentials described below. Then initialize the database and create an administrator account:
 
 ```powershell
-.venv\Scripts\python.exe manage.py runserver
+.\.venv\Scripts\python.exe manage.py migrate
+.\.venv\Scripts\python.exe manage.py createsuperuser
 ```
 
-Open `http://127.0.0.1:8000/`. Users register and log in before opening the quiz or survey. The survey flow is:
+Start the development server:
+
+```powershell
+.\.venv\Scripts\python.exe manage.py runserver
+```
+
+Open <http://127.0.0.1:8000/>. After changing `.env`, stop and restart the server so Django loads the updated values.
+
+## Environment configuration
+
+`.env.example` lists the required variable names. Keep real credentials in the ignored `.env` file; do not commit or share it.
+
+| Variable | Purpose |
+| --- | --- |
+| `GOOGLE_CLIENT_ID` | OAuth client ID for Google sign-in |
+| `GOOGLE_CLIENT_SECRET` | OAuth client secret |
+| `GOOGLE_REDIRECT_URI` | Local callback, normally `http://127.0.0.1:8000/accounts/google/callback/` |
+| `GEMINI_API_KEY` | API key used by Django for quiz generation and scoring |
+| `GEMINI_MODEL` | Gemini model name; the current example uses `gemini-3.8-flash` |
+
+### Google sign-in setup
+
+Create a **Web application** OAuth client in Google Cloud. For local development, configure this authorized JavaScript origin:
 
 ```text
-register/login -> protected quiz or survey
-survey page -> Django POST -> SurveyResponse -> SQLite3 -> thank-you page -> home
+http://127.0.0.1:8000
 ```
 
-The results view and audio playback endpoint are staff-only. Aggregate values are calculated with the Django ORM. All responses are available to authorized staff through Django Admin at `/admin/`; use `python manage.py createsuperuser` to create the portal owner account. Survey recordings are saved as binary data in SQLite, not uploaded to Cloudinary.
+and this authorized redirect URI:
 
-The original pages remain grouped in `frontend/` during migration. Django routes serve those pages for general content, while `/survey/` and `/results/` use the database-backed workflow. Quiz and survey routes require a user account; results remain restricted to staff. To configure Google sign-in, copy `.env.example` to `.env`, replace the placeholders with credentials from a Google OAuth client, and add `http://127.0.0.1:8000/accounts/google/callback/` to its authorized redirect URIs. Set `GOOGLE_REDIRECT_URI` to the deployed callback URL outside local development. The `.env` file is ignored by Git. The quiz uses Gemini to generate a fresh set when its page opens and to score submitted answers; set `GEMINI_API_KEY` in `.env` (and optionally `GEMINI_MODEL`) to enable it. Restart Django after changing `.env`. The API key stays on the server and is never sent to the browser.
+```text
+http://127.0.0.1:8000/accounts/google/callback/
+```
 
----
+Copy the client ID and secret into `.env`. If the OAuth app is in testing mode, add the Google accounts that need to sign in as test users. For deployment, configure the deployed domain and callback URL in Google Cloud and update `GOOGLE_REDIRECT_URI` accordingly.
 
-⭐ If you like this project, don't forget to star the repository!
+### Gemini quiz setup
+
+Create a Gemini API key and put it in `.env` as `GEMINI_API_KEY=...`. The key is sent only from Django to Google; it is not included in quiz-page JavaScript. The quiz makes a Gemini request when it loads and another when the user submits answers. Requests can use API quota. Temporary Gemini `503` responses are retried automatically up to three times.
+
+## Main routes
+
+| Route | Access | Description |
+| --- | --- | --- |
+| `/` | Public | Home page |
+| `/accounts/register/` | Public | Create an account |
+| `/accounts/login/` | Public | Sign in with password or Google |
+| `/accounts/logout/` | Signed in | Log out |
+| `/quiz/` | Signed in | Generate and take a Constitution quiz |
+| `/quiz/api/generate/` | Signed in, POST | Request a new set of questions |
+| `/quiz/api/score/` | Signed in, POST | Submit quiz answers for scoring |
+| `/survey/` | Signed in | Submit a survey response and optional audio |
+| `/survey/thank-you/` | Public | Submission confirmation |
+| `/results/` | Staff | View survey results and response reports |
+| `/results/audio/<response_id>/` | Staff | Play an audio response saved in the database |
+| `/admin/` | Staff | Django administration |
+
+The educational content is served from `frontend/` through Django routes. Account and result templates are in `templates/`, and shared styles and assets are in `static/`.
+
+## Data and access
+
+Survey submissions are stored as `SurveyResponse` records in `db.sqlite3`. The results dashboard uses those records and calculates summary values from the database. Create a staff user with `createsuperuser` to access `/results/` and `/admin/`; regular accounts cannot access the results dashboard or audio endpoint.
+
+The project `.gitignore` excludes `.env`, the local SQLite database, Python bytecode, and the virtual environment.
