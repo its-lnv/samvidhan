@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Samvidhan - Constitution of India{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  {% block fonts %}{% endblock %}
+  <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/components.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/readable.css' %}" />
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  {% include "components/navbar.html" %}
+  {% block content %}{% endblock %}
+  {% include "components/footer.html" %}
+  <script src="{% static 'js/main.js' %}" defer></script>
+  <script src="{% static 'js/navigation.js' %}" defer></script>
+  <script src="{% static 'js/animations.js' %}" defer></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/static/css/readable.css"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Case Reports – Samvidhan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Serif:ital,wght@0,400;1,400&family=Special+Elite&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --saffron:#FF9933;--saffron-dark:#e6821a;
+  --green:#138808;--green-dark:#0e6606;
+  --navy:#002147;--navy-dark:#001530;
+  --gold:#C9A84C;--gold-light:#e8c96a;
+  --cream:#FDF8F0;--cream-dark:#f0e8d8;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--cream);overflow-x:hidden;}
+.tricolor{height:6px;background:linear-gradient(to right,var(--saffron) 33.33%,white 33.33%,white 66.66%,var(--green) 66.66%);}
+
+nav{background:rgba(0,33,71,.97);backdrop-filter:blur(10px);position:sticky;top:0;z-index:50;}
+.nav-inner{max-width:80rem;margin:0 auto;padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Playfair Display',serif;color:white;font-size:1.2rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;}
+.nav-logo .nav-flag{width:1.5rem;height:1rem;border-radius:.125rem;object-fit:cover;display:block;}
+.nav-links{display:flex;gap:1.4rem;align-items:center;}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.82rem;transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a.active{color:#FFC107;font-weight:600;}
+.nav-links .survey-btn{background:var(--saffron);color:white;padding:.25rem 1rem;border-radius:999px;font-weight:600;}
+
+.hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:5rem 1.5rem 3.5rem;text-align:center;color:white;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 50%,rgba(255,153,51,.09) 0%,transparent 55%),radial-gradient(ellipse at 75% 50%,rgba(19,136,8,.07) 0%,transparent 55%);pointer-events:none;}
+
+.board-section{background:#d6d6d6;padding:3rem 1.5rem;}
+.board-wrapper{max-width:1100px;margin:0 auto;background:linear-gradient(145deg,#f6f6f6 0%,#d6d6d6 18%,#b4b4b4 36%,#ececec 54%,#acacac 72%,#f2f2f2 100%);border:16px solid #d5d5d5;border-radius:4px;box-shadow:0 16px 38px rgba(0,0,0,.28),0 0 0 2px #c2c2c2,inset 0 0 0 1px rgba(255,255,255,.7),inset 0 0 0 8px rgba(0,0,0,.14);position:relative;min-height:680px;padding:55px 40px;overflow:hidden;}
+.board-wrapper::before{content:'';position:absolute;inset:16px;background-image:radial-gradient(circle at 21% 24%,rgba(255,255,255,.08) 0%,transparent 36%),radial-gradient(circle at 74% 70%,rgba(255,255,255,.06) 0%,transparent 34%),repeating-radial-gradient(circle at 10% 20%,rgba(255,255,255,.028) 0 1px,transparent 1px 4px),linear-gradient(135deg,#5a5551 0%,#4a4642 42%,#58524c 100%);pointer-events:none;z-index:0;}
+.board-wrapper::after{content:'';position:absolute;inset:16px;border:1px solid rgba(255,255,255,.24);box-shadow:inset 0 0 42px rgba(0,0,0,.34),inset 0 0 0 1px rgba(0,0,0,.2);pointer-events:none;z-index:1;}
+.threads-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:8;}
+.board-inner{position:relative;z-index:3;}
+.board-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:48px 36px;}
+.card-slot{display:flex;flex-direction:column;align-items:center;position:relative;}
+.pin{width:22px;height:22px;background:radial-gradient(circle at 35% 35%,#e74c3c,#8B0000);border-radius:50%;box-shadow:0 3px 8px rgba(0,0,0,.5),inset 0 1px 2px rgba(255,255,255,.3);position:absolute;top:-11px;left:var(--pin-x,50%);transform:translateX(-50%);z-index:10;cursor:pointer;}
+.pin::after{content:'';position:absolute;bottom:-13px;left:50%;transform:translateX(-50%);width:3px;height:13px;background:linear-gradient(to bottom,#555,#333);border-radius:0 0 2px 2px;}
+.case-card{background:white;padding:1.85rem 1.2rem 1.1rem;border-radius:2px;box-shadow:3px 5px 14px rgba(0,0,0,.38),0 1px 3px rgba(0,0,0,.2);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;position:relative;width:100%;transform:rotate(var(--rot,0deg));border-top:4px solid var(--accent,#FF9933);display:block;}
+.case-card:hover{transform:rotate(var(--rot,0deg)) scale(1.05) translateY(-5px);box-shadow:6px 12px 28px rgba(0,0,0,.48);z-index:20;}
+.case-card.lined{background:repeating-linear-gradient(white 0px,white 23px,#dde8f5 24px);}
+.case-card.yellow{background:#fffde7;}
+.case-card.aged{background:#f5efe0;}
+.case-year{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--saffron);margin-bottom:.3rem;}
+.case-emoji{font-size:1.9rem;display:block;margin-bottom:.45rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,.2));}
+.case-title{font-family:'Special Elite',cursive;font-size:.82rem;color:#1a1a1a;line-height:1.4;margin-bottom:.5rem;}
+.case-sub{font-size:.6rem;color:#777;}
+.verdict-tag{display:inline-block;margin-top:.6rem;padding:.22rem .55rem;border-radius:3px;font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
+
+.doctrines-section{background:var(--navy);padding:4rem 1.5rem;}
+.doctrine-card{background:rgba(255,255,255,.07);border-radius:.75rem;padding:1.4rem;border-left:4px solid var(--saffron);}
+footer{background:var(--navy);color:white;padding:2.5rem 1.5rem;text-align:center;border-top:1px solid rgba(255,255,255,.1);}
+
+/* ── DOSSIER OVERLAY ── */
+.dossier-overlay{display:none;position:fixed;inset:0;background:rgba(0,8,26,.9);z-index:1000;overflow-y:auto;padding:2rem 1rem 5rem;backdrop-filter:blur(6px);}
+.dossier-overlay.open{display:block;}
+
+.dossier-page{max-width:800px;margin:0 auto;background:var(--cream);position:relative;box-shadow:0 0 0 1px rgba(0,33,71,.2), 6px 6px 0 var(--navy), 12px 12px 0 var(--saffron);border-radius:2px;overflow:hidden;animation:dossierIn .38s cubic-bezier(.16,1,.3,1);}
+@keyframes dossierIn{from{opacity:0;transform:translateY(28px) scale(.96);}to{opacity:1;transform:none;}}
+
+.dossier-tricolor{height:7px;background:linear-gradient(to right,var(--saffron) 33.33%,white 33.33%,white 66.66%,var(--green) 66.66%);}
+
+.dossier-header{background:var(--navy);padding:2.2rem 2.5rem 2rem;position:relative;overflow:hidden;}
+.dossier-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 85% 50%,rgba(201,168,76,.1) 0%,transparent 60%);pointer-events:none;}
+.dossier-header::after{content:'CLASSIFIED';position:absolute;right:2.2rem;top:50%;transform:translateY(-50%) rotate(-9deg);font-family:'Special Elite',cursive;font-size:2.4rem;font-weight:900;color:rgba(255,153,51,.1);letter-spacing:.1em;pointer-events:none;white-space:nowrap;}
+
+.dossier-case-no{font-size:.63rem;font-family:'Special Elite',cursive;letter-spacing:.14em;color:rgba(201,168,76,.7);margin-bottom:.55rem;}
+.dossier-emoji{font-size:2.8rem;margin-bottom:.5rem;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.4));}
+.dossier-title{font-family:'Playfair Display',serif;font-size:clamp(1.35rem,4vw,1.9rem);font-weight:900;color:white;line-height:1.2;margin-bottom:.75rem;}
+.dossier-meta{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;margin-bottom:.8rem;}
+.dossier-meta-item{font-size:.7rem;color:rgba(255,255,255,.58);font-family:'Inter',sans-serif;}
+.dossier-meta-dot{color:rgba(255,255,255,.22);}
+.verdict-stamp{display:inline-block;border:2px solid var(--gold);color:var(--gold);padding:.28rem .85rem;font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.13em;font-family:'Special Elite',cursive;transform:rotate(-4deg);box-shadow:0 0 10px rgba(201,168,76,.2);background:rgba(201,168,76,.06);}
+
+.dossier-close{position:absolute;top:1.1rem;right:1.1rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:white;width:33px;height:33px;border-radius:50%;cursor:pointer;font-size:1rem;transition:background .2s;display:flex;align-items:center;justify-content:center;z-index:10;}
+.dossier-close:hover{background:rgba(255,153,51,.35);}
+
+/* Logistics bar */
+.logistics-bar{background:var(--navy-dark);display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));border-bottom:3px solid var(--saffron);}
+.logistics-item{padding:.9rem 1.3rem;border-right:1px solid rgba(255,255,255,.06);}
+.logistics-item:last-child{border-right:none;}
+.logistics-label{font-size:.52rem;text-transform:uppercase;letter-spacing:.13em;color:var(--gold);font-weight:700;margin-bottom:.28rem;font-family:'Inter',sans-serif;}
+.logistics-value{font-size:.78rem;color:white;font-family:'Special Elite',cursive;}
+
+/* Body */
+.dossier-body{padding:2rem 2.4rem;}
+.dos-section{margin-bottom:1.9rem;}
+.dos-section-label{display:flex;align-items:center;gap:.55rem;font-size:.6rem;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--saffron);margin-bottom:.8rem;border-bottom:1px solid #e4d8c4;padding-bottom:.45rem;font-family:'Inter',sans-serif;}
+.dos-section-label span{font-size:.95rem;}
+.dos-text{font-family:'Noto Serif',serif;font-size:.875rem;color:#3a3328;line-height:1.87;}
+
+/* Phase items */
+.phase-item{display:flex;gap:.9rem;margin-bottom:1rem;padding:.85rem 1.1rem;background:white;border-radius:3px;border-left:4px solid var(--saffron);box-shadow:0 1px 5px rgba(0,0,0,.06);}
+.phase-num{flex-shrink:0;width:26px;height:26px;background:var(--navy);color:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;font-family:'Inter',sans-serif;margin-top:.08rem;}
+.phase-title{font-weight:700;font-size:.78rem;color:var(--navy);margin-bottom:.22rem;font-family:'Inter',sans-serif;}
+.phase-desc{font-family:'Noto Serif',serif;font-size:.81rem;color:#555;line-height:1.72;}
+
+/* Judgment box */
+.judgment-box{background:white;border:1px solid #e0d4bf;border-radius:5px;padding:1.35rem 1.5rem;box-shadow:0 2px 9px rgba(0,0,0,.06);position:relative;overflow:hidden;}
+.judgment-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(to bottom,var(--saffron),var(--gold),var(--green));}
+.judgment-box .dos-text{padding-left:.55rem;}
+
+/* Conclusion */
+.conclusion-box{background:linear-gradient(135deg,#fff8ee,#fff3e0);border:1px solid rgba(255,153,51,.28);border-radius:7px;padding:1.35rem 1.5rem;box-shadow:0 2px 12px rgba(255,153,51,.08);}
+.conclusion-icon{font-size:1.4rem;margin-bottom:.45rem;}
+
+/* Protocol */
+.protocol-box{background:var(--navy);border-radius:7px;padding:1.5rem;margin-top:1.8rem;}
+.protocol-title{color:var(--gold);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.95rem;display:flex;align-items:center;gap:.45rem;font-family:'Inter',sans-serif;}
+.protocol-item{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start;}
+.protocol-check{width:17px;height:17px;background:var(--saffron);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;color:white;margin-top:.12rem;font-weight:700;}
+.protocol-text{font-size:.79rem;color:rgba(255,255,255,.78);line-height:1.62;font-family:'Noto Serif',serif;}
+.protocol-strong{color:white;font-weight:700;}
+
+.dossier-back-btn{display:inline-flex;align-items:center;gap:.45rem;margin-bottom:1.4rem;color:var(--gold);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-family:'Inter',sans-serif;cursor:pointer;background:none;border:none;padding:0;transition:color .2s;}
+.dossier-back-btn:hover{color:var(--saffron);}
+
+.dossier-watermark{text-align:center;padding:1rem 1.5rem;font-size:.62rem;color:#a89880;font-style:italic;font-family:'Noto Serif',serif;border-top:1px solid #e8dcc8;}
+
+@media(max-width:768px){
+  .board-cards{grid-template-columns:1fr 1fr;gap:40px 28px;}
+  .board-wrapper{padding:46px 18px;}
+  .dossier-body{padding:1.3rem 1.1rem;}
+  .dossier-header{padding:1.5rem 1.2rem 1.3rem;}
+  .logistics-bar{grid-template-columns:1fr 1fr;}
+  .nav-links{display:none;}
+}
+@media(max-width:480px){.board-cards{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="tricolor"></div>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/assets/icons/india-flag.svg" alt="Indian flag" class="nav-flag"/>
+      <span>Samvidhan</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/rights/">Rights &amp; Duties</a>
+      <a href="/articles/">Articles</a>
+      <a href="/freedom/">Freedom Fighters</a>
+      <a href="/cases/" class="active">Case Reports</a>
+      <a href="/quiz/">Quiz</a>
+      <a href="/helpline/">Helpline</a>
+      <a href="/survey/" class="survey-btn">Survey</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div style="position:relative;z-index:1;">
+    <p style="font-size:.68rem;text-transform:uppercase;letter-spacing:.22em;color:var(--gold);margin-bottom:1rem;font-weight:700;">Landmark Judgments</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,3.8rem);font-weight:900;margin-bottom:1rem;">Case <span style="color:var(--saffron)">Reports</span></h1>
+    <p style="color:#9ca3af;font-size:.95rem;max-width:480px;margin:0 auto;line-height:1.75;">Landmark Supreme Court cases pinned to the board — click any case to open the full dossier.</p>
+  </div>
+</section>
+
+<section class="board-section">
+  <div class="board-wrapper" id="corkBoard">
+    <svg class="threads-canvas" id="threadsSvg" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="board-inner">
+      <div class="board-cards" id="boardCards"></div>
+    </div>
+  </div>
+</section>
+
+<section class="doctrines-section">
+  <div style="max-width:1100px;margin:0 auto;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);margin-bottom:2rem;">Key Doctrines Established</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;">
+      <div class="doctrine-card">
+        <h3 style="font-family:'Playfair Display',serif;color:white;margin-bottom:.6rem;font-size:1.05rem;">Basic Structure Doctrine</h3>
+        <p style="color:#9ca3af;font-size:.83rem;line-height:1.7;">Parliament can amend but cannot destroy the Constitution's basic structure — democracy, federalism, secularism. (Kesavananda Bharati, 1973)</p>
+      </div>
+      <div class="doctrine-card" style="border-left-color:var(--green);">
+        <h3 style="font-family:'Playfair Display',serif;color:white;margin-bottom:.6rem;font-size:1.05rem;">Right to Privacy</h3>
+        <p style="color:#9ca3af;font-size:.83rem;line-height:1.7;">Privacy is a fundamental right under Article 21. No government can intrude on personal autonomy. (K.S. Puttaswamy, 2017)</p>
+      </div>
+      <div class="doctrine-card" style="border-left-color:var(--gold);">
+        <h3 style="font-family:'Playfair Display',serif;color:white;margin-bottom:.6rem;font-size:1.05rem;">Judicial Review</h3>
+        <p style="color:#9ca3af;font-size:.83rem;line-height:1.7;">Courts can strike down any law that violates the Constitution — ensuring no law is above fundamental rights. (Article 13)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="tricolor" style="margin-bottom:1.5rem;"></div>
+  <a href="/" style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--gold);text-decoration:none;">Samvidhan</a>
+  <p style="font-size:.72rem;color:#6b7280;margin-top:.5rem;">© 2026 Samvidhan</p>
+</footer>
+
+<!-- DOSSIER OVERLAY -->
+<div class="dossier-overlay" id="dossierOverlay">
+  <div style="max-width:800px;margin:0 auto;">
+    <button class="dossier-back-btn" onclick="closeDossier()">← Return to Archives</button>
+  </div>
+  <div class="dossier-page" id="dossierPage">
+    <div class="dossier-tricolor"></div>
+    <div class="dossier-header">
+      <button class="dossier-close" onclick="closeDossier()">✕</button>
+      <div class="dossier-case-no" id="dCaseNo"></div>
+      <span class="dossier-emoji" id="dEmoji"></span>
+      <h1 class="dossier-title" id="dTitle"></h1>
+      <div class="dossier-meta">
+        <span class="dossier-meta-item" id="dYear"></span>
+        <span class="dossier-meta-dot">•</span>
+        <span class="dossier-meta-item" id="dBench"></span>
+      </div>
+      <div><span class="verdict-stamp" id="dVerdict"></span></div>
+    </div>
+    <div class="logistics-bar" id="dLogistics"></div>
+    <div class="dossier-body">
+      <div class="dos-section">
+        <div class="dos-section-label"><span>📚</span> Background</div>
+        <p class="dos-text" id="dBackground"></p>
+      </div>
+      <div class="dos-section">
+        <div class="dos-section-label"><span>⚡</span> The Incident &amp; Issue</div>
+        <div id="dIncidentPhases"></div>
+      </div>
+      <div class="dos-section">
+        <div class="dos-section-label" style="color:var(--green);"><span>⚖️</span> Judgment</div>
+        <div class="judgment-box"><p class="dos-text" id="dJudgment"></p></div>
+      </div>
+      <div class="dos-section">
+        <div class="dos-section-label" style="color:var(--navy);"><span>🎯</span> Conclusion &amp; Impact</div>
+        <div class="conclusion-box">
+          <div class="conclusion-icon">🇮🇳</div>
+          <p class="dos-text" id="dConclusion"></p>
+        </div>
+      </div>
+      <div class="protocol-box" id="dProtocolBox">
+        <div class="protocol-title"><span style="font-size:1rem">🛡️</span> Why This Judgment Matters</div>
+        <div id="dProtocolList"></div>
+      </div>
+    </div>
+    <div class="dossier-watermark">This case analysis is for educational purposes. All details sourced from public Supreme Court records. Samvidhan — Constitutional Literacy Initiative.</div>
+  </div>
+</div>
+
+<script>
+const cases=[
+  {id:0,caseNo:"AIR 1973 SC 1461",title:"Kesavananda Bharati v. State of Kerala",year:1973,court:"Supreme Court of India",bench:"13-Judge Constitutional Bench",verdict:"Petitioner Partially Upheld",emoji:"🏛️",cardStyle:"",accent:"#FF9933",rot:"-2deg",
+  logistics:[{label:"Case No.",value:"AIR 1973 SC 1461"},{label:"Year",value:"1973"},{label:"Court",value:"Supreme Court"},{label:"Bench",value:"13 Judges"},{label:"Status",value:"Landmark / Binding"}],
+  background:"Kesavananda Bharati, the head of a mutt in Kerala, challenged land reforms that threatened his religious institution's property. The real question before the Supreme Court was: can Parliament amend any part of the Constitution, including Fundamental Rights?",
+  incidentPhases:[{title:"The Constitutional Crisis",desc:"Parliament had passed the 24th, 25th, and 29th Amendments to give itself unlimited amending power — effectively making it possible to abolish Fundamental Rights entirely."},{title:"The Challenge",desc:"The petitioner argued this was beyond Parliament's constitutional authority. If Parliament could rewrite any part of the Constitution, the very nature of the republic could be dismantled by a majority vote."}],
+  judgment:"By a 7-6 majority, the Supreme Court established the 'Basic Structure Doctrine.' While Parliament can amend the Constitution, it cannot destroy its 'basic features' — which include democracy, secularism, federalism, separation of powers, and judicial review.",
+  conclusion:"This is arguably the most important judgment in Indian constitutional history. It saved democracy by limiting Parliament's power. Every Indian citizen today benefits from this ruling — no government can dismantle fundamental democratic principles.",
+  protocol:[{title:"Saved Indian Democracy",desc:"Without this ruling, Parliament could have legally abolished elections, secularism, or judicial review."},{title:"Foundation of Judicial Independence",desc:"Every case where courts overruled a law traces back to this doctrine."},{title:"Citizens' Permanent Shield",desc:"The Basic Structure Doctrine belongs to every citizen — it cannot be voted away."}]},
+
+  {id:1,caseNo:"(2017) 10 SCC 1",title:"K.S. Puttaswamy v. Union of India",year:2017,court:"Supreme Court of India",bench:"9-Judge Constitutional Bench",verdict:"Right to Privacy Upheld",emoji:"🔐",cardStyle:"yellow",accent:"#f59f00",rot:"1.5deg",
+  logistics:[{label:"Case No.",value:"(2017) 10 SCC 1"},{label:"Year",value:"2017"},{label:"Court",value:"Supreme Court"},{label:"Bench",value:"9 Judges"},{label:"Status",value:"Unanimous / Historic"}],
+  background:"Retired Justice K.S. Puttaswamy challenged the Aadhaar scheme, arguing it violated citizens' right to privacy. The government's position was that privacy was not a fundamental right under the Indian Constitution.",
+  incidentPhases:[{title:"The Government's Stand",desc:"The Union Government argued that 1954 and 1962 Supreme Court judgments had held that privacy was not a fundamental right. It said Aadhaar was a welfare measure."},{title:"The Stakes",desc:"Billions of biometric data records were being collected. Without privacy as a fundamental right, citizens had no constitutional protection against surveillance or data misuse by the state."}],
+  judgment:"A historic 9-judge bench unanimously held that privacy is a fundamental right protected under Article 21 (Right to Life and Personal Liberty). All judges affirmed that personal autonomy, bodily integrity, and informational privacy are constitutional rights.",
+  conclusion:"This ruling has sweeping implications for data protection, surveillance, LGBTQ+ rights, and personal freedom. It established that every individual has the right to control information about themselves — the foundation of all digital rights.",
+  protocol:[{title:"Digital Rights Foundation",desc:"All data protection laws, app permissions, and privacy policies in India derive authority from this ruling."},{title:"LGBTQ+ Connection",desc:"Privacy as a fundamental right helped pave the way for the Navtej Singh Johar judgment striking down Section 377."},{title:"Citizen vs. State",desc:"The government cannot compel citizens to surrender personal data without constitutional justification."}]},
+
+  {id:2,caseNo:"AIR 1994 SC 1918",title:"S.R. Bommai v. Union of India",year:1994,court:"Supreme Court of India",bench:"9-Judge Constitutional Bench",verdict:"Limits on President's Rule Set",emoji:"🗳️",cardStyle:"lined",accent:"#7c3aed",rot:"2.5deg",
+  logistics:[{label:"Case No.",value:"AIR 1994 SC 1918"},{label:"Year",value:"1994"},{label:"Court",value:"Supreme Court"},{label:"Bench",value:"9 Judges"},{label:"Status",value:"Federal Landmark"}],
+  background:"S.R. Bommai was the Chief Minister of Karnataka. In 1989, the Governor dismissed his government and recommended President's Rule under Article 356, claiming Bommai had lost majority. Similar dismissals had occurred across states for political reasons.",
+  incidentPhases:[{title:"The Pattern of Misuse",desc:"Article 356 had been used over 100 times since independence — often by Central governments to dismiss democratically elected opposition state governments."},{title:"The Legal Question",desc:"Could courts review a President's Rule proclamation? Or was it entirely in the President's (effectively Central government's) discretion?"}],
+  judgment:"The Supreme Court held that the President's Rule proclamation is justiciable (reviewable by courts). The floor of the Assembly, not the Governor's judgment, is the proper place to test majority. Courts can restore dismissed state governments if Article 356 was misused.",
+  conclusion:"This judgment dramatically curtailed the political misuse of Article 356. It protected India's federal structure and democratic governance at the state level. President's Rule became far less frequent after this ruling.",
+  protocol:[{title:"Federal Structure Protected",desc:"State governments can no longer be arbitrarily dismissed by the Centre for political reasons."},{title:"Secularism Reinforced",desc:"The court clarified that a state government acting against secularism could justify Article 356 — defining its legitimate scope."},{title:"Democratic Accountability",desc:"The Assembly floor — not a Governor's report — is the constitutional site for testing a government's majority."}]},
+
+  {id:3,caseNo:"(2018) 10 SCC 1",title:"Navtej Singh Johar v. Union of India",year:2018,court:"Supreme Court of India",bench:"5-Judge Constitutional Bench",verdict:"Section 377 Partially Struck Down",emoji:"🌈",cardStyle:"aged",accent:"#138808",rot:"-1.5deg",
+  logistics:[{label:"Case No.",value:"(2018) 10 SCC 1"},{label:"Year",value:"2018"},{label:"Court",value:"Supreme Court"},{label:"Bench",value:"5 Judges"},{label:"Status",value:"Historic / Unanimous"}],
+  background:"Navtej Singh Johar, a classical dancer, along with other petitioners challenged Section 377 of the IPC, which criminalized consensual same-sex relations between adults. Section 377 dated back to 1861 under British colonial rule.",
+  incidentPhases:[{title:"157 Years of Criminalization",desc:"LGBTQ+ Indians faced harassment, blackmail, and prosecution under Section 377. A 2013 judgment had re-criminalized homosexuality, reversing a 2009 Delhi High Court order."},{title:"The Constitutional Challenge",desc:"Petitioners argued that criminalizing identity itself violated Articles 14 (equality), 15 (non-discrimination), 19 (freedom), and 21 (dignity and life)."}],
+  judgment:"The Constitution Bench unanimously struck down Section 377 insofar as it criminalized consensual sex between consenting adults. 'History owes an apology to LGBT persons,' the bench held, invoking Articles 14, 15, 19, and 21.",
+  conclusion:"This judgment affirmed that identity, dignity, and the right to love are fundamental rights. It ended 157 years of colonial-era criminalization and is a milestone in India's journey toward full equality for all citizens.",
+  protocol:[{title:"End of Colonial Law",desc:"Section 377 was a British-era imposition. Its partial repeal reclaimed constitutional values over colonial legacy."},{title:"Dignity as a Fundamental Right",desc:"The court confirmed that one's identity and the right to love are part of Article 21's protection."},{title:"Apology from History",desc:"The bench's acknowledgment that 'history owes an apology' was a powerful statement of constitutional reckoning."}]},
+
+  {id:4,caseNo:"AIR 1978 SC 597",title:"Maneka Gandhi v. Union of India",year:1978,court:"Supreme Court of India",bench:"7-Judge Constitutional Bench",verdict:"Article 21 Expansively Interpreted",emoji:"📜",cardStyle:"",accent:"#FF9933",rot:"-3deg",
+  logistics:[{label:"Case No.",value:"AIR 1978 SC 597"},{label:"Year",value:"1978"},{label:"Court",value:"Supreme Court"},{label:"Bench",value:"7 Judges"},{label:"Status",value:"Transformative / Binding"}],
+  background:"Maneka Gandhi's passport was impounded by the government without giving any reasons. She challenged this under Articles 14, 19, and 21. The government argued that as long as there was some legal procedure, the action was valid.",
+  incidentPhases:[{title:"The Impoundment",desc:"The government confiscated her passport invoking the Passport Act, refusing to disclose any reasons. This left her with no way to challenge the decision or know the grounds."},{title:"The Narrow vs. Broad Reading",desc:"The earlier reading of Article 21 held that any procedure — even an arbitrary one — could justify deprivation of liberty. Maneka challenged this cramped interpretation head-on."}],
+  judgment:"The Supreme Court transformed Article 21 from a narrow protection into a broad guarantee. 'Procedure established by law' must be fair, just, and reasonable — not arbitrary or oppressive. Articles 14, 19, and 21 form an interconnected 'golden triangle.'",
+  conclusion:"Maneka Gandhi case is foundational to modern constitutional law. It expanded Article 21 to cover privacy, livelihood, shelter, health, and education. Every citizen who has ever invoked 'right to life' in a broad sense owes that to this single ruling.",
+  protocol:[{title:"The Golden Triangle",desc:"Articles 14, 19 and 21 must be read together — a law violating one often violates all three."},{title:"Fair Procedure Mandatory",desc:"Any government action affecting personal liberty must follow not just some procedure but a fair, just and reasonable one."},{title:"Foundation of Expanded Rights",desc:"From right to health to right to education — all these Article 21 extensions flow from this judgment."}]},
+
+  {id:5,caseNo:"(2015) 5 SCC 1",title:"Shreya Singhal v. Union of India",year:2015,court:"Supreme Court of India",bench:"2-Judge Bench",verdict:"Section 66A Struck Down",emoji:"💻",cardStyle:"yellow",accent:"#c44c4c",rot:"1deg",
+  logistics:[{label:"Case No.",value:"(2015) 5 SCC 1"},{label:"Year",value:"2015"},{label:"Court",value:"Supreme Court"},{label:"Bench",value:"2 Judges"},{label:"Status",value:"Free Speech Landmark"}],
+  background:"Shreya Singhal challenged Section 66A of the IT Act, 2000, after multiple arrests were made for online posts and comments. The law allowed arrests for vague expressions such as 'annoying' or 'offensive' messages.",
+  incidentPhases:[{title:"Misuse of a Vague Law",desc:"Police across states used Section 66A to arrest people for social media posts, political criticism, and satire. Citizens could not clearly know what speech was criminal."},{title:"Constitutional Question",desc:"The petition argued that Section 66A violated Article 19(1)(a) because its wording was overbroad and chilling, and did not fit the narrow restrictions allowed by Article 19(2)."}],
+  judgment:"The Supreme Court struck down Section 66A as unconstitutional. It held that vague and overbroad speech restrictions suppress legitimate expression and create a chilling effect on free speech.",
+  conclusion:"This judgment became a cornerstone of digital free speech in India. It reinforced that online expression is protected by the Constitution, just like speech in newspapers or public spaces.",
+  protocol:[{title:"Protected Online Speech",desc:"Citizens gained strong constitutional protection against arbitrary arrests for lawful online expression."},{title:"Vagueness Doctrine Applied",desc:"A penal law must be precise; unclear words that allow subjective police action cannot survive constitutional scrutiny."},{title:"Democracy in the Digital Age",desc:"The ruling affirmed that the internet is a democratic space where dissent and criticism are constitutionally protected."}]}
+];
+
+function buildCards(){
+  const c2=document.getElementById('boardCards');
+  const pinOffsets=['24%','50%','76%','28%','52%','74%'];
+  cases.forEach((c,i)=>{
+    const slot=document.createElement('div');
+    slot.className='card-slot';slot.id=`slot-${i}`;
+    const card=document.createElement('div');
+    card.className=`case-card ${c.cardStyle}`;
+    card.style.setProperty('--rot',c.rot);
+    card.style.setProperty('--pin-x',pinOffsets[i%pinOffsets.length]);
+    card.style.borderTopColor=c.accent;
+    card.onclick=()=>openDossier(c);
+    card.innerHTML=`<span class="pin" id="pin-${i}"></span><div class="case-year">${c.year}</div><span class="case-emoji">${c.emoji}</span><div class="case-title">${c.title.replace(' v. ','<br>v. ')}</div><div class="case-sub">${c.court}</div><div class="verdict-tag" style="background:${c.cardStyle==='yellow'?'#fff3cd':c.cardStyle==='aged'?'#f0e8d8':'#fff0e6'};color:${c.accent};">${c.verdict}</div>`;
+    slot.appendChild(card);c2.appendChild(slot);
+  });
+  setTimeout(drawThreads,320);
+}
+
+function drawThreads(){
+  const svg=document.getElementById('threadsSvg');
+  const board=document.getElementById('corkBoard');
+  const bR=board.getBoundingClientRect();
+  const pins=[];
+  for(let i=0;i<cases.length;i++){
+    const p=document.getElementById(`pin-${i}`);if(!p)continue;
+    const r=p.getBoundingClientRect();
+    pins.push({x:r.left-bR.left+r.width/2,y:r.top-bR.top+r.height/2});
+  }
+
+  if(pins.length<2){
+    svg.innerHTML='';
+    return;
+  }
+
+  const strokeColor='#8c3b3b';
+  const strokeOpacity='0.86';
+  const strokeWidth='1.8';
+
+  if(pins.length<6){
+    const conns=[[0,1],[1,2],[0,3],[1,3],[1,4],[2,4],[3,4],[0,4]];
+    let lines='';
+    conns.forEach(([a,b])=>{
+      const p1=pins[a];
+      const p2=pins[b];
+      if(!p1||!p2)return;
+      lines+=`<line x1="${p1.x.toFixed(1)}" y1="${p1.y.toFixed(1)}" x2="${p2.x.toFixed(1)}" y2="${p2.y.toFixed(1)}" stroke="${strokeColor}" stroke-width="${strokeWidth}" stroke-opacity="${strokeOpacity}" stroke-linecap="round"/>`;
+    });
+    svg.innerHTML=lines;
+    return;
+  }
+
+  // 6-card fixed zig-zag graph inspired by the reference detective board.
+  const w=bR.width;
+  const h=bR.height;
+  const points={
+    c0:pins[0], c1:pins[1], c2:pins[2],
+    c3:pins[3], c4:pins[4], c5:pins[5],
+    j1:{x:w*0.17,y:h*0.14},
+    j2:{x:w*0.53,y:h*0.12},
+    j3:{x:w*0.36,y:h*0.42},
+    j4:{x:w*0.69,y:h*0.42},
+    j5:{x:w*0.54,y:h*0.74},
+    j6:{x:w*0.86,y:h*0.66}
+  };
+
+  const conns=[
+    ['j1','c0'],['j1','c1'],['j1','j3'],
+    ['c0','j3'],['c0','c3'],
+    ['j3','c1'],['j3','c3'],['j3','j5'],
+    ['j2','c1'],['j2','c2'],['j2','j4'],
+    ['c1','j4'],['c1','j5'],
+    ['j4','c2'],['j4','c4'],['j4','j5'],['j4','j6'],
+    ['c3','j5'],['j5','c4'],['j5','c5'],
+    ['c2','j6'],['c4','j6'],['j6','c5']
+  ];
+
+  let lines='';
+  conns.forEach(([a,b])=>{
+    const p1=points[a];
+    const p2=points[b];
+    if(!p1||!p2)return;
+    lines+=`<line x1="${p1.x.toFixed(1)}" y1="${p1.y.toFixed(1)}" x2="${p2.x.toFixed(1)}" y2="${p2.y.toFixed(1)}" stroke="${strokeColor}" stroke-width="${strokeWidth}" stroke-opacity="${strokeOpacity}" stroke-linecap="round"/>`;
+  });
+
+  const joints=['j1','j2','j3','j4','j5','j6'];
+  let jointDots='';
+  joints.forEach(id=>{
+    const p=points[id];
+    jointDots+=`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.1" fill="#9b9b9b" stroke="#5d5d5d" stroke-width="1"/>`;
+    jointDots+=`<circle cx="${(p.x-1.1).toFixed(1)}" cy="${(p.y-1.1).toFixed(1)}" r="1.1" fill="#ececec"/>`;
+  });
+
+  svg.innerHTML=lines+jointDots;
+}
+
+function openDossier(c){
+  document.getElementById('dCaseNo').textContent=c.caseNo+' · '+c.court;
+  document.getElementById('dEmoji').textContent=c.emoji;
+  document.getElementById('dTitle').textContent=c.title;
+  document.getElementById('dYear').textContent=c.year;
+  document.getElementById('dBench').textContent=c.bench;
+  document.getElementById('dVerdict').textContent=c.verdict;
+  document.getElementById('dLogistics').innerHTML=c.logistics.map(l=>`<div class="logistics-item"><div class="logistics-label">${l.label}</div><div class="logistics-value">${l.value}</div></div>`).join('');
+  document.getElementById('dBackground').textContent=c.background;
+  document.getElementById('dJudgment').textContent=c.judgment;
+  document.getElementById('dConclusion').textContent=c.conclusion;
+  document.getElementById('dIncidentPhases').innerHTML=c.incidentPhases.map((p,i)=>`<div class="phase-item"><div class="phase-num">${i+1}</div><div><div class="phase-title">${p.title}</div><div class="phase-desc">${p.desc}</div></div></div>`).join('');
+  document.getElementById('dProtocolList').innerHTML=c.protocol.map(p=>`<div class="protocol-item"><div class="protocol-check">✓</div><div class="protocol-text"><span class="protocol-strong">${p.title}:</span> ${p.desc}</div></div>`).join('');
+  const ov=document.getElementById('dossierOverlay');
+  ov.classList.add('open');ov.scrollTop=0;
+  document.body.style.overflow='hidden';
+}
+
+function closeDossier(){
+  document.getElementById('dossierOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.getElementById('dossierOverlay').addEventListener('click',function(e){if(e.target===this)closeDossier();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDossier();});
+window.addEventListener('resize',()=>setTimeout(drawThreads,120));
+buildCards();
+</script>
+</body>
+</html>

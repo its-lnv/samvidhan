@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/static/css/readable.css"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Liberty – Samvidhan</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/static/css/global.css"/>
+<link rel="stylesheet" href="/static/css/components.css"/>
+<script src="/static/js/main.js" defer></script><script src="/static/js/navigation.js" defer></script><script src="/static/js/animations.js" defer></script>
+<style>
+:root{--saffron:#FF9933;--green:#138808;--navy:#002147;--gold:#C9A84C;--cream:#FDF8F0;}
+*{box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);overflow-x:hidden;}
+.font-display{font-family:'Cormorant Garamond',serif;}
+.tricolor{height:5px;background:linear-gradient(to right,var(--saffron) 33.33%,white 33.33%,white 66.66%,var(--green) 66.66%);}
+nav{background:rgba(0,33,71,.97);}
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.vis{opacity:1;transform:translateY(0);}
+.mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s;}
+.mobile-menu.open{max-height:600px;}
+.card{background:white;border-radius:1.25rem;padding:1.75rem;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s;}
+.card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.12);}
+.expand-body{max-height:0;overflow:hidden;transition:max-height .5s;}
+.expand-body.open{max-height:600px;}
+.freedom-item{border-left:4px solid var(--saffron);padding-left:1rem;margin-bottom:1.25rem;}
+</style>
+</head>
+<body>
+<div class="tricolor"></div>
+<nav class="sticky top-0 z-50 px-6 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="/" class="font-display text-white text-xl font-bold inline-flex items-center gap-2">
+      <img src="/assets/icons/india-flag.svg" alt="Indian flag" class="w-6 h-4 rounded-sm object-cover"/>
+      <span>Samvidhan</span>
+    </a>
+    <div class="hidden lg:flex gap-5 text-white text-sm">
+      <a href="/" class="hover:text-yellow-300">Home</a>
+      <a href="/rights/" class="hover:text-yellow-300">Rights</a>
+      <a href="/articles/" class="hover:text-yellow-300">Articles</a>
+      <a href="/cases/" class="hover:text-yellow-300">Cases</a>
+      <a href="/crimes/" class="hover:text-yellow-300">Crimes</a>
+      <a href="/freedom/" class="hover:text-yellow-300">Freedom Fighters</a>
+      <a href="/quiz/" class="hover:text-yellow-300">Quiz</a>
+      <a href="/helpline/" class="hover:text-yellow-300">Helpline</a>
+      <a href="/survey/" class="bg-orange-500 px-4 py-1 rounded-full">Survey</a>
+    </div>
+    <button id="hamburger" class="lg:hidden text-white p-2">☰</button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu lg:hidden">
+    <div class="max-w-7xl mx-auto px-6 pb-4 flex flex-col gap-3 text-white text-sm mt-4">
+      <a href="/" class="py-2 border-b border-white/20">Home</a>
+      <a href="/rights/" class="py-2 border-b border-white/20">Rights</a>
+      <a href="/quiz/" class="py-2 border-b border-white/20">Quiz</a>
+      <a href="/survey/" class="py-2">Survey</a>
+    </div>
+  </div>
+</nav>
+
+<section style="background:linear-gradient(160deg,#ff6600,#ff9933,#ffb366)" class="py-32 px-6 text-center text-white overflow-hidden relative">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28rem;opacity:.07;pointer-events:none">🕊</div>
+  <div class="max-w-4xl mx-auto relative z-10 fade-up vis">
+    <div class="inline-block px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-widest mb-6 bg-white/20 text-white">Core Preamble Value</div>
+    <h1 class="font-display text-7xl md:text-8xl font-bold mb-6 text-white">Liberty</h1>
+    <p class="text-xl text-orange-100 max-w-2xl mx-auto leading-relaxed">Every Indian has the freedom to think, speak, believe, and live as they choose — within the bounds of others' rights and the law.</p>
+    <div class="mt-8 h-px w-32 mx-auto bg-white/40"></div>
+    <p class="mt-6 font-display text-xl italic text-orange-100">"Freedom of thought and expression — the cornerstone of democracy."</p>
+  </div>
+</section>
+
+<div class="bg-white border-b border-gray-100 py-4 px-6 overflow-x-auto">
+  <div class="flex gap-2 max-w-7xl mx-auto min-w-max">
+    <a href="/values/sovereignty/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Sovereignty</a>
+    <a href="/values/secularism/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Secularism</a>
+    <a href="/values/socialism/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Socialism</a>
+    <a href="/values/democracy/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Democracy</a>
+    <a href="/values/republic/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Republic</a>
+    <a href="/values/justice/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Justice</a>
+    <a href="/values/liberty/" class="px-4 py-2 rounded-full text-sm font-medium text-white" style="background:var(--navy)">Liberty</a>
+    <a href="/values/equality/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Equality</a>
+    <a href="/values/fraternity/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Fraternity</a>
+    <a href="/values/dignity/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Dignity</a>
+    <a href="/values/unity/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Unity</a>
+  </div>
+</div>
+
+<div class="max-w-5xl mx-auto px-6 py-16">
+
+  <div class="fade-up grid md:grid-cols-2 gap-8 mb-16 items-start">
+    <div>
+      <p class="text-xs uppercase tracking-widest font-semibold mb-4" style="color:var(--saffron)">What It Means</p>
+      <h2 class="font-display text-5xl font-bold mb-6" style="color:var(--navy)">The Freedom to Be Yourself</h2>
+      <p class="text-gray-600 leading-relaxed mb-4">The Preamble promises liberty of thought, expression, belief, faith, and worship. Liberty means freedom — from arbitrary state power, from social coercion, and from fear of expressing who you are.</p>
+      <p class="text-gray-600 leading-relaxed mb-4">India's most powerful liberty guarantee is Article 19 — which gives all citizens six fundamental freedoms. But liberty in India is not absolute: it comes with reasonable restrictions to protect the rights of others and maintain public order.</p>
+      <p class="text-gray-600 leading-relaxed">Article 21 — the right to life and personal liberty — has been called the "heart of the Constitution" by the Supreme Court. It protects not just physical life, but the right to live with dignity.</p>
+    </div>
+    <div>
+      <h3 class="font-display text-2xl font-bold mb-4" style="color:var(--navy)">Article 19 — Six Freedoms</h3>
+      <div class="space-y-3">
+        <div class="freedom-item"><p class="font-semibold text-sm" style="color:var(--navy)">19(1)(a) — Freedom of Speech & Expression</p><p class="text-xs text-gray-500 mt-1">Write, speak, publish, broadcast — including the press. Subject to restrictions on defamation, incitement, public order.</p></div>
+        <div class="freedom-item" style="border-color:var(--green)"><p class="font-semibold text-sm" style="color:var(--navy)">19(1)(b) — Peaceful Assembly</p><p class="text-xs text-gray-500 mt-1">Right to protest, demonstrate, and gather — without arms, without violence.</p></div>
+        <div class="freedom-item" style="border-color:var(--navy)"><p class="font-semibold text-sm" style="color:var(--navy)">19(1)(c) — Form Associations</p><p class="text-xs text-gray-500 mt-1">Form unions, political parties, NGOs, religious bodies.</p></div>
+        <div class="freedom-item" style="border-color:var(--gold)"><p class="font-semibold text-sm" style="color:var(--navy)">19(1)(d) — Move Freely</p><p class="text-xs text-gray-500 mt-1">Travel anywhere within India without restrictions.</p></div>
+        <div class="freedom-item" style="border-color:#8b5cf6"><p class="font-semibold text-sm" style="color:var(--navy)">19(1)(e) — Reside Anywhere</p><p class="text-xs text-gray-500 mt-1">Live and settle in any part of India.</p></div>
+        <div class="freedom-item" style="border-color:#ef4444"><p class="font-semibold text-sm" style="color:var(--navy)">19(1)(g) — Profession of Choice</p><p class="text-xs text-gray-500 mt-1">Choose any occupation, trade, or business — no person can be forced into a specific career.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real examples -->
+  <div class="fade-up mb-16">
+    <h2 class="font-display text-4xl font-bold mb-8" style="color:var(--navy)">Liberty in Action</h2>
+    <div class="space-y-4">
+      <div class="bg-white rounded-2xl p-6 shadow-sm cursor-pointer" onclick="toggleEx(0)">
+        <div class="flex items-center justify-between"><div class="flex items-center gap-4"><span class="text-2xl">✍️</span><div><h4 class="font-semibold" style="color:var(--navy)">Freedom of the Press</h4><p class="text-sm text-gray-400">Journalists exposing corruption</p></div></div><span id="arr0" class="text-gray-400 text-xl">＋</span></div>
+        <div class="expand-body" id="ex0"><p class="mt-4 text-gray-600 text-sm leading-relaxed pt-4 border-t border-gray-100">India has thousands of independent newspapers, websites, and TV channels that can — and do — criticize the government, expose corruption, and hold power accountable. The freedom of the press (which flows from Article 19) is why you can read news that disagrees with the government of the day. This liberty is the watchdog of all other liberties.</p></div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm cursor-pointer" onclick="toggleEx(1)">
+        <div class="flex items-center justify-between"><div class="flex items-center gap-4"><span class="text-2xl">🎨</span><div><h4 class="font-semibold" style="color:var(--navy)">Artistic Freedom</h4><p class="text-sm text-gray-400">Films, art, and books that question and challenge</p></div></div><span id="arr1" class="text-gray-400 text-xl">＋</span></div>
+        <div class="expand-body" id="ex1"><p class="mt-4 text-gray-600 text-sm leading-relaxed pt-4 border-t border-gray-100">India has a rich tradition of films, books, and art that challenge social norms — from Satyajit Ray's neo-realist films critiquing poverty to contemporary novels exploring caste and sexuality. Liberty allows artists to hold a mirror to society. When courts have protected controversial books or films from bans, they have upheld liberty against majoritarian intolerance.</p></div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm cursor-pointer" onclick="toggleEx(2)">
+        <div class="flex items-center justify-between"><div class="flex items-center gap-4"><span class="text-2xl">⛪</span><div><h4 class="font-semibold" style="color:var(--navy)">Freedom of Religion</h4><p class="text-sm text-gray-400">Every person chooses their faith</p></div></div><span id="arr2" class="text-gray-400 text-xl">＋</span></div>
+        <div class="expand-body" id="ex2"><p class="mt-4 text-gray-600 text-sm leading-relaxed pt-4 border-t border-gray-100">Articles 25–28 protect freedom of conscience and religion. You can follow any religion, change your religion, or follow no religion at all. No person can be compelled to attend or pay for religious instruction. The liberty of belief and faith is one of the most personal freedoms the Constitution protects.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fade-up rounded-2xl p-10 text-white" style="background:linear-gradient(135deg,#cc5500,var(--saffron))">
+    <h2 class="font-display text-4xl font-bold mb-6 text-white">Why Liberty Matters Today</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div><p class="text-orange-100 leading-relaxed mb-4">Liberty is both precious and fragile. Every generation must actively defend it. In the digital age, new threats to liberty emerge: surveillance technology, internet shutdowns, and laws that criminalize legitimate speech.</p><p class="text-orange-100 leading-relaxed">The courts, civil society, and informed citizens are the guardians of liberty. Know your freedoms. Defend them.</p></div>
+      <div class="space-y-3">
+        <div class="bg-white/15 rounded-xl p-4"><p class="font-semibold text-white mb-1">🌐 Internet Freedom</p><p class="text-sm text-orange-100">India has the world's most internet shutdowns annually — a direct threat to liberty of expression and assembly.</p></div>
+        <div class="bg-white/15 rounded-xl p-4"><p class="font-semibold text-white mb-1">🔒 Habeas Corpus</p><p class="text-sm text-orange-100">If someone is unlawfully detained, they or anyone on their behalf can file a writ of Habeas Corpus — protecting physical liberty.</p></div>
+        <div class="bg-white/15 rounded-xl p-4"><p class="font-semibold text-white mb-1">📱 Privacy</p><p class="text-sm text-orange-100">In 2017, the Supreme Court declared privacy a fundamental right (Article 21) — protecting liberty in the digital age.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--navy)" class="text-white py-10 px-6 text-center">
+  <div class="tricolor mb-6"></div>
+  <a href="/" class="font-display text-2xl font-bold" style="color:var(--gold)">Samvidhan</a>
+  <p class="text-xs text-gray-600 mt-4">© 2026 Samvidhan | For educational purposes</p>
+</footer>
+<script>
+function toggleEx(i){const el=document.getElementById('ex'+i);const arr=document.getElementById('arr'+i);el.classList.toggle('open');arr.textContent=el.classList.contains('open')?'－':'＋';}
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title>Scales of justice</title>
+  <desc>Balanced scales icon inside a circular badge.</desc>
+  <circle cx="64" cy="64" r="60" fill="#FDF8F0" stroke="#C9A84C" stroke-width="4"/>
+  <g stroke="#002147" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="64" y1="24" x2="64" y2="88"/>
+    <line x1="46" y1="88" x2="82" y2="88"/>
+    <line x1="34" y1="44" x2="94" y2="44"/>
+    <line x1="34" y1="44" x2="22" y2="64"/>
+    <line x1="34" y1="44" x2="46" y2="64"/>
+    <line x1="94" y1="44" x2="82" y2="64"/>
+    <line x1="94" y1="44" x2="106" y2="64"/>
+  </g>
+  <path d="M14 64h40c-1 11-9 19-20 19S15 75 14 64z" fill="#FF9933" opacity="0.9"/>
+  <path d="M74 64h40c-1 11-9 19-20 19s-19-8-20-19z" fill="#138808" opacity="0.9"/>
+  <circle cx="64" cy="24" r="5" fill="#002147"/>
+</svg>

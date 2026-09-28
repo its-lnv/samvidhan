@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/static/css/readable.css"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Constitution Quiz – Samvidhan</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--saffron:#FF9933;--green:#138808;--navy:#002147;--gold:#C9A84C;--cream:#FDF8F0;}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:#111;overflow-x:hidden;}
+.font-display{font-family:'Playfair Display',serif;}
+.tricolor{height:6px;background:linear-gradient(to right,var(--saffron) 33.33%,white 33.33%,white 66.66%,var(--green) 66.66%);}
+nav{background:rgba(0,33,71,.97);}
+.option-btn{
+  width:100%;text-align:left;padding:.9rem 1.25rem;border-radius:.75rem;
+  border:2px solid #e5e7eb;background:white;cursor:pointer;transition:all .2s;
+  font-size:.95rem;
+}
+.option-btn:hover:not(:disabled){border-color:var(--saffron);background:#fff8f0;}
+.option-btn.correct{border-color:var(--green)!important;background:#f0fdf4!important;color:#166534;}
+.option-btn.wrong{border-color:#ef4444!important;background:#fef2f2!important;color:#991b1b;}
+.option-btn.reveal-correct{border-color:var(--green)!important;background:#f0fdf4!important;}
+.progress-bar{height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--saffron),var(--gold),var(--green));transition:width .4s ease;}
+@keyframes pop{0%{transform:scale(.9);opacity:0;}100%{transform:scale(1);opacity:1;}}
+.pop{animation:pop .3s ease;}
+.score-ring{
+  width:160px;height:160px;border-radius:50%;
+  border:8px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;
+  background:white;
+  box-shadow:0 0 0 4px rgba(201,168,76,.2);
+}
+.mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.mobile-menu.open{max-height:600px;}
+</style>
+</head>
+<body>
+<div class="tricolor"></div>
+<nav class="sticky top-0 z-50 px-6 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="/" class="font-display text-white text-xl font-bold inline-flex items-center gap-2">
+      <img src="/assets/icons/india-flag.svg" alt="Indian flag" class="w-6 h-4 rounded-sm object-cover"/>
+      <span>Samvidhan</span>
+    </a>
+    <div class="hidden lg:flex gap-6 text-white text-sm">
+      <a href="/" class="hover:text-yellow-300">Home</a>
+      <a href="/rights/" class="hover:text-yellow-300">Rights & Duties</a>
+      <a href="/articles/" class="hover:text-yellow-300">Articles</a>
+      <a href="/freedom/" class="hover:text-yellow-300">Freedom Fighters</a>
+      <a href="/crimes/" class="hover:text-yellow-300">Crimes</a>
+      <a href="/quiz/" class="text-yellow-300">Quiz</a>
+      <a href="/helpline/" class="hover:text-yellow-300">Helpline</a>
+      <a href="/survey/" class="bg-orange-500 px-4 py-1 rounded-full">Survey</a>
+      {% if request.user.is_authenticated %}
+      <form action="{% url 'logout' %}" method="post" class="inline-flex">{% csrf_token %}<button type="submit" class="rounded-full border border-white/60 px-4 py-1 text-white hover:bg-orange-500">Logout</button></form>
+      {% else %}<a href="{% url 'login' %}" class="hover:text-yellow-300">Log in</a><a href="{% url 'register' %}" class="bg-orange-500 px-4 py-1 rounded-full">Register</a>{% endif %}
+    </div>
+    <button id="hamburger" class="lg:hidden text-white p-2">☰</button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu lg:hidden">
+    <div class="max-w-7xl mx-auto px-6 pb-4 flex flex-col gap-3 text-white text-sm mt-4">
+      <a href="/" class="py-2 border-b border-white border-opacity-20">Home</a>
+      <a href="/rights/" class="py-2 border-b border-white border-opacity-20">Rights & Duties</a>
+      <a href="/articles/" class="py-2 border-b border-white border-opacity-20">Articles</a>
+      <a href="/freedom/" class="py-2 border-b border-white border-opacity-20">Freedom Fighters</a>
+      <a href="/quiz/" class="py-2 border-b border-white border-opacity-20">Quiz</a>
+      <a href="/helpline/" class="py-2 border-b border-white border-opacity-20">Helpline</a>
+      <a href="/survey/" class="py-2">Survey</a>
+      {% if request.user.is_authenticated %}
+      <form action="{% url 'logout' %}" method="post">{% csrf_token %}<button type="submit" class="w-full rounded-full border border-white/50 py-2 text-left text-white">Logout</button></form>
+      {% else %}<a href="{% url 'login' %}" class="py-2 border-b border-white border-opacity-20">Log in</a><a href="{% url 'register' %}" class="py-2">Register</a>{% endif %}
+    </div>
+  </div>
+</nav>
+
+<section style="background:linear-gradient(135deg,var(--navy),#0a4a8a)" class="py-16 px-6 text-center text-white">
+  <p class="text-xs uppercase tracking-widest mb-3" style="color:var(--saffron)">Test Your Knowledge</p>
+  <h1 class="font-display text-5xl font-black mb-3">Constitution <span style="color:var(--gold)">Quiz</span></h1>
+  <p class="text-gray-300 max-w-md mx-auto">10 questions on the Indian Constitution. Each question has only one correct answer.</p>
+</section>
+
+<div class="max-w-2xl mx-auto px-6 py-12">
+
+  <!-- Start Screen -->
+  <div id="startScreen" class="text-center">
+    <form class="hidden">{% csrf_token %}</form>
+    <div class="bg-white rounded-2xl p-10 shadow-lg">
+      <div class="text-7xl mb-6">🧠</div>
+      <h2 class="font-display text-3xl font-bold mb-4" style="color:var(--navy)">Ready to Begin?</h2>
+    <p id="quizStatus" class="mb-4 text-sm text-gray-600" role="status">Generating a fresh quiz...</p>
+      <p class="text-gray-500 mb-6 leading-relaxed">10 multiple choice questions about the Indian Constitution, Fundamental Rights, history, and key provisions. Your score and answer review will appear after you finish.</p>
+      <div class="grid grid-cols-3 gap-4 mb-8 text-center">
+        <div class="bg-orange-50 rounded-xl p-4">
+          <div class="text-2xl font-bold" style="color:var(--saffron)">10</div>
+          <div class="text-xs text-gray-500 mt-1">Questions</div>
+        </div>
+        <div class="bg-green-50 rounded-xl p-4">
+          <div class="text-2xl font-bold" style="color:var(--green)">MCQ</div>
+          <div class="text-xs text-gray-500 mt-1">Format</div>
+        </div>
+        <div class="bg-blue-50 rounded-xl p-4">
+          <div class="text-2xl font-bold" style="color:var(--navy)">∞</div>
+          <div class="text-xs text-gray-500 mt-1">Time</div>
+        </div>
+      </div>
+      <button id="startQuizBtn" onclick="startQuiz()" disabled class="w-full py-4 rounded-xl text-white font-semibold text-lg transition-all hover:opacity-90 hover:shadow-xl" style="background:var(--saffron)">
+        Start Quiz 🚀
+      </button>
+    </div>
+  </div>
+
+  <!-- Quiz Screen -->
+  <div id="quizScreen" class="hidden">
+    <!-- Progress -->
+    <div class="mb-6">
+      <div class="flex justify-between text-sm text-gray-500 mb-2">
+        <span id="questionCounter">Question 1 of 10</span>
+        <span>Choose one option</span>
+      </div>
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill" style="width:10%"></div>
+      </div>
+    </div>
+
+    <div id="questionCard" class="bg-white rounded-2xl p-8 shadow-lg pop">
+      <p class="text-xs uppercase tracking-widest mb-4" style="color:var(--saffron)" id="questionCategory">Category</p>
+      <h2 class="font-display text-xl md:text-2xl font-bold mb-6 leading-snug" id="questionText" style="color:var(--navy)"></h2>
+      <div id="optionsContainer" class="space-y-3"></div>
+      <div id="feedback" class="hidden mt-6 p-4 rounded-xl">
+        <p id="feedbackText" class="text-sm leading-relaxed"></p>
+      </div>
+      <button id="nextBtn" onclick="nextQuestion()" class="hidden w-full mt-6 py-3 rounded-xl text-white font-semibold transition-all hover:opacity-90" style="background:var(--navy)">
+        Next Question →
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Screen -->
+  <div id="resultScreen" class="hidden text-center">
+    <div class="bg-white rounded-2xl p-10 shadow-lg">
+      <h2 class="font-display text-4xl font-bold mb-6" style="color:var(--navy)">Quiz Complete! 🎉</h2>
+      <div class="flex justify-center mb-8">
+        <div class="score-ring">
+          <span id="finalScore" class="font-display text-5xl font-black" style="color:var(--navy)"></span>
+          <span class="text-gray-400 text-sm">out of 10</span>
+        </div>
+      </div>
+      <p id="scoreMessage" class="text-lg font-medium mb-6"></p>
+      <div id="reviewSection" class="text-left space-y-3 mb-8"></div>
+      <button onclick="restartQuiz()" class="w-full py-4 rounded-xl text-white font-semibold text-lg hover:opacity-90 transition" style="background:var(--saffron)">
+        Try Again 🔄
+      </button>
+      <a href="/" class="block mt-3 text-sm text-gray-400 hover:text-gray-600 transition">← Back to Home</a>
+    </div>
+  </div>
+
+</div>
+
+<footer style="background:var(--navy)" class="text-white py-10 px-6 text-center">
+  <div class="tricolor mb-6"></div>
+  <a href="/" class="font-display text-xl font-bold" style="color:var(--gold)">Samvidhan</a>
+  <p class="text-xs text-gray-500 mt-2">© 2026 Samvidhan</p>
+</footer>
+
+<script>
+let questions = [];
+let current=0, answered=false, userAnswers=[], quizBusy=false;
+
+const quizStatus = document.getElementById('quizStatus');
+const startButton = document.getElementById('startQuizBtn');
+const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+async function apiPost(url, payload) {
+  const response = await fetch(url, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrfToken},
+    body: JSON.stringify(payload)
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error || 'Request failed. Please try again.');
+  return data;
+}
+
+async function loadQuiz() {
+  quizStatus.textContent = 'Generating a fresh quiz...';
+  quizStatus.classList.remove('text-red-600');
+  startButton.disabled = true;
+  startButton.textContent = 'Please wait...';
+  try {
+    const data = await apiPost('/quiz/api/generate/', {});
+    questions = data.questions;
+    userAnswers = [];
+    startButton.disabled = false;
+    startButton.textContent = 'Start Quiz';
+    quizStatus.textContent = 'Your new questions are ready.';
+  } catch (error) {
+    quizStatus.textContent = error.message;
+    quizStatus.classList.add('text-red-600');
+    startButton.disabled = false;
+    startButton.textContent = 'Try generating again';
+  }
+}
+
+function startQuiz(){
+  if (!questions.length) { loadQuiz(); return; }
+  current = 0;
+  userAnswers = [];
+  document.getElementById('startScreen').classList.add('hidden');
+  document.getElementById('quizScreen').classList.remove('hidden');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  answered = false;
+  const q = questions[current];
+  document.getElementById('questionCounter').textContent = `Question ${current+1} of ${questions.length}`;
+  document.getElementById('progressFill').style.width = `${((current+1)/questions.length)*100}%`;
+  document.getElementById('questionCategory').textContent = q.category;
+  document.getElementById('questionText').textContent = q.question;
+  document.getElementById('feedback').classList.add('hidden');
+  document.getElementById('nextBtn').classList.add('hidden');
+  const opts = document.getElementById('optionsContainer');
+  opts.replaceChildren();
+  q.options.forEach((option, index) => {
+    const button = document.createElement('button');
+    button.className = 'option-btn';
+    button.textContent = `${['A','B','C','D'][index]}. ${option}`;
+    button.addEventListener('click', () => selectAnswer(index, button));
+    opts.appendChild(button);
+  });
+  const card = document.getElementById('questionCard');
+  card.classList.remove('pop');
+  void card.offsetWidth;
+  card.classList.add('pop');
+}
+
+function selectAnswer(index, button){
+  if (answered) return;
+  answered = true;
+  userAnswers[current] = index;
+  document.querySelectorAll('.option-btn').forEach(option => { option.disabled = true; });
+  button.classList.add('border-orange-500');
+  showFeedback('Answer saved. The score will be calculated when you finish.');
+  const next = document.getElementById('nextBtn');
+  next.classList.remove('hidden');
+  next.textContent = current < questions.length-1 ? 'Next Question' : 'Submit and See Score';
+}
+
+function showFeedback(message){
+  const feedback = document.getElementById('feedback');
+  feedback.classList.remove('hidden');
+  feedback.style.background = '#fff8f0';
+  feedback.style.borderLeft = '4px solid var(--saffron)';
+  document.getElementById('feedbackText').textContent = message;
+}
+
+async function nextQuestion(){
+  if (current < questions.length-1) {
+    current++;
+    renderQuestion();
+    return;
+  }
+  await submitQuiz();
+}
+
+async function submitQuiz(){
+  if (quizBusy) return;
+  quizBusy = true;
+  const next = document.getElementById('nextBtn');
+  next.disabled = true;
+  next.textContent = 'Gemini is calculating your score...';
+  showFeedback('Submitting your answers for scoring...');
+  try {
+    const result = await apiPost('/quiz/api/score/', {answers: userAnswers});
+    showResults(result);
+  } catch (error) {
+    quizBusy = false;
+    next.disabled = false;
+    next.textContent = 'Retry score submission';
+    next.onclick = submitQuiz;
+    showFeedback(error.message);
+  }
+}
+
+function showResults(result){
+  quizBusy = false;
+  document.getElementById('quizScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.remove('hidden');
+  document.getElementById('finalScore').textContent = result.score;
+  const ratio = result.score / questions.length;
+  let message, color;
+  if (ratio === 1) { message='Perfect score! You are a Constitution expert!'; color='var(--green)'; }
+  else if (ratio >= .7) { message='Excellent! Great knowledge of the Constitution!'; color='var(--saffron)'; }
+  else if (ratio >= .5) { message='Good effort! Keep learning!'; color='var(--gold)'; }
+  else { message='Keep reading. The Constitution is fascinating!'; color='#6b7280'; }
+  const messageElement = document.getElementById('scoreMessage');
+  messageElement.textContent = message;
+  messageElement.style.color = color;
+  const review = document.getElementById('reviewSection');
+  review.replaceChildren();
+  const heading = document.createElement('h3');
+  heading.className = 'font-display text-lg font-bold mb-3';
+  heading.style.color = 'var(--navy)';
+  heading.textContent = 'Quick Review';
+  review.appendChild(heading);
+  result.results.forEach((item, index) => {
+    const card = document.createElement('div');
+    card.className = 'text-sm p-3 rounded-lg bg-gray-50 flex gap-2 items-start';
+    const number = document.createElement('span');
+    number.textContent = `${index+1}.`;
+    const detail = document.createElement('span');
+    detail.className = 'flex-1';
+    detail.textContent = `${item.question}\nYour answer: ${item.selected_option}\nCorrect answer: ${item.correct_option}\n${item.correct ? 'Correct. ' : 'Incorrect. '}${item.explanation}`;
+    detail.style.whiteSpace = 'pre-line';
+    card.append(number, detail);
+    review.appendChild(card);
+  });
+}
+
+async function restartQuiz(){
+  document.getElementById('resultScreen').classList.add('hidden');
+  document.getElementById('startScreen').classList.remove('hidden');
+  await loadQuiz();
+}
+
+loadQuiz();
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+</script>
+</body>
+</html>

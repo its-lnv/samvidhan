@@ -1,0 +1,2418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/static/css/readable.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Samvidhan Survey – Constitution Ki Pariksha 📜</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================ 
+   SAMVIDHAN SURVEY – THEME & VARIABLES
+   ============================================================ */
+:root {
+  --saffron:   #E86D1F;
+  --saffron-light: #FFA040;
+  --white:     #FFF8EE;
+  --green:     #1A6B3A;
+  --green-light: #2E9B55;
+  --navy:      #1A2456;
+  --navy-light:#2B3575;
+  --gold:      #D4A017;
+  --gold-light:#F0C040;
+  --parchment: #FFF3DC;
+  --ink:       #1A0A00;
+  --radius:    14px;
+  --shadow:    0 8px 40px rgba(26,36,86,0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(135deg, #1A2456 0%, #2B3575 40%, #1A6B3A 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px 60px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background decorative Ashoka Chakra */
+body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: min(80vw, 600px);
+  height: min(80vw, 600px);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='3'/%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='8' fill='rgba(255,255,255,0.06)'/%3E%3C!-- spokes --%3E%3Cg stroke='rgba(255,255,255,0.04)' stroke-width='1.5'%3E%3Cline x1='100' y1='5' x2='100' y2='195'/%3E%3Cline x1='5' y1='100' x2='195' y2='100'/%3E%3Cline x1='32' y1='32' x2='168' y2='168'/%3E%3Cline x1='168' y1='32' x2='32' y2='168'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(22.5 100 100)'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(45 100 100)'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(67.5 100 100)'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(112.5 100 100)'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(135 100 100)'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(157.5 100 100)'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(202.5 100 100)'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(225 100 100)'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(247.5 100 100)'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(292.5 100 100)'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(315 100 100)'/%3E%3Cline x1='100' y1='5' x2='100' y2='30' transform='rotate(337.5 100 100)'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  text-align: center;
+  margin-bottom: 28px;
+  z-index: 10;
+  position: relative;
+}
+.site-header .logo-emoji { font-size: 3rem; display: block; margin-bottom: 6px; }
+.site-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  color: var(--gold-light);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  letter-spacing: 1px;
+}
+.site-header p {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* ============================================================
+   BOOK / SURVEY CONTAINER
+   ============================================================ */
+.book-wrapper {
+  perspective: 2000px;
+  width: 100%;
+  max-width: 820px;
+  position: relative;
+  z-index: 10;
+}
+
+.survey-book {
+  position: relative;
+  width: 100%;
+}
+
+/* Progress bar */
+.progress-bar-wrap {
+  background: rgba(255,255,255,0.12);
+  border-radius: 50px;
+  height: 8px;
+  margin-bottom: 18px;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--saffron), var(--gold-light));
+  border-radius: 50px;
+  transition: width 0.6s cubic-bezier(.4,0,.2,1);
+}
+.progress-label {
+  text-align: right;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* ============================================================
+   PAGE CARDS
+   ============================================================ */
+.pages-container {
+  position: relative;
+  min-height: 520px;
+}
+
+.page-card {
+  background: var(--parchment);
+  border-radius: var(--radius);
+  padding: clamp(24px, 5vw, 44px);
+  box-shadow: var(--shadow), inset 0 0 0 1px rgba(212,160,23,0.25);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* hidden by default */
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: left center;
+  transform: rotateY(-90deg);
+  transition: transform 0.55s cubic-bezier(.77,0,.18,1), opacity 0.3s;
+  /* Parchment texture */
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.015) 0px,
+    rgba(0,0,0,0.015) 1px,
+    transparent 1px,
+    transparent 28px
+  );
+}
+.page-card.active {
+  opacity: 1;
+  pointer-events: all;
+  transform: rotateY(0deg);
+  position: relative;
+}
+.page-card.exit-left {
+  opacity: 0;
+  pointer-events: none;
+  transform: rotateY(90deg);
+}
+.page-card.exit-right {
+  opacity: 0;
+  pointer-events: none;
+  transform: rotateY(-90deg);
+}
+
+/* Decorative page corner fold */
+.page-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(225deg, #e0c98a 50%, transparent 50%);
+  border-radius: 0 0 var(--radius) 0;
+}
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--gold);
+}
+.page-icon {
+  font-size: 2.2rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+.page-title-wrap h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 3.5vw, 1.65rem);
+  color: var(--navy);
+  line-height: 1.2;
+}
+.page-title-wrap .page-subtitle {
+  font-size: 0.82rem;
+  color: var(--green);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   QUESTION GROUPS
+   ============================================================ */
+.q-group {
+  margin-bottom: 26px;
+}
+.q-group.validation-error {
+  border: 2px solid #c0392b;
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(192,57,43,0.06);
+}
+.q-label {
+  display: block;
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 0.97rem;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.q-label .q-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--saffron);
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-right: 8px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.q-funny {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--green);
+  font-style: italic;
+  font-weight: 600;
+  margin-top: 3px;
+  margin-left: 34px;
+}
+
+/* Text inputs */
+.q-input, .q-textarea, .q-select {
+  width: 100%;
+  padding: 11px 16px;
+  border: 2px solid rgba(26,36,86,0.18);
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.93rem;
+  color: var(--ink);
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.q-input:focus, .q-textarea:focus, .q-select:focus {
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 3px rgba(232,109,31,0.15);
+}
+.q-textarea { resize: vertical; min-height: 90px; }
+
+/* Radio / Checkbox options */
+.options-grid {
+  display: grid;
+  gap: 10px;
+}
+.options-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+.options-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+.opt-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 2px solid rgba(26,36,86,0.14);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+  user-select: none;
+}
+.opt-label:hover { border-color: var(--saffron); background: #fff8f0; transform: translateX(3px); }
+.opt-label input { display: none; }
+.opt-label.selected {
+  border-color: var(--saffron);
+  background: linear-gradient(135deg, #fff3e0, #fff8f0);
+  color: var(--saffron);
+}
+.opt-icon { font-size: 1.1rem; }
+
+/* Yes / No pills */
+.yn-wrap { display: flex; gap: 14px; flex-wrap: wrap; }
+.yn-btn {
+  flex: 1;
+  min-width: 100px;
+  padding: 12px 20px;
+  border: 2px solid rgba(26,36,86,0.2);
+  border-radius: 50px;
+  background: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--navy);
+  text-align: center;
+}
+.yn-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+.yn-btn.yes.selected { background: var(--green); color: #fff; border-color: var(--green); }
+.yn-btn.no.selected  { background: #c0392b; color: #fff; border-color: #c0392b; }
+.yn-btn.maybe.selected { background: var(--gold); color: #fff; border-color: var(--gold); }
+#q30-bajrang-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(214,124,30,0.9) 0%, rgba(145,67,10,0.96) 54%, rgba(86,36,4,0.99) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 10003;
+  transition: opacity 0.65s ease, visibility 0s linear 0.65s;
+}
+#q30-bajrang-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transition: opacity 0.65s ease;
+}
+#q30-bajrang-overlay img {
+  width: min(88vw, 430px);
+  border-radius: 14px;
+  border: 3px solid rgba(255,248,238,0.9);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.38);
+  opacity: 0;
+  transform: scale(0.9) translateY(8px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+#q30-bajrang-overlay.image-visible img {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Scale rating */
+.scale-wrap { display: flex; gap: 8px; justify-content: space-between; }
+.scale-btn {
+  flex: 1;
+  padding: 10px 4px;
+  border: 2px solid rgba(26,36,86,0.18);
+  border-radius: 10px;
+  background: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--navy);
+  text-align: center;
+}
+.scale-btn.selected { background: var(--navy); color: #fff; border-color: var(--navy); }
+.scale-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: #888; margin-top: 5px; }
+
+/* Dark joke badge */
+.dark-joke-badge {
+  display: inline-block;
+  background: #2c2c2c;
+  color: #e0c870;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 50px;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+}
+
+/* Divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 22px 0;
+}
+
+/* ============================================================
+   AUDIO RECORDER
+   ============================================================ */
+.audio-recorder {
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  color: #fff;
+}
+.audio-recorder h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+  color: var(--gold-light);
+}
+.audio-recorder p { font-size: 0.85rem; opacity: 0.75; margin-bottom: 18px; }
+.audio-controls { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+.audio-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.audio-btn.rec  { background: #e74c3c; color: #fff; }
+.audio-btn.stop { background: #fff; color: var(--navy); }
+.audio-btn.play { background: var(--green-light); color: #fff; }
+.audio-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.audio-btn:not(:disabled):hover { transform: scale(1.05); }
+.rec-indicator { width: 12px; height: 12px; border-radius: 50%; background: #fff; animation: blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.audio-timer { font-size: 2rem; font-weight: 800; color: var(--gold-light); letter-spacing: 2px; margin-bottom: 8px; }
+.audio-status { font-size: 0.82rem; opacity: 0.7; }
+audio { width: 100%; margin-top: 12px; border-radius: 8px; }
+
+/* ============================================================
+   NAVIGATION BUTTONS
+   ============================================================ */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  gap: 12px;
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.3px;
+}
+.nav-btn.prev {
+  background: rgba(255,255,255,0.8);
+  color: var(--navy);
+  border: 2px solid rgba(26,36,86,0.25);
+}
+.nav-btn.next {
+  background: linear-gradient(135deg, var(--saffron), #c0500e);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(232,109,31,0.4);
+}
+.nav-btn.submit {
+  background: linear-gradient(135deg, var(--green), #0e4d28);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(26,107,58,0.4);
+}
+.nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
+.nav-btn:active { transform: translateY(0); }
+.page-dots { display: flex; gap: 7px; }
+.page-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.page-dot.active { background: var(--saffron); transform: scale(1.3); }
+
+/* ============================================================
+   THANK YOU SCREEN
+   ============================================================ */
+#thank-you {
+  display: none;
+  text-align: center;
+  padding: 40px 30px;
+  background: var(--parchment);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 10;
+  max-width: 820px;
+  width: 100%;
+  animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes popIn {
+  from { opacity:0; transform: scale(0.8); }
+  to   { opacity:1; transform: scale(1); }
+}
+#thank-you .ty-emoji { font-size: 4rem; margin-bottom: 16px; }
+#thank-you h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+#thank-you .hindi-msg {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  color: var(--saffron);
+  line-height: 1.7;
+  margin: 16px 0;
+  background: linear-gradient(135deg, #fff8f0, #ffe8cc);
+  border-radius: 12px;
+  padding: 18px;
+  border-left: 4px solid var(--saffron);
+}
+#thank-you .ty-footer { font-size: 0.85rem; color: #888; margin-top: 20px; }
+#thank-you .explore-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+  padding: 12px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  box-shadow: 0 4px 16px rgba(26,36,86,0.32);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#thank-you .explore-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(26,36,86,0.36);
+}
+#thank-you .explore-link:active { transform: translateY(0); }
+.confetti-emoji {
+  font-size: 2rem;
+  display: inline-block;
+  animation: bounce 0.6s infinite alternate;
+}
+@keyframes bounce { from{transform:translateY(0)} to{transform:translateY(-12px)} }
+
+/* Cover page specific */
+.cover-page {
+  text-align: center;
+  padding: 40px clamp(20px,5vw,50px);
+}
+.cover-page .chakra { font-size: 4rem; margin-bottom: 12px; display: block; animation: spin 20s linear infinite; }
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.cover-page h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.cover-page .tagline {
+  font-size: 1rem;
+  color: var(--green);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.cover-page .cover-desc {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto 24px;
+  background: linear-gradient(135deg, #fff, #f9f5ee);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(212,160,23,0.3);
+}
+.cover-page .start-hint {
+  font-size: 0.82rem;
+  color: #888;
+  font-style: italic;
+}
+
+/* Disclaimer badge */
+.disclaimer {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border: 1px solid #f0c040;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  color: #7a5a00;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+/* Loader overlay */
+#loader {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(26,36,86,0.85);
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 16px;
+}
+#loader.show { display: flex; }
+.loader-spinner {
+  width: 50px; height: 50px;
+  border: 4px solid rgba(255,255,255,0.3);
+  border-top-color: var(--gold-light);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+#loader p { font-size: 1rem; font-weight: 700; opacity: 0.85; }
+
+/* Future overlay effect (Q28) */
+#future-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 10001;
+  transition: opacity 0.9s ease, visibility 0s linear 0.9s;
+}
+#future-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transition: opacity 0.9s ease;
+}
+.future-message {
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4.5vw, 3.1rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  border-right: 2px solid rgba(255,255,255,0.85);
+  padding-right: 6px;
+}
+#future-overlay.show-text .future-message {
+  opacity: 1;
+}
+.future-message.typing {
+  animation: typeCaret 0.7s step-end infinite;
+}
+#q17-video-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.86);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 10002;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+#q17-video-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transition: opacity 0.25s ease;
+}
+#q17-video {
+  width: min(92vw, 560px);
+  max-height: 80vh;
+  border-radius: 14px;
+  background: #000;
+  box-shadow: 0 16px 50px rgba(0,0,0,0.45);
+}
+#q17-video-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+body.overlay-lock {
+  overflow: hidden;
+}
+@keyframes typeCaret {
+  50% { border-color: transparent; }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .options-grid.cols-2 { grid-template-columns: 1fr; }
+  .options-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+  .yn-wrap { flex-direction: column; }
+  .scale-wrap { gap: 4px; }
+  .scale-btn { font-size: 0.75rem; padding: 8px 2px; }
+  .nav-btn { padding: 11px 18px; font-size: 0.88rem; }
+}
+</style>
+</head>
+<body>
+<form id="survey-form" method="post" action="{% url 'survey' %}" style="display:none;">
+  {% csrf_token %}
+</form>
+
+<div id="loader">
+  <div class="loader-spinner"></div>
+  <p>📤 Bhej raha hun Sarkar ke paas... ek second!</p>
+</div>
+
+<div id="future-overlay" aria-hidden="true">
+  <div class="future-message" id="future-message">Welcome to Future</div>
+</div>
+
+<div id="q17-video-overlay" aria-hidden="true">
+  <button id="q17-video-close" type="button" aria-label="Close video">x</button>
+  <video id="q17-video" playsinline preload="auto"></video>
+</div>
+
+<div id="q30-bajrang-overlay" aria-hidden="true">
+  <img id="q30-bajrang-overlay-image" alt="Bajrang Dal"/>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <span class="logo-emoji">📜</span>
+  <h1>Samvidhan Survey</h1>
+  <p>Constitution Ki Pariksha — No Marks, Only Fun! 🎉</p>
+</header>
+
+<!-- Book Wrapper -->
+<div class="book-wrapper">
+  <div class="survey-book">
+    <!-- Progress -->
+    <div class="progress-label" id="progress-label">Page 1 of 7</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-bar" style="width:14.3%"></div>
+    </div>
+
+    <div class="pages-container" id="pages-container">
+
+      <!-- ========================================================
+           PAGE 0 — COVER
+           ======================================================== -->
+      <div class="page-card active" id="page-0">
+        <div class="cover-page">
+          <span class="chakra">☸️</span>
+          <h2>Welcome to the<br/>Samvidhan Survey!</h2>
+          <p class="tagline">"Jaago Nagrik Jaago — Constitution Padho! Reel baad me dekhna"</p>
+          <div class="cover-desc">
+            <strong>Namaste 🙏</strong><br/>
+            This is a fun survey (unlike boring Google Forms) to check how much you actually know about the Indian Constitution — 
+            vs. how much you think you know from that one WhatsApp forward.<br/><br/>
+            Don't worry, there are no wrong answers. Except some. Please study. 😂
+          </div>
+          <div class="disclaimer">
+            <span>⚠️</span>
+            <span>This survey is for research purpose. Your responses are strictly confidential and will NOT be used to file an FIR. Probably. 😅</span>
+          </div>
+          <p class="start-hint">👇 Click "Begin My Journey" to start — it's free, unlike some takes money to provide Internship</p>
+        </div>
+        <div class="nav-buttons">
+          <span></span>
+          <div style="display:flex; align-items:center; gap:16px;">
+            <div class="page-dots" id="dots"></div>
+            <button class="nav-btn next" onclick="goNext()">Begin My Journey 🚀</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           PAGE 1 — BASIC DETAILS
+           ======================================================== -->
+      <div class="page-card" id="page-1">
+        <div class="page-header">
+          <span class="page-icon">🪪</span>
+          <div class="page-title-wrap">
+            <div class="page-subtitle">Section 1</div>
+            <h2>Aapka Parichay — Aap Hai Kon?</h2>
+          </div>
+        </div>
+        <p class="q-funny" style="margin-left:0; margin-bottom:18px;">
+          (Don't worry, we won't put your name in Scam. Or will we? 😈)
+        </p>
+
+        <div class="q-group">
+          <label class="q-label"><span class="q-num">1</span> Your Good Name (as it appears on Aadhar, not as your mom calls you in anger)</label>
+          <input type="text" class="q-input" id="name" placeholder="e.g., Sharukh Khan">
+        </div>
+
+        <div class="q-group">
+          <label class="q-label"><span class="q-num">2</span> Age (in human years, not dog years)</label>
+          <input type="number" class="q-input" id="age" placeholder="Your age (18-99, we accept all)" min="10" max="99"/>
+        </div>
+
+        <div class="q-group">
+          <label class="q-label"><span class="q-num">3</span> Gender</label>
+          <div class="options-grid cols-3">
+            <label class="opt-label" onclick="selectOpt(this,'gender-group')">
+              <input type="radio" name="gender"/> <span class="opt-icon">👨</span> Male
+            </label>
+            <label class="opt-label" onclick="selectOpt(this,'gender-group')">
+              <input type="radio" name="gender"/> <span class="opt-icon">👩</span> Female
+            </label>
+            <label class="opt-label" onclick="selectOpt(this,'gender-group')">
+              <input type="radio" name="gender"/> <span class="opt-icon">🌈</span> Other🧐
+            </label>
+          </div>
+        </div>
+
+        <div class="q-group">
+          <label class="q-label"><span class="q-num">4</span> Your Email ID</label>
+          <input type="email" class="q-input" id="email" placeholder="you@example.com" required/>
+        </div>
+
+        <div class="q-group">
+          <label class="q-label"><span class="q-num">5</span> Your Course / Stream</label>
+          <div class="options-grid cols-2">
+            <label class="opt-label" onclick="selectOpt(this,'course-group')"><input type="radio" name="course"/> 📊 Commerce</label>
+            <label class="opt-label" onclick="selectOpt(this,'course-group')"><input type="radio" name="course"/> 💻 Engineering / Tech</label>
+            <label class="opt-label" onclick="selectOpt(this,'course-group')"><input type="radio" name="course"/> 🔬 Science</label>
+            <label class="opt-label" onclick="selectOpt(this,'course-group')"><input type="radio" name="course"/> 📚 Other</label>
+          </div>
+        </div>
+
+        <div class="q-group">
+          <label class="q-label"><span class="q-num">6</span> College / University Name</label>
+          <input type="text" class="q-input" id="college" placeholder="Name of your esteemed institution"/>
+        </div>
+
+        <div class="q-group">
+          <label class="q-label"><span class="q-num">7</span> Year / Semester</label>
+          <select class="q-select" id="year">
+            <option value="">— Select Year —</option>
+            <option>1st Year</option><option>2nd Year</option><option>3rd Year</option>
+            <option>4th Year</option><option>5th Year</option>
+            <option>PG / Masters</option><option>PhD</option>
+            <option>Pass out / Working</option>
+          </select>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="nav-btn prev" onclick="goPrev()">← Back</button>
+          <div style="display:flex; align-items:center; gap:16px;">
+            <div class="page-dots" id="dots1"></div>
+            <button class="nav-btn next" onclick="goNext()">Next Section →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           PAGE 2 — CONSTITUTIONAL AWARENESS
+           ======================================================== -->
+      <div class="page-card" id="page-2">
+        <div class="page-header">
+          <span class="page-icon">📖</span>
+          <div class="page-title-wrap">
+            <div class="page-subtitle">Section 2</div>
+            <h2>Constitution — Sunne Mein Acha Lagta Hai! 😅</h2>
+          </div>
+        </div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">8</span> Do you know about the Constitution of India?
+            <span class="q-funny">Hint: It's not a Bollywood script, though it's equally dramatic like Bollywood Movies 🎬</span>
+          </label>
+          <div class="yn-wrap">
+            <button class="yn-btn yes" onclick="selectYN(this,'q8','Yes')">✅ Haan ji, bilkul!</button>
+            <button class="yn-btn no" onclick="selectYN(this,'q8','No')">❌ Bas naam hee suna hai</button>
+            <button class="yn-btn maybe" onclick="selectYN(this,'q8','Maybe')">🤔 Thoda thoda</button>
+          </div>
+          <input type="hidden" id="q8" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">9</span> Have you studied Constitutional Values in your course?
+            <span class="q-funny">Or did you just Google it 5 mins before the exam? No judgment. 😂</span>
+          </label>
+          <div class="yn-wrap">
+            <button class="yn-btn yes" onclick="selectYN(this,'q9','Yes - Properly')">📖 Yes, properly padha!</button>
+            <button class="yn-btn no" onclick="selectYN(this,'q9','No')">🙈 Ek page bhi nahi</button>
+            <button class="yn-btn maybe" onclick="selectYN(this,'q9','Just for exams')">📝 Sirf exam ke liye</button>
+          </div>
+          <input type="hidden" id="q9" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">10</span> According to you, what is the Constitution?
+            <span class="q-funny">In your own words. "It's a very big book" is NOT an accepted answer. 📚</span>
+          </label>
+          <textarea class="q-textarea" id="q10" placeholder="Tell us in your own words... you got this! (No copy-paste from ChatGPT or any other, we have anti-cheating AI 🤖)"></textarea>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">11</span> Do you know when the Constitution of India came into effect?
+            <span class="q-funny">It's NOT the same date as your favorite cricketer's birthday. 😅</span>
+          </label>
+          <div class="options-grid">
+            <label class="opt-label" onclick="selectOpt(this,'q11-group')"><input type="radio" name="q11"/> 📅 26th January, 1950 ✓</label>
+            <label class="opt-label" onclick="selectOpt(this,'q11-group')"><input type="radio" name="q11"/> 📅 15th August, 1947 (That's Independence Day bhai!)</label>
+            <label class="opt-label" onclick="selectOpt(this,'q11-group')"><input type="radio" name="q11"/> 📅 26th November, 1949 (Constitution Day!)</label>
+            <label class="opt-label" onclick="selectOpt(this,'q11-group')"><input type="radio" name="q11"/> 🤷 No idea, I thought it was on my birthday</label>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">12</span> Who is known as the "Father of the Indian Constitution"?
+            <span class="q-funny">Dark hint: He was not allowed to drink water at certain places in this very country. 💔</span>
+          </label>
+          <div class="options-grid cols-2">
+            <label class="opt-label" onclick="selectOpt(this,'q12-group')"><input type="radio" name="q12"/> 🙏 Dr. B.R. Ambedkar</label>
+            <label class="opt-label" onclick="selectOpt(this,'q12-group')"><input type="radio" name="q12"/> 🤔 Jawaharlal Nehru</label>
+            <label class="opt-label" onclick="selectOpt(this,'q12-group')"><input type="radio" name="q12"/> 🕊️ Mahatma Gandhi</label>
+            <label class="opt-label" onclick="selectOpt(this,'q12-group')"><input type="radio" name="q12"/> 🔫 Chandra Shekhar Azad</label>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">13</span> How many Articles does the Indian Constitution have?
+            <span class="q-funny">Sirf yeh batao — not counting the ones added later. 😂</span>
+          </label>
+          <div class="options-grid cols-2">
+            <label class="opt-label" onclick="selectOpt(this,'q13-group')"><input type="radio" name="q13"/> 395 (original)</label>
+            <label class="opt-label" onclick="selectOpt(this,'q13-group')"><input type="radio" name="q13"/> 448 (current)</label>
+            <label class="opt-label" onclick="selectOpt(this,'q13-group')"><input type="radio" name="q13"/> 100 (kitna padhe itna!)</label>
+            <label class="opt-label" onclick="selectOpt(this,'q13-group')"><input type="radio" name="q13"/> I thought 420 😂</label>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">14</span> If the Constitution was a Bollywood movie, what would it be called?
+            <span class="q-funny">Thodi mehnat karo sochne me! "Jai Hind" is too easy. 🎬</span>
+          </label>
+          <textarea class="q-textarea" id="q14" placeholder='E.g., "Article 370 – Ek Pyaar Ki Kahani" 😐' style="min-height:70px;"></textarea>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="nav-btn prev" onclick="goPrev()">← Pichhe</button>
+          <div style="display:flex; align-items:center; gap:16px;">
+            <button class="nav-btn next" onclick="goNext()">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           PAGE 3 — FUNDAMENTAL DUTIES
+           ======================================================== -->
+      <div class="page-card" id="page-3">
+        <div class="page-header">
+          <span class="page-icon">🫡</span>
+          <div class="page-title-wrap">
+            <div class="page-subtitle">Section 3</div>
+            <h2>Maulik Kartavya — Duties? Kya Hota Hai? 🤔</h2>
+          </div>
+        </div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">15</span> Are you aware of your Fundamental Duties?
+            <span class="q-funny">Spoiler alert: "Watching Dhurandhar 3 times in theatre" is NOT one of them 🎬</span>
+          </label>
+          <div class="yn-wrap">
+            <button class="yn-btn yes" onclick="selectYN(this,'q21','Yes')">✅ Part IVA, Article 51A, 11 duties!</button>
+            <button class="yn-btn no" onclick="selectYN(this,'q21','No')">❌ Duties? Koi bataya hi nahi!</button>
+            <button class="yn-btn maybe" onclick="selectYN(this,'q21','Heard of it')">📢 Sunna hai, padha nahi</button>
+          </div>
+          <input type="hidden" id="q21" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">16</span> Do you follow your duties as a responsible citizen?
+            <span class="q-funny">Vijay Mallya, Nirav Modi and Mehul Choksi have left the GC. ✈️</span>
+          </label>
+          <div class="yn-wrap">
+            <button class="yn-btn yes" onclick="selectYN(this,'q22','Always')">😇 Always! Model citizen!</button>
+            <button class="yn-btn maybe" onclick="selectYN(this,'q22','Sometimes')">🤔 Kabhi kabhi follow kar leta hu</button>
+            <button class="yn-btn no" onclick="selectYN(this,'q22','Be honest')">😬 Mujhe bhi pata nahi kya karein</button>
+          </div>
+          <input type="hidden" id="q22" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">17</span> Which duty do you think is MOST important?
+            <span class="q-funny">Choose wisely. Your answer will be judged... just kidding. Or am I? 😈</span>
+          </label>
+          <div class="options-grid">
+            <label class="opt-label" onclick="selectOpt(this,'q23-group')"><input type="radio" name="q23"/> 🇮🇳 Respect the National Flag & Anthem</label>
+            <label class="opt-label" onclick="selectOpt(this,'q23-group')"><input type="radio" name="q23"/> 🌿 Protect the Environment</label>
+            <label class="opt-label" onclick="selectOpt(this,'q23-group')"><input type="radio" name="q23"/> 🤝 Promote Harmony & Brotherhood</label>
+            <label class="opt-label" onclick="selectOpt(this,'q23-group')"><input type="radio" name="q23"/> 🗳️ Participate in Democracy (Vote!)</label>
+            <label class="opt-label" onclick="selectOpt(this,'q23-group')"><input type="radio" name="q23"/> 💰 Pay your taxes (RIP salaries)</label>
+            <label class="opt-label" onclick="selectOpt(this,'q23-group')"><input type="radio" name="q23"/> 🔬 Develop scientific temper (Delete WhatsApp fwds!)</label>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">18</span> How do you show respect to the National Anthem? 🎵
+            <span class="q-funny">Please say something better than "I stand up in the cinema"</span>
+          </label>
+          <div class="options-grid">
+            <label class="opt-label" onclick="selectOpt(this,'q24-group')"><input type="radio" name="q24"/> 🏟️ Stand up & sing with full josh!</label>
+            <label class="opt-label" onclick="selectOpt(this,'q24-group')"><input type="radio" name="q24"/> 😐 Stand silently (too shy to sing)</label>
+            <label class="opt-label" onclick="selectOpt(this,'q24-group')"><input type="radio" name="q24"/> 🎬 Grudgingly stand at cinema</label>
+            <label class="opt-label" onclick="selectOpt(this,'q24-group')"><input type="radio" name="q24"/> 😅 I quietly sneak out before it plays</label>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">19</span> One Fundamental Duty says "protect public property." When was the last time you saw someone NOT littering?
+            <span class="q-funny" style="color:#c0392b;">Red Mode 🔴: Aaj mai jab raste me aa raha tha toh mujhe Vimal dikha.</span>
+          </label>
+          <div class="yn-wrap">
+            <button class="yn-btn yes" onclick="selectYN(this,'q25','Today')">😇 Today! I threw nothing!</button>
+            <button class="yn-btn maybe" onclick="selectYN(this,'q25','Sometimes I do litter')">😬 Sometimes I... slip</button>
+            <button class="yn-btn no" onclick="selectYN(this,'q25','Never thought about it')">🤦 Yeh bhi duty hai?!</button>
+          </div>
+          <input type="hidden" id="q25" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">20</span> Write one duty you think Indians perform BEST and one they perform WORST:
+          </label>
+          <textarea class="q-textarea" id="q26" placeholder="Best duty: We're great at ___&#10;Worst duty: We completely ignore ___&#10;(Be honest! The constitution won't get offended... 😂)"></textarea>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="nav-btn prev" onclick="goPrev()">← Pichhe</button>
+          <button class="nav-btn next" onclick="goNext()">Next Section →</button>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           PAGE 4 — EQUALITY & JUSTICE
+           ======================================================== -->
+      <div class="page-card" id="page-4">
+        <div class="page-header">
+          <span class="page-icon">🏛️</span>
+          <div class="page-title-wrap">
+            <div class="page-subtitle">Section 4</div>
+            <h2>Samanta & Nyaya — Reality Check Time! 🪞</h2>
+          </div>
+        </div>
+        <p class="q-funny" style="margin-left:0; margin-bottom:18px;">
+          (The Constitution promises equality. 😬)
+        </p>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">21</span> Do you believe India provides equal opportunities to ALL its citizens?
+            <span class="q-funny">Honest answers only. Your JEE rank does not count as "equal opportunity." 💔</span>
+          </label>
+          <div class="yn-wrap">
+            <button class="yn-btn yes" onclick="selectYN(this,'q27','Yes - Absolutely')">🌟 Yes, we've come far!</button>
+            <button class="yn-btn no" onclick="selectYN(this,'q27','No - Far from it')">😐 No, not really</button>
+            <button class="yn-btn maybe" onclick="selectYN(this,'q27','Getting better')">🚀 Getting better, slowly</button>
+          </div>
+          <input type="hidden" id="q27" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">22</span> Have you personally seen or experienced discrimination based on caste, gender, color or religion?
+          </label>
+          <div class="yn-wrap">
+            <button class="yn-btn yes" onclick="handleQ28Selection(this,'Yes - Experienced')">😔 Yes, they harass me</button>
+            <button class="yn-btn maybe" onclick="handleQ28Selection(this,'Witnessed')">👀 Witnessed it happen to others</button>
+            <button class="yn-btn no" onclick="handleQ28Selection(this,'No')">🙏 No, thankfully not</button>
+          </div>
+          <input type="hidden" id="q28" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">23</span> Do you think laws in India are fair for everyone?
+            <span class="q-funny">Remember: In India, "out of court settlement" is practically a legal term. 😂</span>
+          </label>
+          <div class="yn-wrap">
+            <button class="yn-btn yes" onclick="selectYN(this,'q29','Yes')">⚖️ Yes, fair for all</button>
+            <button class="yn-btn no" onclick="selectYN(this,'q29','No')">❌ Depends on your connections</button>
+            <button class="yn-btn maybe" onclick="selectYN(this,'q29','Sometimes')">🙊 Mai nhi bataunga</button>
+          </div>
+          <input type="hidden" id="q29" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">24</span> The Constitution grants RESERVATION to uplift marginalized communities. Your honest opinion?
+            <span class="q-funny">Tera response hamare paas stored rahega toh soch-samajh ke boliyo jo bolna hai 🐦‍🔥</span>
+          </label>
+          <div class="options-grid">
+            <label class="opt-label" onclick="selectOpt(this,'q30-group')"><input type="radio" name="q30"/> 👍 Necessary and should continue</label>
+            <label class="opt-label" onclick="selectOpt(this,'q30-group')"><input type="radio" name="q30"/> 🔄 Should be reviewed/reformed</label>
+            <label class="opt-label" onclick="selectOpt(this,'q30-group')"><input type="radio" name="q30"/> ❓ I need to read more before judging</label>
+            <label class="opt-label" onclick="selectOpt(this,'q30-group')"><input type="radio" name="q30"/> 🤐 No opinion (wisest answer!)</label>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">25</span> Women got Right to Vote in India in 1950 itself (unlike some "developed" countries). How proud does this make you?
+            <span class="q-funny">Fun fact: Switzerland gave women voting rights only in 1971. Kuch hua, hum pehle bade!</span>
+          </label>
+          <div class="scale-wrap" id="q31-scale">
+            <button class="scale-btn" onclick="selectScale(this,'q31-scale','1')">1<br/>😐</button>
+            <button class="scale-btn" onclick="selectScale(this,'q31-scale','2')">2<br/>🙂</button>
+            <button class="scale-btn" onclick="selectScale(this,'q31-scale','3')">3<br/>😊</button>
+            <button class="scale-btn" onclick="selectScale(this,'q31-scale','4')">4<br/>😤</button>
+            <button class="scale-btn" onclick="selectScale(this,'q31-scale','5')">5<br/>🤩</button>
+          </div>
+          <div class="scale-labels"><span>Not much</span><span>Very Proud!</span></div>
+          <input type="hidden" id="q31" value=""/>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="nav-btn prev" onclick="goPrev()">← Pichhe</button>
+          <button class="nav-btn next" onclick="goNext()">Next Section →</button>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           PAGE 5 — OPINION BASED
+           ======================================================== -->
+      <div class="page-card" id="page-5">
+        <div class="page-header">
+          <span class="page-icon">💭</span>
+          <div class="page-title-wrap">
+            <div class="page-subtitle">Section 5</div>
+            <h2>Aapki Rai — Your Opinion Matters!</h2>
+          </div>
+        </div>
+        <p class="q-funny" style="margin-left:0; margin-bottom:18px;">
+          (You've come this far. You're basically a constitutional scholar now. Act like it! 🎓)
+        </p>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">26</span> Do you think people in India are generally aware of constitutional values?
+            <span class="q-funny">Remember: Knowing the name "Constitution" ≠ knowing constitutional values 😅</span>
+          </label>
+          <div class="yn-wrap">
+            <button class="yn-btn yes" onclick="selectYN(this,'q37','Yes - Most are aware')">👍 Haan, kaafi log jaante hain</button>
+            <button class="yn-btn no" onclick="selectYN(this,'q37','No - Very low awareness')">😔 Bahut low awareness hai</button>
+            <button class="yn-btn maybe" onclick="selectYN(this,'q37','Urban-Rural divide')">🌆 Urban haan, Rural different picture</button>
+          </div>
+          <input type="hidden" id="q37" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">27</span> Should constitutional values be taught MORE in schools and colleges?
+            <span class="q-funny">Spoiler: We spent 6 chapters on British Imperialism and 0.5 pages on Fundamental Rights 😭</span>
+          </label>
+          <div class="yn-wrap">
+            <button class="yn-btn yes" onclick="selectYN(this,'q38','Yes - Definitely')">🏫 Absolutely! Make it mandatory!</button>
+            <button class="yn-btn maybe" onclick="selectYN(this,'q38','It already is')">📚 It already is, just badly taught</button>
+            <button class="yn-btn no" onclick="selectYN(this,'q38','No')">🙄 Students have too much already</button>
+          </div>
+          <input type="hidden" id="q38" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">28</span> How can constitutional awareness be BEST improved? (Pick your top idea)
+          </label>
+          <div class="options-grid">
+            <label class="opt-label" onclick="selectOpt(this,'q39-group')"><input type="radio" name="q39"/> 📱 Social media campaigns (Reels, Memes!, this Survey)</label>
+            <label class="opt-label" onclick="selectOpt(this,'q39-group')"><input type="radio" name="q39"/> 🏫 Compulsory subject in school/college</label>
+            <label class="opt-label" onclick="selectOpt(this,'q39-group')"><input type="radio" name="q39"/> 🎬 Bollywood movies on the topic</label>
+            <label class="opt-label" onclick="selectOpt(this,'q39-group')"><input type="radio" name="q39"/> 📺 Street plays / nukkad nataks</label>
+            <label class="opt-label" onclick="selectOpt(this,'q39-group')"><input type="radio" name="q39"/> 🏛️ Government awareness drives</label>
+            <label class="opt-label" onclick="selectOpt(this,'q39-group')"><input type="radio" name="q39"/> 📲 Apps / Websites like Samvidhan!</label>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">29</span> Rate how interesting you find the Indian Constitution on a scale of 1-5:
+            <span class="q-funny">If you said 1, this survey has failed. If 5, you're our new ambassador! 😄</span>
+          </label>
+          <div class="scale-wrap" id="q40-scale">
+            <button class="scale-btn" onclick="selectScale(this,'q40-scale','1')">1<br/>😴</button>
+            <button class="scale-btn" onclick="selectScale(this,'q40-scale','2')">2<br/>🤡</button>
+            <button class="scale-btn" onclick="selectScale(this,'q40-scale','3')">3<br/>🙂</button>
+            <button class="scale-btn" onclick="selectScale(this,'q40-scale','4')">4<br/>😃</button>
+            <button class="scale-btn" onclick="selectScale(this,'q40-scale','5')">5<br/>🤩</button>
+          </div>
+          <div class="scale-labels"><span>Bohut boring</span><span>Bahut interesting!</span></div>
+          <input type="hidden" id="q40" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">30</span> Should people be free to express patriotic or religious slogans in public spaces?
+          </label>
+          <div class="yn-wrap">
+            <button class="yn-btn yes" onclick="selectYN(this,'q41','Yes - It gets too political')">👍 Yes</button>
+            <button class="yn-btn no" onclick="selectYN(this,'q41','No - Its normal debate')">⚠️ Only in certain situations</button>
+            <button class="yn-btn maybe" onclick="selectYN(this,'q41','No Comment')">🤐 Not sure</a>
+          </div>
+          <input type="hidden" id="q41" value=""/>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="nav-btn prev" onclick="goPrev()">← Pichhe</button>
+          <button class="nav-btn next" onclick="goNext()">Last Section →</button>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           PAGE 6 — FINAL + AUDIO
+           ======================================================== -->
+      <div class="page-card" id="page-6">
+        <div class="page-header">
+          <span class="page-icon">🎙️</span>
+          <div class="page-title-wrap">
+            <div class="page-subtitle">Section 6 – Final Round</div>
+            <h2>Aakhri Sawaal — Aur Aapki Awaaz! 🎤</h2>
+          </div>
+        </div>
+        <p class="q-funny" style="margin-left:0; margin-bottom:18px;">
+          (Tum yaha tak tike ho? 🎉 Almost done. Don't close the tab now — that would be unconstitutional (असंवैधानिक).
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">31</span> How important are constitutional values in your DAILY life?
+            <span class="q-funny">From your morning chai to your midnight Twitter rant — the constitution is always there! ☕</span>
+          </label>
+          <div class="scale-wrap" id="q42-scale">
+            <button class="scale-btn" onclick="selectScale(this,'q42-scale','1')">1<br/>😴</button>
+            <button class="scale-btn" onclick="selectScale(this,'q42-scale','2')">2<br/>😐</button>
+            <button class="scale-btn" onclick="selectScale(this,'q42-scale','3')">3<br/>🙂</button>
+            <button class="scale-btn" onclick="selectScale(this,'q42-scale','4')">4<br/>😊</button>
+            <button class="scale-btn" onclick="selectScale(this,'q42-scale','5')">5<br/>💪</button>
+          </div>
+          <div class="scale-labels"><span>Bilkul nahi!</span><span>Bahut important!</span></div>
+          <input type="hidden" id="q42" value=""/>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">32</span> Any suggestions to promote constitutional awareness in India?
+            <span class="q-funny">Your answer might actually be read. Unlike that RTI application. 😂</span>
+          </label>
+          <textarea class="q-textarea" id="q43" placeholder="Share your genius idea here... Who knows, it might actually happen! Or get forwarded on WhatsApp, which is basically the same thing 😄"></textarea>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">33</span> Your biggest takeaway from this survey / अगर आप हमारी जगह होते, तो क्या अलग करते? 🤔:
+          </label>
+          <textarea class="q-textarea" id="q44" placeholder="I didn't know that... / From now on I will... / The Constitution basically says..."></textarea>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">34</span> If you could add ONE Article to the Constitution, what would it be?
+            <span class="q-funny">Article 45A: "Politicians must watch Scam 1992 before taking office." Valid? 😂</span>
+          </label>
+          <textarea class="q-textarea" id="q45" placeholder="My proposed Article: ___ (I, [Your Name], hereby propose that the Constitution of India shall add...)"></textarea>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- AUDIO RECORDER -->
+        <div class="q-group">
+          <label class="q-label">
+            <span class="q-num">🎙️</span> BONUS: Record your voice opinion on the Indian Constitution!
+            <span class="q-funny">Max 60 seconds. Say what you feel. Be honest. Don't be serious. Be constitutional. 🎤</span>
+          </label>
+
+          <div class="audio-recorder">
+            <h3>🎙️ Voice Your Opinion!</h3>
+            <p>Record a short message about constitutional awareness in India.<br/>Max 60 seconds — we promise not to leak it (unlike those video clips 😅)</p>
+            <div class="audio-timer" id="audio-timer">00:00</div>
+            <div class="audio-controls">
+              <button class="audio-btn rec" id="btn-record" onclick="startRecording()">
+                <div class="rec-indicator" id="rec-dot" style="display:none;"></div>
+                🔴 Start Recording
+              </button>
+              <button class="audio-btn stop" id="btn-stop" onclick="stopRecording()" disabled>
+                ⏹️ Stop
+              </button>
+            </div>
+            <div class="audio-status" id="audio-status">Click "Start Recording" to begin 🎙️</div>
+            <audio id="audio-playback" controls style="display:none;"></audio>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="q-group" style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9); border-radius:12px; padding:18px; border: 1px solid #a5d6a7;">
+          <label class="q-label" style="color: var(--green);">
+            ⭐ Rate your overall experience with this survey:
+          </label>
+          <div class="scale-wrap" id="survey-rating-scale">
+            <button class="scale-btn" onclick="selectScale(this,'survey-rating-scale','1')" style="border-color:#4caf50">1<br/>😤</button>
+            <button class="scale-btn" onclick="selectScale(this,'survey-rating-scale','2')" style="border-color:#4caf50">2<br/>😐</button>
+            <button class="scale-btn" onclick="selectScale(this,'survey-rating-scale','3')" style="border-color:#4caf50">3<br/>🙂</button>
+            <button class="scale-btn" onclick="selectScale(this,'survey-rating-scale','4')" style="border-color:#4caf50">4<br/>😄</button>
+            <button class="scale-btn" onclick="selectScale(this,'survey-rating-scale','5')" style="border-color:#4caf50">5<br/>🤩</button>
+          </div>
+          <input type="hidden" id="survey-rating" value=""/>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="nav-btn prev" onclick="goPrev()">← Pichhe</button>
+          <button class="nav-btn submit" onclick="submitSurvey()">
+            Submit Survey — Jai Hind!
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /pages-container -->
+  </div>
+</div>
+
+<!-- Thank You Screen -->
+<div id="thank-you" style="display:none;">
+  <div class="ty-emoji">🎊</div>
+  <h2>Wah! Survey Complete Ho Gaya!</h2>
+  <p style="color:#555; font-size:0.95rem; margin-bottom:4px;">
+    Your responses have been successfully submitted. You are now officially more constitution-aware than 60% of WhatsApp uncles! 🎉
+  </p>
+  <div class="hindi-msg">
+    <strong>बहुत बढ़िया! 🙏</strong><br/>
+    आपने यह सर्वे पूरा किया — इसका मतलब आप सच में देश के बारे में सोचते हैं।<br/>
+    वरना लोग तो बीच में ही छोड़ देते| 😂<br/><br/>
+    <strong>संविधान कहता है:</strong> "We the people of India..." — और आप उन लोगों में से हैं जो सुनते हैं!<br/><br/>
+    अब जाइए — <em>पहले Constitution पढ़िए, फिर Instagram!</em> 📜❤️
+  </div>
+  <div style="font-size: 1.8rem; margin: 16px 0;">
+    <span class="confetti-emoji" style="animation-delay:0s">🎉</span>
+    <span class="confetti-emoji" style="animation-delay:0.4s">⚖️</span>
+    <span class="confetti-emoji" style="animation-delay:0.6s">📜</span>
+    <span class="confetti-emoji" style="animation-delay:0.8s">🎊</span>
+  </div>
+  <p style="color: var(--navy); font-weight:700; font-size:1rem;">
+    <em>"Saare Jahan Se Accha, Hindustan Hamara Hamara, Saare Jahan Se Accha"</em><br/>
+    — And now you actually know why! 🌟
+  </p>
+  <div class="ty-footer">
+    Survey by <strong>Samvidhan</strong> — Making the Constitution Cool Since 2026 😎<br/>
+    Questions / responses go to our team. Thank you for participating!
+  </div>
+  <a href="/" class="explore-link">Explore Samvidhan</a>
+</div>
+
+<script>
+/* ============================================================
+   STATE
+   ============================================================ */
+let currentPage = 0;
+const totalPages = 7; // 0-6
+let mediaRecorder = null;
+let audioChunks = [];
+let audioBase64 = "";
+let audioProcessingPromise = Promise.resolve();
+let recordingTimer = null;
+let recordingSeconds = 0;
+let isRecording = false;
+let q28EffectTimers = [];
+let q28TypingTimer = null;
+const MODI_OPTION_AUDIO_FILE = '/static/assets/music/अङ्गेन_गात्रं_नयनेन_वक्त्रं।_न्यायेन_राज्यं_लवणेन_भोज्यम्.mp3';
+const Q12_OPTION_THREE_AUDIO_FILE = '/static/assets/music/Namaskar Dosto.mp3';
+const Q16_OPTION_TWO_AUDIO_FILE = '/static/assets/music/Modi Jii ne war rukwa di Papa.mp3';
+const Q18_OPTION_FOUR_AUDIO_FILE = '/static/assets/music/Alhamdulillah.mp3';
+const Q21_OPTION_TWO_AUDIO_FILE = '/static/assets/music/Kyu nahi ho rahi padhai.mp3';
+const Q24_TOP_THREE_OPTIONS_AUDIO_FILE = '/static/assets/music/Jai Bheem.mp3';
+const Q30_OPTION_ONE_TWO_AUDIO_FILE = '/static/assets/music/Bajrang Dal.mp3';
+const Q30_OPTION_ONE_TWO_IMAGE_FILE = '/static/assets/icons/Bajrang Dal.jpeg';
+const Q22_FUTURE_AUDIO_FILE = '/static/assets/music/Andhera Kayam Rahe.mp3';
+const THANK_YOU_RAHUL_AUDIO_FILE = '/static/assets/music/Rahul Gandhi.mp3';
+const Q17_ILLUMINATI_VIDEO_FILE = '/static/assets/gifs/Iluminati.mp4';
+let modiOptionAudio = null;
+let q12OptionThreeAudio = null;
+let q16OptionTwoAudio = null;
+let q18OptionFourAudio = null;
+let q21OptionTwoAudio = null;
+let q24TopThreeOptionsAudio = null;
+let q30OptionOneTwoAudio = null;
+let q22FutureAudio = null;
+let thankYouRahulAudio = null;
+let thankYouAudioTimer = null;
+let q30BajrangOverlay = null;
+let q30BajrangOverlayImage = null;
+let q30OverlayShowTimer = null;
+let q30ImageShowTimer = null;
+let q17IlluminatiVideo = null;
+let q17VideoOverlay = null;
+
+const mandatoryOptionQuestions = {
+  1: [
+    { type: 'radio', name: 'gender', label: 'Q3 - Gender' },
+    { type: 'email', id: 'email', label: 'Q4 - Email ID' },
+    { type: 'radio', name: 'course', label: 'Q5 - Course / Stream' },
+    { type: 'select', id: 'year', label: 'Q7 - Year / Semester' },
+  ],
+  2: [
+    { type: 'hidden', id: 'q8', label: 'Q8 - Constitution awareness' },
+    { type: 'hidden', id: 'q9', label: 'Q9 - Studied constitutional values' },
+    { type: 'radio', name: 'q11', label: 'Q11 - Constitution effective date' },
+    { type: 'radio', name: 'q12', label: 'Q12 - Father of Constitution' },
+    { type: 'radio', name: 'q13', label: 'Q13 - Number of Articles' },
+  ],
+  3: [
+    { type: 'hidden', id: 'q21', label: 'Q15 - Aware of Fundamental Duties' },
+    { type: 'hidden', id: 'q22', label: 'Q16 - Follow duties' },
+    { type: 'radio', name: 'q23', label: 'Q17 - Most important duty' },
+    { type: 'radio', name: 'q24', label: 'Q18 - National Anthem respect' },
+    { type: 'hidden', id: 'q25', label: 'Q19 - Public property / littering' },
+  ],
+  4: [
+    { type: 'hidden', id: 'q27', label: 'Q21 - Equal opportunities' },
+    { type: 'hidden', id: 'q28', label: 'Q22 - Discrimination experience' },
+    { type: 'hidden', id: 'q29', label: 'Q23 - Laws fairness' },
+    { type: 'radio', name: 'q30', label: 'Q24 - Reservation opinion' },
+    { type: 'hidden', id: 'q31', label: 'Q25 - Pride rating' },
+  ],
+  5: [
+    { type: 'hidden', id: 'q37', label: 'Q26 - Awareness in India' },
+    { type: 'hidden', id: 'q38', label: 'Q27 - Teach more in schools' },
+    { type: 'radio', name: 'q39', label: 'Q28 - Best awareness method' },
+    { type: 'hidden', id: 'q40', label: 'Q29 - Constitution interest rating' },
+    { type: 'hidden', id: 'q41', label: 'Q30 - Politicization opinion' },
+  ],
+  6: [
+    { type: 'hidden', id: 'q42', label: 'Q31 - Daily life importance rating' },
+    { type: 'hidden', id: 'survey-rating', label: 'Overall survey experience rating' },
+  ],
+};
+
+function isOptionRuleAnswered(rule, pageEl) {
+  if (rule.type === 'radio') {
+    return !!pageEl.querySelector(`input[name="${rule.name}"]:checked`);
+  }
+
+  const field = document.getElementById(rule.id);
+  if (!field) return false;
+
+  if (rule.type === 'email') {
+    const value = String(field.value || '').trim();
+    return value !== '' && field.checkValidity();
+  }
+
+  return String(field.value || '').trim() !== '';
+}
+
+function getRuleGroupElement(rule, pageEl) {
+  if (rule.type === 'radio') {
+    const input = pageEl.querySelector(`input[name="${rule.name}"]`);
+    return input ? input.closest('.q-group') : null;
+  }
+
+  const field = document.getElementById(rule.id);
+  return field ? field.closest('.q-group') : null;
+}
+
+function clearGroupValidationError(el) {
+  const group = el?.closest?.('.q-group');
+  if (group) group.classList.remove('validation-error');
+}
+
+function validateOptionQuestionsForPage(pageNumber) {
+  const rules = mandatoryOptionQuestions[pageNumber] || [];
+  if (!rules.length) return true;
+
+  const pageEl = document.getElementById(`page-${pageNumber}`);
+  if (!pageEl) return true;
+
+  pageEl.querySelectorAll('.q-group.validation-error').forEach(group => {
+    group.classList.remove('validation-error');
+  });
+
+  const missingLabels = [];
+
+  rules.forEach(rule => {
+    if (isOptionRuleAnswered(rule, pageEl)) return;
+
+    missingLabels.push(rule.label);
+    const groupEl = getRuleGroupElement(rule, pageEl);
+    if (groupEl) groupEl.classList.add('validation-error');
+  });
+
+  if (!missingLabels.length) return true;
+
+  alert(
+    'Please complete all mandatory questions on this page before continuing:\n\n' +
+    missingLabels.map(label => `- ${label}`).join('\n')
+  );
+
+  const firstError = pageEl.querySelector('.q-group.validation-error');
+  if (firstError) {
+    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  return false;
+}
+
+/* ============================================================
+   DOTS
+   ============================================================ */
+function buildDots() {
+  const containers = document.querySelectorAll('[id^="dots"]');
+  // We'll only put dots in the progress area, not per-page
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function goNext() {
+  if (currentPage >= totalPages - 1) return;
+  if (!validateOptionQuestionsForPage(currentPage)) return;
+  animateTransition(currentPage, currentPage + 1, 'forward');
+}
+
+function goPrev() {
+  if (currentPage <= 0) return;
+  animateTransition(currentPage, currentPage - 1, 'backward');
+}
+
+function animateTransition(from, to, direction) {
+  const fromEl = document.getElementById('page-' + from);
+  const toEl   = document.getElementById('page-' + to);
+  if (!fromEl || !toEl) return;
+
+  // Setup initial state of incoming page
+  toEl.style.display = 'block';
+  if (direction === 'forward') {
+    toEl.style.transform = 'rotateY(-90deg)';
+    toEl.style.opacity = '0';
+    toEl.style.position = 'absolute';
+  } else {
+    toEl.style.transform = 'rotateY(90deg)';
+    toEl.style.opacity = '0';
+    toEl.style.position = 'absolute';
+  }
+  toEl.classList.remove('active','exit-left','exit-right');
+
+  // Animate out
+  requestAnimationFrame(() => {
+    fromEl.style.transition = 'transform 0.45s cubic-bezier(.77,0,.18,1), opacity 0.3s';
+    toEl.style.transition   = 'transform 0.45s cubic-bezier(.77,0,.18,1), opacity 0.3s';
+
+    if (direction === 'forward') {
+      fromEl.style.transform = 'rotateY(90deg)';
+      fromEl.style.opacity   = '0';
+    } else {
+      fromEl.style.transform = 'rotateY(-90deg)';
+      fromEl.style.opacity   = '0';
+    }
+    toEl.style.transform = 'rotateY(0deg)';
+    toEl.style.opacity   = '1';
+
+    setTimeout(() => {
+      fromEl.classList.remove('active');
+      fromEl.style.position = 'absolute';
+      fromEl.style.pointerEvents = 'none';
+      fromEl.style.transition = '';
+
+      toEl.classList.add('active');
+      toEl.style.position = 'relative';
+      toEl.style.pointerEvents = 'all';
+      toEl.style.transition = '';
+      toEl.style.transform = '';
+      toEl.style.opacity   = '';
+
+      currentPage = to;
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 480);
+  });
+}
+
+function updateProgress() {
+  const pct = ((currentPage + 1) / totalPages * 100).toFixed(1);
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-label').textContent =
+    `Page ${currentPage + 1} of ${totalPages}`;
+}
+
+/* ============================================================
+   OPTION SELECTORS
+   ============================================================ */
+function selectOpt(el, groupName) {
+  // Remove selected from siblings
+  const parent = el.closest('.options-grid') || el.parentNode;
+  parent.querySelectorAll('.opt-label').forEach(l => l.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+  clearGroupValidationError(el);
+}
+
+function playModiOptionAudio() {
+  try {
+    if (!modiOptionAudio) {
+      modiOptionAudio = new Audio(encodeURI(MODI_OPTION_AUDIO_FILE));
+      modiOptionAudio.preload = 'auto';
+    }
+
+    modiOptionAudio.pause();
+    modiOptionAudio.currentTime = 0;
+    const playPromise = modiOptionAudio.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+  } catch (err) {
+    console.warn('Modi option audio failed:', err);
+  }
+}
+
+function playQ16OptionTwoAudio() {
+  try {
+    if (!q16OptionTwoAudio) {
+      q16OptionTwoAudio = new Audio(encodeURI(Q16_OPTION_TWO_AUDIO_FILE));
+      q16OptionTwoAudio.preload = 'auto';
+    }
+
+    q16OptionTwoAudio.pause();
+    q16OptionTwoAudio.currentTime = 0;
+    const playPromise = q16OptionTwoAudio.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+  } catch (err) {
+    console.warn('Q16 option audio failed:', err);
+  }
+}
+
+function playQ12OptionThreeAudio() {
+  try {
+    if (!q12OptionThreeAudio) {
+      q12OptionThreeAudio = new Audio(encodeURI(Q12_OPTION_THREE_AUDIO_FILE));
+      q12OptionThreeAudio.preload = 'auto';
+    }
+
+    q12OptionThreeAudio.pause();
+    q12OptionThreeAudio.currentTime = 0;
+    const playPromise = q12OptionThreeAudio.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+  } catch (err) {
+    console.warn('Q12 option audio failed:', err);
+  }
+}
+
+function playQ18OptionFourAudio() {
+  try {
+    if (!q18OptionFourAudio) {
+      q18OptionFourAudio = new Audio(encodeURI(Q18_OPTION_FOUR_AUDIO_FILE));
+      q18OptionFourAudio.preload = 'auto';
+    }
+
+    q18OptionFourAudio.pause();
+    q18OptionFourAudio.currentTime = 0;
+    const playPromise = q18OptionFourAudio.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+  } catch (err) {
+    console.warn('Q18 option audio failed:', err);
+  }
+}
+
+function playQ21OptionTwoAudio() {
+  try {
+    if (!q21OptionTwoAudio) {
+      q21OptionTwoAudio = new Audio(encodeURI(Q21_OPTION_TWO_AUDIO_FILE));
+      q21OptionTwoAudio.preload = 'auto';
+    }
+
+    q21OptionTwoAudio.pause();
+    q21OptionTwoAudio.currentTime = 0;
+    const playPromise = q21OptionTwoAudio.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+  } catch (err) {
+    console.warn('Q21 option audio failed:', err);
+  }
+}
+
+function playQ24TopThreeOptionsAudio() {
+  try {
+    if (!q24TopThreeOptionsAudio) {
+      q24TopThreeOptionsAudio = new Audio(encodeURI(Q24_TOP_THREE_OPTIONS_AUDIO_FILE));
+      q24TopThreeOptionsAudio.preload = 'auto';
+    }
+
+    q24TopThreeOptionsAudio.pause();
+    q24TopThreeOptionsAudio.currentTime = 0;
+    const playPromise = q24TopThreeOptionsAudio.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+  } catch (err) {
+    console.warn('Q24 options audio failed:', err);
+  }
+}
+
+function clearQ30OverlayShowTimer() {
+  if (q30OverlayShowTimer) {
+    clearTimeout(q30OverlayShowTimer);
+    q30OverlayShowTimer = null;
+  }
+}
+
+function clearQ30ImageShowTimer() {
+  if (q30ImageShowTimer) {
+    clearTimeout(q30ImageShowTimer);
+    q30ImageShowTimer = null;
+  }
+}
+
+function closeQ30BajrangOverlay() {
+  q30BajrangOverlay = q30BajrangOverlay || document.getElementById('q30-bajrang-overlay');
+  if (!q30BajrangOverlay) return;
+
+  clearQ30OverlayShowTimer();
+  clearQ30ImageShowTimer();
+
+  q30BajrangOverlay.classList.remove('active', 'image-visible');
+  q30BajrangOverlay.setAttribute('aria-hidden', 'true');
+
+  const futureOverlayActive = document.getElementById('future-overlay')?.classList.contains('active');
+  const q17OverlayActive = document.getElementById('q17-video-overlay')?.classList.contains('active');
+  if (!futureOverlayActive && !q17OverlayActive) {
+    document.body.classList.remove('overlay-lock');
+  }
+}
+
+function showQ30BajrangOverlay() {
+  q30BajrangOverlay = q30BajrangOverlay || document.getElementById('q30-bajrang-overlay');
+  q30BajrangOverlayImage = q30BajrangOverlayImage || document.getElementById('q30-bajrang-overlay-image');
+  if (!q30BajrangOverlay || !q30BajrangOverlayImage) return;
+
+  if (!q30BajrangOverlayImage.src) {
+    q30BajrangOverlayImage.src = encodeURI(Q30_OPTION_ONE_TWO_IMAGE_FILE);
+  }
+
+  clearQ30ImageShowTimer();
+  q30BajrangOverlay.classList.remove('active', 'image-visible');
+  q30BajrangOverlay.setAttribute('aria-hidden', 'true');
+  void q30BajrangOverlay.offsetWidth;
+
+  document.body.classList.add('overlay-lock');
+  q30BajrangOverlay.classList.add('active');
+  q30BajrangOverlay.setAttribute('aria-hidden', 'false');
+
+  q30ImageShowTimer = setTimeout(() => {
+    if (!q30BajrangOverlay) return;
+    q30BajrangOverlay.classList.add('image-visible');
+    q30ImageShowTimer = null;
+  }, 3250);
+}
+
+function stopQ30OptionOneTwoMedia() {
+  if (q30OptionOneTwoAudio) {
+    q30OptionOneTwoAudio.pause();
+    q30OptionOneTwoAudio.currentTime = 0;
+  }
+  closeQ30BajrangOverlay();
+}
+
+function playQ30OptionOneTwoAudio() {
+  try {
+    if (!q30OptionOneTwoAudio) {
+      q30OptionOneTwoAudio = new Audio(encodeURI(Q30_OPTION_ONE_TWO_AUDIO_FILE));
+      q30OptionOneTwoAudio.preload = 'auto';
+    }
+
+    closeQ30BajrangOverlay();
+    q30OptionOneTwoAudio.pause();
+    q30OptionOneTwoAudio.currentTime = 0;
+    q30OptionOneTwoAudio.onplaying = () => {
+      clearQ30OverlayShowTimer();
+      q30OverlayShowTimer = setTimeout(() => {
+        showQ30BajrangOverlay();
+        q30OverlayShowTimer = null;
+      }, 5000);
+      q30OptionOneTwoAudio.onplaying = null;
+    };
+    q30OptionOneTwoAudio.onended = closeQ30BajrangOverlay;
+
+    const playPromise = q30OptionOneTwoAudio.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        closeQ30BajrangOverlay();
+      });
+    }
+  } catch (err) {
+    console.warn('Q30 option audio failed:', err);
+  }
+}
+
+function closeQ17IlluminatiVideo() {
+  if (!q17VideoOverlay || !q17IlluminatiVideo) return;
+
+  q17IlluminatiVideo.pause();
+  q17IlluminatiVideo.currentTime = 0;
+  q17VideoOverlay.classList.remove('active');
+  q17VideoOverlay.setAttribute('aria-hidden', 'true');
+}
+
+function playQ17IlluminatiVideo() {
+  q17IlluminatiVideo = q17IlluminatiVideo || document.getElementById('q17-video');
+  q17VideoOverlay = q17VideoOverlay || document.getElementById('q17-video-overlay');
+  if (!q17IlluminatiVideo || !q17VideoOverlay) return;
+
+  if (!q17IlluminatiVideo.src) {
+    q17IlluminatiVideo.src = encodeURI(Q17_ILLUMINATI_VIDEO_FILE);
+  }
+
+  q17VideoOverlay.classList.add('active');
+  q17VideoOverlay.setAttribute('aria-hidden', 'false');
+  q17IlluminatiVideo.currentTime = 0;
+
+  const playPromise = q17IlluminatiVideo.play();
+  if (playPromise && typeof playPromise.catch === 'function') {
+    playPromise.catch(() => {});
+  }
+}
+
+function toggleMulti(event, el) {
+  if (event && typeof event.preventDefault === 'function') {
+    event.preventDefault();
+  }
+
+  const option = el || event;
+  if (!option) return;
+
+  const checkbox = option.querySelector('input[type="checkbox"]');
+  if (!checkbox) return;
+
+  const nextState = !option.classList.contains('selected');
+  option.classList.toggle('selected', nextState);
+  checkbox.checked = nextState;
+}
+
+function selectYN(el, id, val) {
+  const wrap = el.closest('.yn-wrap');
+  wrap.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById(id).value = val;
+  clearGroupValidationError(el);
+}
+
+function clearQ28EffectTimers() {
+  q28EffectTimers.forEach(timer => clearTimeout(timer));
+  q28EffectTimers = [];
+  if (q28TypingTimer) {
+    clearInterval(q28TypingTimer);
+    q28TypingTimer = null;
+  }
+  if (q22FutureAudio) {
+    q22FutureAudio.pause();
+    q22FutureAudio.currentTime = 0;
+    q22FutureAudio.onended = null;
+  }
+}
+
+function closeQ28FutureOverlay() {
+  const overlay = document.getElementById('future-overlay');
+  const message = document.getElementById('future-message');
+
+  if (overlay) {
+    overlay.classList.remove('active', 'show-text');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  if (message) {
+    message.classList.remove('typing');
+    message.textContent = '';
+  }
+
+  document.body.classList.remove('overlay-lock');
+}
+
+function typeFutureMessage(el, text, speed = 95) {
+  el.textContent = '';
+  let idx = 0;
+  q28TypingTimer = setInterval(() => {
+    idx += 1;
+    el.textContent = text.slice(0, idx);
+    if (idx >= text.length) {
+      clearInterval(q28TypingTimer);
+      q28TypingTimer = null;
+    }
+  }, speed);
+}
+
+function runQ28FutureEffect() {
+  const overlay = document.getElementById('future-overlay');
+  const message = document.getElementById('future-message');
+  if (!overlay || !message) return;
+
+  clearQ28EffectTimers();
+
+  overlay.classList.remove('active', 'show-text');
+  message.classList.remove('typing');
+  message.textContent = '';
+  void overlay.offsetWidth;
+
+  document.body.classList.add('overlay-lock');
+  overlay.classList.add('active');
+  overlay.setAttribute('aria-hidden', 'false');
+
+  q28EffectTimers.push(setTimeout(() => {
+    try {
+      if (!q22FutureAudio) {
+        q22FutureAudio = new Audio(encodeURI(Q22_FUTURE_AUDIO_FILE));
+        q22FutureAudio.preload = 'auto';
+      }
+
+      q22FutureAudio.pause();
+      q22FutureAudio.currentTime = 0;
+      q22FutureAudio.onended = closeQ28FutureOverlay;
+
+      const playPromise = q22FutureAudio.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {
+          q28EffectTimers.push(setTimeout(() => {
+            closeQ28FutureOverlay();
+          }, 1200));
+        });
+      }
+    } catch (err) {
+      console.warn('Q22 future audio failed:', err);
+      q28EffectTimers.push(setTimeout(() => {
+        closeQ28FutureOverlay();
+      }, 1200));
+    }
+  }, 2500));
+}
+
+function handleQ28Selection(el, val) {
+  selectYN(el, 'q28', val);
+}
+
+function selectScale(el, scaleId, val) {
+  const wrap = document.getElementById(scaleId);
+  wrap.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  clearGroupValidationError(el);
+  // Find hidden input with id = first part of scaleId
+  const inputId = scaleId.replace('-scale','');
+  const inp = document.getElementById(inputId);
+  if (inp) inp.value = val;
+  else {
+    // For survey-rating
+    if (scaleId === 'survey-rating-scale') document.getElementById('survey-rating').value = val;
+  }
+}
+
+/* ============================================================
+   AUDIO RECORDING
+   ============================================================ */
+function getMicErrorMessage(err) {
+  const code = err?.name || 'UnknownError';
+  const details = err?.message ? `: ${err.message}` : '';
+
+  switch (code) {
+    case 'NotAllowedError':
+      return `❌ Mic permission denied (${code}${details}). Lock icon -> Site permissions -> Microphone: Allow, then reload.`;
+    case 'NotFoundError':
+      return `❌ No microphone found (${code}${details}). Check if input device is connected/enabled in Windows sound settings.`;
+    case 'NotReadableError':
+      return `❌ Microphone is busy (${code}${details}). Close apps like Zoom/Teams/OBS and try again.`;
+    case 'SecurityError':
+      return `❌ Browser blocked microphone (${code}${details}). Open page on 127.0.0.1/localhost or HTTPS.`;
+    case 'AbortError':
+      return `❌ Microphone request was interrupted (${code}${details}). Please try again.`;
+    case 'TypeError':
+      return `❌ Mic API unavailable (${code}${details}). Browser/context issue detected.`;
+    case 'ReferenceError':
+      return `❌ Recorder API error (${code}${details}). Browser may not expose MediaRecorder in current context.`;
+    default:
+      return `❌ Microphone error (${code}${details}). Check browser console for details.`;
+  }
+}
+
+async function startRecording() {
+  const statusEl = document.getElementById('audio-status');
+  const recordBtn = document.getElementById('btn-record');
+  const stopBtn = document.getElementById('btn-stop');
+
+  const resetRecordBtn = () => {
+    if (!recordBtn) return;
+    recordBtn.innerHTML = '<div class="rec-indicator" id="rec-dot" style="display:none;"></div>🔴 Start Recording';
+  };
+
+  if (!navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== 'function') {
+    if (statusEl) {
+      statusEl.textContent = '❌ Browser does not expose microphone API in this context.';
+    }
+    if (recordBtn) recordBtn.disabled = false;
+    if (stopBtn) stopBtn.disabled = true;
+    resetRecordBtn();
+    return;
+  }
+
+  if (typeof window.MediaRecorder === 'undefined') {
+    if (statusEl) {
+      statusEl.textContent = '❌ MediaRecorder not available in this browser/context. Try latest Chrome/Edge on localhost.';
+    }
+    if (recordBtn) recordBtn.disabled = false;
+    if (stopBtn) stopBtn.disabled = true;
+    resetRecordBtn();
+    return;
+  }
+
+  try {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const hasInput = devices.some(device => device.kind === 'audioinput');
+    if (!hasInput) {
+      if (statusEl) {
+        statusEl.textContent = '❌ No audio input device detected. Connect/enable a microphone first.';
+      }
+      return;
+    }
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true,
+      }
+    });
+
+    audioChunks = [];
+    const mimeTypes = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4'];
+    let recorderOptions = undefined;
+    if (typeof window.MediaRecorder.isTypeSupported === 'function') {
+      const supported = mimeTypes.find(type => window.MediaRecorder.isTypeSupported(type));
+      if (supported) {
+        recorderOptions = { mimeType: supported };
+      }
+    }
+
+    mediaRecorder = recorderOptions ? new MediaRecorder(stream, recorderOptions) : new MediaRecorder(stream);
+    mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+    mediaRecorder.onstop = () => { audioProcessingPromise = processAudio(); };
+    mediaRecorder.start(1000);
+    isRecording = true;
+    recordingSeconds = 0;
+    updateAudioTimer();
+    recordingTimer = setInterval(() => {
+      recordingSeconds++;
+      updateAudioTimer();
+      if (recordingSeconds >= 60) stopRecording();
+    }, 1000);
+
+    if (recordBtn) {
+      recordBtn.disabled = true;
+      recordBtn.innerHTML = '<div class="rec-indicator" id="rec-dot"></div>🔴 Recording...';
+    }
+    if (stopBtn) stopBtn.disabled = false;
+    if (statusEl) {
+      statusEl.textContent = '🎙️ Recording in progress... Speak freely!';
+    }
+  } catch(err) {
+    console.error('Microphone error details:', err);
+    if (recordBtn) recordBtn.disabled = false;
+    if (stopBtn) stopBtn.disabled = true;
+    resetRecordBtn();
+    if (statusEl) {
+      statusEl.textContent = getMicErrorMessage(err);
+    }
+  }
+}
+
+function stopRecording() {
+  const recordBtn = document.getElementById('btn-record');
+  const stopBtn = document.getElementById('btn-stop');
+
+  if (mediaRecorder && isRecording) {
+    mediaRecorder.stop();
+    if (mediaRecorder.stream) {
+      mediaRecorder.stream.getTracks().forEach(t => t.stop());
+    }
+    isRecording = false;
+    clearInterval(recordingTimer);
+    if (recordBtn) {
+      recordBtn.disabled = false;
+      recordBtn.innerHTML = '<div class="rec-indicator" id="rec-dot" style="display:none;"></div>🔴 Start Recording';
+    }
+    if (stopBtn) stopBtn.disabled = true;
+    document.getElementById('audio-status').textContent = '✅ Recording saved! Click play to review.';
+  }
+}
+
+function updateAudioTimer() {
+  const timerEl = document.getElementById('audio-timer');
+  if (!timerEl) return;
+
+  const minutes = String(Math.floor(recordingSeconds / 60)).padStart(2, '0');
+  const seconds = String(recordingSeconds % 60).padStart(2, '0');
+  timerEl.textContent = `${minutes}:${seconds}`;
+}
+
+async function processAudio() {
+  const blob = new Blob(audioChunks, { type: audioChunks[0]?.type || 'audio/webm' });
+  const url  = URL.createObjectURL(blob);
+  const playback = document.getElementById('audio-playback');
+  playback.src = url;
+  playback.style.display = 'block';
+
+  document.getElementById('audio-status').textContent = 'Saving audio with your survey response...';
+  audioBase64 = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error || new Error('Could not read audio recording'));
+    reader.readAsDataURL(blob);
+  });
+  document.getElementById('audio-status').textContent = '✅ Recording ready. It will be stored with your survey response.';
+}
+
+/* ============================================================
+   COLLECT ALL RESPONSES
+   ============================================================ */
+function collectData() {
+  // Helper to get selected radio text
+  const getRadio = name => {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    if (!el) return 'Not answered';
+    return el.closest('.opt-label').textContent
+      .trim()
+      .replace(/^[^\p{L}\p{N}]+/u, '')
+      .replace(/🧐$/u, '')
+      .trim();
+  };
+
+  // Helper to get YN button value
+  const getYN = id => document.getElementById(id)?.value || 'Not answered';
+
+  return {
+    // Basic
+    name:    document.getElementById('name')?.value || '',
+    age:     document.getElementById('age')?.value || '',
+    gender:  getRadio('gender'),
+    email:   document.getElementById('email')?.value || '',
+    course:  getRadio('course'),
+    college: document.getElementById('college')?.value || '',
+    year:    document.getElementById('year')?.value || '',
+
+    // Section 2
+    q8:  getYN('q8'),
+    q9:  getYN('q9'),
+    q10: document.getElementById('q10')?.value || '',
+    q11: getRadio('q11'),
+    q12: getRadio('q12'),
+    q13: getRadio('q13'),
+    q14: document.getElementById('q14')?.value || '',
+
+    // Section 3
+    q21: getYN('q21'),
+    q22: getYN('q22'),
+    q23: getRadio('q23'),
+    q24: getRadio('q24'),
+    q25: getYN('q25'),
+    q26: document.getElementById('q26')?.value || '',
+
+    // Section 4
+    q27: getYN('q27'),
+    q28: getYN('q28'),
+    q29: getYN('q29'),
+    q30: getRadio('q30'),
+    q31: document.getElementById('q31')?.value || '',
+
+    // Section 5
+    q37: getYN('q37'),
+    q38: getYN('q38'),
+    q39: getRadio('q39'),
+    q40: document.getElementById('q40')?.value || '',
+    q41: getYN('q41'),
+
+    // Section 6
+    q42: document.getElementById('q42')?.value || '',
+    q43: document.getElementById('q43')?.value || '',
+    q44: document.getElementById('q44')?.value || '',
+    q45: document.getElementById('q45')?.value || '',
+    survey_rating: document.getElementById('survey-rating')?.value || '',
+
+    audio_url: '',
+    audio_data: audioBase64,
+    audio_status: audioBase64 ? 'YES - Audio recorded' : 'No audio recorded',
+    timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+  };
+}
+
+/* ============================================================
+   SUBMIT SURVEY
+   ============================================================ */
+async function submitSurvey() {
+  if (!validateOptionQuestionsForPage(currentPage)) return;
+
+  try {
+    await audioProcessingPromise;
+  } catch (err) {
+    document.getElementById('audio-status').textContent = 'Audio could not be prepared. Please record it again.';
+    return;
+  }
+
+  const data = collectData();
+  const form = document.getElementById('survey-form');
+  form.querySelectorAll('[data-survey-field]').forEach(field => field.remove());
+  Object.entries(data).forEach(([name, value]) => {
+    if (name === 'timestamp') return;
+    const field = document.createElement('input');
+    field.type = 'hidden';
+    field.name = name;
+    field.value = value ?? '';
+    field.dataset.surveyField = 'true';
+    form.appendChild(field);
+  });
+  form.submit();
+}
+
+function showThankYou(emailFailed = false) {
+  document.querySelector('.book-wrapper').style.display = 'none';
+  const ty = document.getElementById('thank-you');
+  ty.style.display = 'block';
+  if (emailFailed) {
+    ty.querySelector('.ty-footer').innerHTML +=
+      '<br/><span style="color:#e74c3c; font-size:0.8rem;">⚠️ Note: Email delivery had an issue. Please contact your EmailJS settings.</span>';
+  }
+
+  if (thankYouAudioTimer) {
+    clearTimeout(thankYouAudioTimer);
+    thankYouAudioTimer = null;
+  }
+
+  thankYouAudioTimer = setTimeout(() => {
+    try {
+      if (!thankYouRahulAudio) {
+        thankYouRahulAudio = new Audio(encodeURI(THANK_YOU_RAHUL_AUDIO_FILE));
+        thankYouRahulAudio.preload = 'auto';
+      }
+
+      thankYouRahulAudio.pause();
+      thankYouRahulAudio.currentTime = 0;
+      const playPromise = thankYouRahulAudio.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    } catch (err) {
+      console.warn('Thank you audio failed:', err);
+    }
+  }, 1000);
+
+  // Confetti burst
+  createConfetti();
+}
+
+/* ============================================================
+   SIMPLE CONFETTI
+   ============================================================ */
+function createConfetti() {
+  const colors = ['#E86D1F','#1A6B3A','#D4A017','#1A2456','#FF6B6B','#4ECDC4'];
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement('div');
+    c.style.cssText = `
+      position: fixed;
+      width: ${Math.random()*10+5}px;
+      height: ${Math.random()*10+5}px;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      left: ${Math.random()*100}vw;
+      top: -20px;
+      border-radius: ${Math.random()>0.5?'50%':'0'};
+      animation: fall ${Math.random()*3+2}s linear forwards;
+      z-index: 9998;
+    `;
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(), 5000);
+  }
+  // Add fall keyframe if not present
+  if (!document.getElementById('confetti-style')) {
+    const style = document.createElement('style');
+    style.id = 'confetti-style';
+    style.textContent = `
+      @keyframes fall {
+        to { transform: translateY(110vh) rotate(${Math.random()*720}deg); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+const yearSelect = document.getElementById('year');
+if (yearSelect) {
+  yearSelect.addEventListener('change', () => clearGroupValidationError(yearSelect));
+}
+
+const emailInput = document.getElementById('email');
+if (emailInput) {
+  emailInput.addEventListener('input', () => clearGroupValidationError(emailInput));
+}
+
+q17IlluminatiVideo = document.getElementById('q17-video');
+q17VideoOverlay = document.getElementById('q17-video-overlay');
+const q17VideoClose = document.getElementById('q17-video-close');
+
+if (q17IlluminatiVideo) {
+  q17IlluminatiVideo.src = encodeURI(Q17_ILLUMINATI_VIDEO_FILE);
+  q17IlluminatiVideo.addEventListener('ended', closeQ17IlluminatiVideo);
+}
+
+if (q17VideoOverlay) {
+  q17VideoOverlay.addEventListener('click', (event) => {
+    if (event.target === q17VideoOverlay) {
+      closeQ17IlluminatiVideo();
+    }
+  });
+}
+
+if (q17VideoClose) {
+  q17VideoClose.addEventListener('click', closeQ17IlluminatiVideo);
+}
+
+q30BajrangOverlay = document.getElementById('q30-bajrang-overlay');
+q30BajrangOverlayImage = document.getElementById('q30-bajrang-overlay-image');
+
+if (q30BajrangOverlayImage) {
+  q30BajrangOverlayImage.src = encodeURI(Q30_OPTION_ONE_TWO_IMAGE_FILE);
+}
+
+updateProgress();
+</script>
+</body>
+</html>

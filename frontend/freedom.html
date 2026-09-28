@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/static/css/readable.css"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Freedom Fighters – Samvidhan</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Serif:ital,wght@0,400;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--saffron:#FF9933;--green:#138808;--navy:#002147;--gold:#C9A84C;--cream:#FDF8F0;}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:#111;overflow-x:hidden;}
+.font-display{font-family:'Playfair Display',serif;}
+.font-serif{font-family:'Noto Serif',serif;}
+.tricolor{height:6px;background:linear-gradient(to right,var(--saffron) 33.33%,white 33.33%,white 66.66%,var(--green) 66.66%);}
+nav{background:rgba(0,33,71,.97);}
+.fighter-card{
+  background:white;border-radius:1.25rem;overflow:hidden;
+  transition:all .35s;cursor:pointer;
+  box-shadow:0 2px 16px rgba(0,0,0,.07);
+}
+.fighter-card:hover{transform:translateY(-8px);box-shadow:0 24px 48px rgba(0,33,71,.15);}
+.fighter-card:hover .fighter-overlay{opacity:1;}
+.fighter-avatar{
+  width:80px;height:80px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;
+  line-height:1;
+  border:3px solid var(--gold);
+  background:var(--cream);
+  overflow:hidden;
+  flex-shrink:0;
+}
+.fighter-avatar img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:50%;
+  display:block;
+}
+.fighter-overlay{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(0,33,71,.9),transparent);
+  opacity:0;transition:.3s;padding:1.5rem;
+}
+.tag{display:inline-block;padding:.2rem .75rem;border-radius:999px;font-size:.75rem;font-weight:600;}
+.fade-in{opacity:0;transform:translateY(30px);transition:all .6s;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.detail-panel{max-height:0;overflow:hidden;transition:max-height .5s ease;}
+.detail-panel.open{max-height:400px;}
+.mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.mobile-menu.open{max-height:600px;}
+</style>
+</head>
+<body>
+<div class="tricolor"></div>
+<nav class="sticky top-0 z-50 px-6 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="/" class="font-display text-white text-xl font-bold inline-flex items-center gap-2">
+      <img src="/assets/icons/india-flag.svg" alt="Indian flag" class="w-6 h-4 rounded-sm object-cover"/>
+      <span>Samvidhan</span>
+    </a>
+    <div class="hidden lg:flex gap-6 text-white text-sm">
+      <a href="/" class="hover:text-yellow-300">Home</a>
+      <a href="/rights/" class="hover:text-yellow-300">Rights & Duties</a>
+      <a href="/articles/" class="hover:text-yellow-300">Articles</a>
+      <a href="/freedom/" class="text-yellow-300">Freedom Fighters</a>
+      <a href="/cases/" class="hover:text-yellow-300">Cases</a>
+      <a href="/crimes/" class="hover:text-yellow-300">Crimes</a>
+      <a href="/quiz/" class="hover:text-yellow-300">Quiz</a>
+      <a href="/helpline/" class="hover:text-yellow-300">Helpline</a>
+      <a href="/survey/" class="bg-orange-500 px-4 py-1 rounded-full">Survey</a>
+    </div>
+    <button id="hamburger" class="lg:hidden text-white p-2" aria-label="Open menu">
+      <img src="/assets/icons/menu.svg" alt="Menu" class="w-6 h-6"/>
+    </button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu lg:hidden">
+    <div class="max-w-7xl mx-auto px-6 pb-4 flex flex-col gap-3 text-white text-sm mt-4">
+      <a href="/" class="py-2 border-b border-white border-opacity-20">Home</a>
+      <a href="/freedom/" class="py-2 border-b border-white border-opacity-20">Freedom Fighters</a>
+      <a href="/quiz/" class="py-2 border-b border-white border-opacity-20">Quiz</a>
+      <a href="/helpline/" class="py-2 border-b border-white border-opacity-20">Helpline</a>
+      <a href="/survey/" class="py-2">Survey</a>
+    </div>
+  </div>
+</nav>
+
+<section style="background:linear-gradient(135deg,#1a0a00,#7c2d12,#431407)" class="py-24 px-6 text-center text-white">
+  <div class="max-w-3xl mx-auto fade-in visible">
+    <p class="text-xs uppercase tracking-widest mb-4" style="color:var(--saffron)">Those Who Made India Free</p>
+    <h1 class="font-display text-5xl md:text-6xl font-black mb-4">Freedom <span style="color:var(--gold)">Fighters</span></h1>
+    <p class="text-orange-200 max-w-xl mx-auto font-serif italic">"The nation which forgets its defenders will itself be forgotten." — Calvin Coolidge</p>
+  </div>
+</section>
+
+<div class="max-w-6xl mx-auto px-6 py-16">
+
+  <div class="fade-in text-center mb-14">
+    <h2 class="font-display text-4xl font-bold mb-3" style="color:var(--navy)">Icons of the <span style="border-bottom:3px solid var(--saffron);padding-bottom:4px">Independence Movement</span></h2>
+    <p class="text-gray-500 max-w-2xl mx-auto">Click any card to read the full story of their sacrifice and contribution.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="fighterGrid"></div>
+</div>
+
+<!-- Quote section -->
+<section style="background:var(--navy)" class="py-20 px-6">
+  <div class="max-w-4xl mx-auto text-center text-white">
+    <div class="mb-6 flex justify-center">
+      <img src="/assets/fighters/gandhi2.jpg" alt="Mahatma Gandhi portrait" class="w-13 h-10 mb-100 rounded-full object-cover" style="object-position:center 42%;"/>
+    </div>
+    <blockquote class="font-display text-2xl md:text-3xl font-bold italic mb-6" style="color:var(--gold)">"A nation's culture resides in the hearts and in the soul of its people."</blockquote>
+    <p class="text-gray-300">— Mahatma Gandhi</p>
+  </div>
+</section>
+
+<div class="max-w-6xl mx-auto px-6 py-16">
+  <div class="fade-in">
+    <h2 class="font-display text-3xl font-bold mb-6" style="color:var(--navy)">Their Role in the Constitution</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-6 shadow-sm">
+        <img src="/assets/fighters/ambedkar.jpg" alt="BR Amberdkar portrait" class="w-10 h-10 mb-3 rounded-full object-cover" style="object-position:center 42%;"/>
+        <h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Dr. B.R. Ambedkar</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">As Chairman of the Drafting Committee, Dr. Ambedkar personally drafted most of the Constitution. He fought to include Fundamental Rights, abolish untouchability, and enshrine equality for all citizens.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm">
+        <img src="/assets/fighters/nehru.jpeg" alt="Jawaharlal Nehru portrait" class="w-10 h-10 mb-3 rounded-full object-cover" style="object-position:center 42%;"/>
+        <h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Jawaharlal Nehru</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">As India's first PM and key Constituent Assembly member, Nehru moved the famous "Objectives Resolution" that became the basis of the Preamble. He championed secularism and democracy.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm">
+        <img src="/assets/fighters/patel.jpg" alt="Sardar Vallabhbhai Patel portrait" class="w-10 h-10 mb-3 rounded-full object-cover object-top"/>
+        <h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Sardar Vallabhbhai Patel</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">The "Iron Man of India" unified over 560 princely states into the Indian Union, making a united republic possible. He also chaired the Advisory Committee on Fundamental Rights.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--navy)" class="text-white py-10 px-6 text-center">
+  <div class="tricolor mb-6"></div>
+  <a href="/" class="font-display text-xl font-bold" style="color:var(--gold)">Samvidhan</a>
+  <p class="text-xs text-gray-500 mt-2">© 2026 Samvidhan</p>
+</footer>
+
+<script>
+const fighters=[
+  {
+    name:"Mahatma Gandhi",icon:"<img src='/assets/fighters/gandhi.jpg' alt='Mahatma Gandhi portrait' class='w-full h-full object-cover object-top' loading='lazy'/>",years:"1869–1948",tag:"Father of the Nation",tagColor:"#16a34a",
+    short:"Led non-violent civil disobedience movements against British rule.",
+    story:"Mohandas Karamchand Gandhi transformed India's independence movement through Satyagraha (truth-force) and non-violence. His major campaigns included the Non-Cooperation Movement (1920), Salt March (1930), and Quit India Movement (1942). He was assassinated on 30 January 1948, just months after independence. Gandhi's philosophy of ahimsa influenced the Constitution's spirit of peace and dignity.",
+    role:"Inspired the values of truth, non-violence, and fraternity embedded in the Constitution."
+  },
+  {
+    name:"B.R. Ambedkar",icon:"<img src='/assets/fighters/ambedkar.jpg' alt='Dr. B.R. Ambedkar portrait' class='w-full h-full object-cover object-top' loading='lazy'/>",years:"1891–1956",tag:"Father of the Constitution",tagColor:"#1d4ed8",
+    short:"Principal architect of the Indian Constitution and champion of Dalit rights.",
+    story:"Dr. Bhimrao Ramji Ambedkar was born into an 'untouchable' family and overcame tremendous discrimination to become one of India's greatest legal minds. He earned doctorates from Columbia University and the London School of Economics. As Chairman of the Drafting Committee, he personally wrote most of the Constitution over 2+ years. He ensured the abolition of untouchability (Article 17) and reservation for marginalized communities. He converted to Buddhism in 1956.",
+    role:"Drafted the Constitution; authored Articles on Fundamental Rights, equality, and abolition of untouchability."
+  },
+  {
+    name:"Bhagat Singh",icon:"<img src='/assets/fighters/bhagat-singh.jpg' alt='Bhagat Singh portrait' class='w-full h-full object-cover object-top' loading='lazy'/>",years:"1907–1931",tag:"Revolutionary",tagColor:"#dc2626",
+    short:"Revolutionary who gave his life at age 23 for India's freedom.",
+    story:"Bhagat Singh became a revolutionary at a young age, inspired by the Jallianwala Bagh massacre. He co-founded the Hindustan Socialist Republican Association. In 1929, he threw non-lethal bombs in the Central Legislative Assembly to protest oppressive laws — not to kill but to 'make the deaf hear.' He was hanged on 23 March 1931, becoming a martyr who inspired generations.",
+    role:"His sacrifice catalyzed mass support for independence and influenced the constitutional commitment to social equality."
+  },
+  {
+    name:"Subhas Chandra Bose",icon:"<img src='/assets/fighters/subhas-bose.jpg' alt='Subhas Chandra Bose portrait' class='w-full h-full object-cover object-top' loading='lazy'/>",years:"1897–1945",tag:"Netaji",tagColor:"#7c3aed",
+    short:"Led the Indian National Army to fight for India's freedom.",
+    story:"Netaji Subhas Chandra Bose was a fierce nationalist who believed armed struggle was necessary for independence. He escaped house arrest and traveled to Germany and Japan, forming the Indian National Army (INA) with POWs. His famous call 'Give me blood, and I shall give you freedom!' electrified India. The INA trials after the war galvanized public opinion against British rule.",
+    role:"His armed movement weakened British confidence in controlling India, hastening independence."
+  },
+  {
+    name:"Sardar Vallabhbhai Patel",icon:"<img src='/assets/fighters/patel.jpg' alt='Sardar Vallabhbhai Patel portrait' class='w-full h-full object-cover object-top' loading='lazy'/>",years:"1875–1950",tag:"Iron Man of India",tagColor:"#b45309",
+    short:"United 560+ princely states into the Indian Union.",
+    story:"Vallabhbhai Patel was a brilliant lawyer and organizer who earned the title 'Iron Man of India.' As India's first Home Minister and Deputy PM, he negotiated the merger of 560+ princely states into independent India — without this, India would have fragmented. He also crushed the Hyderabad problem through military action. He chaired the Constituent Assembly's Advisory Committee on Fundamental Rights and Minorities.",
+    role:"Made the unified Republic of India possible; shaped provisions on Fundamental Rights."
+  },
+  {
+    name:"Jawaharlal Nehru",icon:"<img src='/assets/fighters/nehru.jpeg' alt='Jawaharlal Nehru portrait' class='w-full h-full object-cover' style='object-position:center 42%;' loading='lazy'/>",years:"1889–1964",tag:"First Prime Minister",tagColor:"#0369a1",
+    short:"India's first PM who moved the Objectives Resolution forming the Preamble.",
+    story:"Nehru was educated at Harrow and Cambridge and became one of Gandhi's closest associates. He was imprisoned nine times by the British. In the Constituent Assembly, he moved the Objectives Resolution on 13 December 1946 — a document that became the soul of the Preamble. As PM, he built India's democratic institutions, scientific temperament, and non-aligned foreign policy.",
+    role:"Authored the Preamble's spirit; championed secularism, democracy, and scientific temper in the Constitution."
+  },
+  {
+    name:"Sarojini Naidu",icon:"<img src='/assets/fighters/sarojini-naidu.jpg' alt='Sarojini Naidu portrait' class='w-full h-full object-cover object-center' loading='lazy'/>",years:"1879–1949",tag:"Nightingale of India",tagColor:"#be185d",
+    short:"Poet, freedom fighter, and first woman Governor of an Indian state.",
+    story:"Sarojini Naidu was a gifted poet and a passionate freedom fighter. She participated in the Salt March, Non-Cooperation Movement, and civil disobedience. She was the second woman to serve as President of the Indian National Congress. After independence, she became the first woman Governor (of UP). She also participated in the Constituent Assembly.",
+    role:"Represented women's voices in the freedom struggle; participated in the Constituent Assembly debates."
+  },
+  {
+    name:"Lala Lajpat Rai",icon:"<img src='/assets/fighters/lala-lajpat-rai.jpg' alt='Lala Lajpat Rai portrait' class='w-full h-full object-cover object-top' loading='lazy'/>",years:"1865–1928",tag:"Punjab Kesari",tagColor:"#c2410c",
+    short:"Lion of Punjab who led major agitations against British rule.",
+    story:"Lala Lajpat Rai was a fierce nationalist known as 'Punjab Kesari' (Lion of Punjab). He led protests against the Simon Commission in 1928, during which he was brutally lathi-charged by British police. His death from injuries sparked national outrage and inspired Bhagat Singh's revolutionary activities.",
+    role:"His sacrifice and activism deepened the constitutional vision for dignity and self-respect."
+  }
+];
+
+const grid=document.getElementById('fighterGrid');
+fighters.forEach((f,i)=>{
+  const card=document.createElement('div');
+  card.className='fighter-card fade-in';
+  card.innerHTML=`
+    <div class="p-6 cursor-pointer" onclick="toggleDetail(${i})">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="fighter-avatar">${f.icon}</div>
+        <div>
+          <h3 class="font-display text-xl font-bold" style="color:var(--navy)">${f.name}</h3>
+          <p class="text-xs text-gray-400">${f.years}</p>
+          <span class="tag mt-1" style="background:${f.tagColor}20;color:${f.tagColor}">${f.tag}</span>
+        </div>
+      </div>
+      <p class="text-gray-600 text-sm leading-relaxed mb-3">${f.short}</p>
+      <button class="text-sm font-semibold flex items-center gap-1" style="color:var(--saffron)" id="btn${i}">
+        Read Full Story <span id="arrow${i}">↓</span>
+      </button>
+    </div>
+    <div class="detail-panel" id="detail${i}">
+      <div class="px-6 pb-6 border-t pt-4 space-y-3" style="border-color:rgba(201,168,76,.2)">
+        <p class="text-sm text-gray-700 leading-relaxed">${f.story}</p>
+        <div class="bg-orange-50 rounded-xl p-4">
+          <p class="text-xs font-semibold uppercase tracking-widest mb-1" style="color:var(--saffron)">Constitutional Role</p>
+          <p class="text-sm text-gray-600">${f.role}</p>
+        </div>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+function toggleDetail(i){
+  const panel=document.getElementById('detail'+i);
+  const arrow=document.getElementById('arrow'+i);
+  panel.classList.toggle('open');
+  arrow.textContent=panel.classList.contains('open')?'↑':'↓';
+}
+
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+const observer=new IntersectionObserver(e=>e.forEach(el=>el.isIntersecting&&el.target.classList.add('visible')),{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

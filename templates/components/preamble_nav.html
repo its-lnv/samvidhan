@@ -1,0 +1,13 @@
+<nav class="value-pills" aria-label="Constitutional values">
+  <a class="value-pill{% if value_slug == 'sovereignty' %} active{% endif %}" href="{% url 'sovereignty' %}">Sovereignty</a>
+  <a class="value-pill{% if value_slug == 'secularism' %} active{% endif %}" href="{% url 'secularism' %}">Secularism</a>
+  <a class="value-pill{% if value_slug == 'socialism' %} active{% endif %}" href="{% url 'socialism' %}">Socialism</a>
+  <a class="value-pill{% if value_slug == 'democracy' %} active{% endif %}" href="{% url 'democracy' %}">Democracy</a>
+  <a class="value-pill{% if value_slug == 'republic' %} active{% endif %}" href="{% url 'republic' %}">Republic</a>
+  <a class="value-pill{% if value_slug == 'justice' %} active{% endif %}" href="{% url 'justice' %}">Justice</a>
+  <a class="value-pill{% if value_slug == 'liberty' %} active{% endif %}" href="{% url 'liberty' %}">Liberty</a>
+  <a class="value-pill{% if value_slug == 'equality' %} active{% endif %}" href="{% url 'equality' %}">Equality</a>
+  <a class="value-pill{% if value_slug == 'fraternity' %} active{% endif %}" href="{% url 'fraternity' %}">Fraternity</a>
+  <a class="value-pill{% if value_slug == 'dignity' %} active{% endif %}" href="{% url 'dignity' %}">Dignity</a>
+  <a class="value-pill{% if value_slug == 'unity' %} active{% endif %}" href="{% url 'unity' %}">Unity</a>
+</nav>

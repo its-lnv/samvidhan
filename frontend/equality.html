@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/static/css/readable.css"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Equality – Samvidhan</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/static/css/global.css"/>
+<link rel="stylesheet" href="/static/css/components.css"/>
+<script src="/static/js/main.js" defer></script><script src="/static/js/navigation.js" defer></script><script src="/static/js/animations.js" defer></script>
+<style>
+:root{--saffron:#FF9933;--green:#138808;--navy:#002147;--gold:#C9A84C;--cream:#FDF8F0;}
+*{box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);overflow-x:hidden;}
+.font-display{font-family:'Cormorant Garamond',serif;}
+.tricolor{height:5px;background:linear-gradient(to right,var(--saffron) 33.33%,white 33.33%,white 66.66%,var(--green) 66.66%);}
+nav{background:rgba(0,33,71,.97);}
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.vis{opacity:1;transform:translateY(0);}
+.mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s;}
+.mobile-menu.open{max-height:600px;}
+.card{background:white;border-radius:1.25rem;padding:1.75rem;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s;}
+.card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.12);}
+.expand-body{max-height:0;overflow:hidden;transition:max-height .5s;}
+.expand-body.open{max-height:600px;}
+</style>
+</head>
+<body>
+<div class="tricolor"></div>
+<nav class="sticky top-0 z-50 px-6 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="/" class="font-display text-white text-xl font-bold inline-flex items-center gap-2">
+      <img src="/assets/icons/india-flag.svg" alt="Indian flag" class="w-6 h-4 rounded-sm object-cover"/>
+      <span>Samvidhan</span>
+    </a>
+    <div class="hidden lg:flex gap-5 text-white text-sm">
+      <a href="/" class="hover:text-yellow-300">Home</a>
+      <a href="/rights/" class="hover:text-yellow-300">Rights</a>
+      <a href="/articles/" class="hover:text-yellow-300">Articles</a>
+      <a href="/cases/" class="hover:text-yellow-300">Cases</a>
+      <a href="/crimes/" class="hover:text-yellow-300">Crimes</a>
+      <a href="/freedom/" class="hover:text-yellow-300">Freedom Fighters</a>
+      <a href="/quiz/" class="hover:text-yellow-300">Quiz</a>
+      <a href="/helpline/" class="hover:text-yellow-300">Helpline</a>
+      <a href="/survey/" class="bg-orange-500 px-4 py-1 rounded-full">Survey</a>
+    </div>
+    <button id="hamburger" class="lg:hidden text-white p-2">☰</button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu lg:hidden">
+    <div class="max-w-7xl mx-auto px-6 pb-4 flex flex-col gap-3 text-white text-sm mt-4">
+      <a href="/" class="py-2 border-b border-white/20">Home</a>
+      <a href="/rights/" class="py-2 border-b border-white/20">Rights</a>
+      <a href="/quiz/" class="py-2 border-b border-white/20">Quiz</a>
+      <a href="/survey/" class="py-2">Survey</a>
+    </div>
+  </div>
+</nav>
+
+<section style="background:linear-gradient(160deg,#064e3b,#065f46,#047857)" class="py-32 px-6 text-center text-white overflow-hidden relative">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:25rem;opacity:.05;pointer-events:none">⚖</div>
+  <div class="max-w-4xl mx-auto relative z-10 fade-up vis">
+    <div class="inline-block px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-widest mb-6 bg-white/10 text-green-200">Core Preamble Value</div>
+    <h1 class="font-display text-7xl md:text-8xl font-bold mb-6 text-white">Equality</h1>
+    <p class="text-xl text-green-100 max-w-2xl mx-auto leading-relaxed">Every person is equal before the law. No person shall be denied equal protection. Discrimination based on religion, race, caste, sex, or birthplace is unconstitutional.</p>
+    <div class="mt-8 h-px w-32 mx-auto bg-green-300/40"></div>
+    <p class="mt-6 font-display text-xl italic text-green-200">"All are equal before the law." — Article 14</p>
+  </div>
+</section>
+
+<div class="bg-white border-b border-gray-100 py-4 px-6 overflow-x-auto">
+  <div class="flex gap-2 max-w-7xl mx-auto min-w-max">
+    <a href="/values/sovereignty/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Sovereignty</a>
+    <a href="/values/secularism/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Secularism</a>
+    <a href="/values/socialism/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Socialism</a>
+    <a href="/values/democracy/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Democracy</a>
+    <a href="/values/republic/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Republic</a>
+    <a href="/values/justice/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Justice</a>
+    <a href="/values/liberty/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Liberty</a>
+    <a href="/values/equality/" class="px-4 py-2 rounded-full text-sm font-medium text-white" style="background:var(--navy)">Equality</a>
+    <a href="/values/fraternity/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Fraternity</a>
+    <a href="/values/dignity/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Dignity</a>
+    <a href="/values/unity/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Unity</a>
+  </div>
+</div>
+
+<div class="max-w-5xl mx-auto px-6 py-16">
+
+  <div class="fade-up grid md:grid-cols-2 gap-8 mb-16 items-start">
+    <div>
+      <p class="text-xs uppercase tracking-widest font-semibold mb-4" style="color:var(--green)">What It Means</p>
+      <h2 class="font-display text-5xl font-bold mb-6" style="color:var(--navy)">Equal — Not Identical</h2>
+      <p class="text-gray-600 leading-relaxed mb-4">Equality does not mean treating everyone identically. It means treating equals equally, and unequals unequally in proportion to their inequality — this is the principle behind affirmative action and reservations.</p>
+      <p class="text-gray-600 leading-relaxed mb-4">India's Constitution addresses equality through Articles 14–18, which together abolish discrimination, untouchability, and titles, while requiring equal treatment from the state.</p>
+      <p class="text-gray-600 leading-relaxed">Equality before the law (Article 14) means the law does not recognize any privilege by birth. A Prime Minister and a laborer are equal before a court. The law must apply to both without distinction.</p>
+    </div>
+    <div class="space-y-4">
+      <div class="card border-l-4" style="border-color:var(--green)">
+        <p class="font-semibold mb-2" style="color:var(--green)">Article 14</p>
+        <p class="text-sm text-gray-600">Equality before law and equal protection of laws within the territory of India.</p>
+      </div>
+      <div class="card border-l-4" style="border-color:var(--saffron)">
+        <p class="font-semibold mb-2" style="color:var(--saffron)">Article 15</p>
+        <p class="text-sm text-gray-600">Prohibition of discrimination on grounds of religion, race, caste, sex, or place of birth.</p>
+      </div>
+      <div class="card border-l-4" style="border-color:var(--navy)">
+        <p class="font-semibold mb-2" style="color:var(--navy)">Article 16</p>
+        <p class="text-sm text-gray-600">Equal opportunity in matters of public employment — no citizen can be denied government jobs on grounds of religion, race, caste, sex, or place of birth.</p>
+      </div>
+      <div class="card border-l-4" style="border-color:#ef4444">
+        <p class="font-semibold mb-2 text-red-600">Article 17</p>
+        <p class="text-sm text-gray-600">Abolition of untouchability in any form. Enforcing untouchability is a criminal offence under the SC/ST Prevention of Atrocities Act.</p>
+      </div>
+      <div class="card border-l-4" style="border-color:var(--gold)">
+        <p class="font-semibold mb-2" style="color:var(--gold)">Article 18</p>
+        <p class="text-sm text-gray-600">Abolition of titles. No titles of nobility (like "Sir", "Rai Bahadur") can be conferred by the State — reinforcing that birth confers no legal privilege.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Affirmative action -->
+  <div class="fade-up mb-16">
+    <h2 class="font-display text-4xl font-bold mb-4 text-center" style="color:var(--navy)">Substantive Equality: Reservations</h2>
+    <p class="text-gray-500 text-center mb-8 max-w-2xl mx-auto">To correct centuries of systemic inequality, India's Constitution allows special provisions for disadvantaged groups.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="card text-center"><div class="text-4xl mb-3">📜</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Scheduled Castes (SC)</h3><p class="text-sm text-gray-600">15% reservation in government jobs and educational institutions for historically oppressed communities under Articles 15(4) and 16(4).</p></div>
+      <div class="card text-center"><div class="text-4xl mb-3">🌿</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Scheduled Tribes (ST)</h3><p class="text-sm text-gray-600">7.5% reservation for tribal communities who have historically lived outside the mainstream economic and educational system.</p></div>
+      <div class="card text-center"><div class="text-4xl mb-3">🤝</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Other Backward Classes (OBC)</h3><p class="text-sm text-gray-600">27% reservation for socially and educationally backward communities, as recommended by the Mandal Commission.</p></div>
+    </div>
+  </div>
+
+  <!-- Real examples -->
+  <div class="fade-up mb-16">
+    <h2 class="font-display text-4xl font-bold mb-8" style="color:var(--navy)">Equality in Action</h2>
+    <div class="space-y-4">
+      <div class="bg-white rounded-2xl p-6 shadow-sm cursor-pointer" onclick="toggleEx(0)">
+        <div class="flex items-center justify-between"><div class="flex items-center gap-4"><span class="text-2xl">👩‍⚖️</span><div><h4 class="font-semibold" style="color:var(--navy)">Triple Talaq Case (2017)</h4><p class="text-sm text-gray-400">Equality for Muslim women</p></div></div><span id="arr0" class="text-gray-400 text-xl">＋</span></div>
+        <div class="expand-body" id="ex0"><p class="mt-4 text-gray-600 text-sm leading-relaxed pt-4 border-t border-gray-100">The Supreme Court, in a landmark 3–2 majority decision, struck down "triple talaq" (instant divorce by pronouncing talaq thrice) as unconstitutional. It held that the practice violated the right to equality of Muslim women (Articles 14 and 15). The subsequent Muslim Women (Protection of Rights on Marriage) Act 2019 criminalized it — a triumph of constitutional equality over discriminatory personal law.</p></div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm cursor-pointer" onclick="toggleEx(1)">
+        <div class="flex items-center justify-between"><div class="flex items-center gap-4"><span class="text-2xl">⚡</span><div><h4 class="font-semibold" style="color:var(--navy)">Indra Sawhney Case (1992)</h4><p class="text-sm text-gray-400">The 50% cap on reservations</p></div></div><span id="arr1" class="text-gray-400 text-xl">＋</span></div>
+        <div class="expand-body" id="ex1"><p class="mt-4 text-gray-600 text-sm leading-relaxed pt-4 border-t border-gray-100">The Supreme Court upheld the Mandal Commission's 27% OBC reservations but set a 50% ceiling on total reservations. It balanced the right to equality with affirmative action: special provisions are allowed to achieve substantive equality, but cannot be so extensive that they become the norm rather than the exception. This case defines the boundaries of affirmative equality.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fade-up rounded-2xl p-10 text-white" style="background:linear-gradient(135deg,#064e3b,#065f46)">
+    <h2 class="font-display text-4xl font-bold mb-6 text-white">Why Equality Matters Today</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div><p class="text-green-100 leading-relaxed mb-4">India is one of the most unequal societies in terms of caste, gender, and class. Despite seven decades of constitutional equality, discrimination persists — in hiring, housing, marriage, and everyday interactions. The Constitution sets a goal that must be continuously pursued.</p><p class="text-green-100 leading-relaxed">Equality is not a destination India has reached — it is a direction India must always travel in.</p></div>
+      <div class="space-y-3">
+        <div class="bg-white/10 rounded-xl p-4"><p class="font-semibold text-white mb-1">👩 Gender Equality</p><p class="text-sm text-green-200">Women's reservation in Parliament (33%) and equal pay for equal work are constitutional equality goals still being achieved.</p></div>
+        <div class="bg-white/10 rounded-xl p-4"><p class="font-semibold text-white mb-1">🏘️ Caste Discrimination</p><p class="text-sm text-green-200">The SC/ST Prevention of Atrocities Act protects Dalits and tribals from discrimination and violence.</p></div>
+        <div class="bg-white/10 rounded-xl p-4"><p class="font-semibold text-white mb-1">🌍 LGBTQ+ Equality</p><p class="text-sm text-green-200">The journey towards full constitutional equality for LGBTQ+ Indians continues through courts and legislation.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--navy)" class="text-white py-10 px-6 text-center">
+  <div class="tricolor mb-6"></div>
+  <a href="/" class="font-display text-2xl font-bold" style="color:var(--gold)">Samvidhan</a>
+  <p class="text-xs text-gray-600 mt-4">© 2026 Samvidhan | For educational purposes</p>
+</footer>
+<script>
+function toggleEx(i){const el=document.getElementById('ex'+i);const arr=document.getElementById('arr'+i);el.classList.toggle('open');arr.textContent=el.classList.contains('open')?'－':'＋';}
+</script>
+</body>
+</html>

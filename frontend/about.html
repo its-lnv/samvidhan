@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/static/css/readable.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About Us & Creators – Samvidhan</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --saffron: #FF9933;
+    --white: #FFFFFF;
+    --green: #138808;
+    --navy: #002147;
+    --gold: #C9A84C;
+    --cream: #FDF8F0;
+    --dark: #0A0A0A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+  .font-display { font-family: 'Playfair Display', serif; }
+  .font-serif  { font-family: 'Noto Serif', serif; }
+
+  /* ── Tricolor ── */
+  .tricolor { height: 6px; background: linear-gradient(to right, var(--saffron) 33.33%, #fff 33.33%, #fff 66.66%, var(--green) 66.66%); }
+
+  /* ── Nav ── */
+  nav { background: rgba(0,33,71,.97); backdrop-filter: blur(10px); }
+  .mobile-menu { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+  .mobile-menu.open { max-height: 600px; }
+
+  /* ── Hero ── */
+  .hero-bg {
+  background: linear-gradient(135deg, 
+    #0f172a 0%,
+    #1e40af 30%,
+    #1d4ed8 60%,
+    #06b6d4 100%
+  );
+}
+
+  .hero-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(255,255,255,0.08)'/%3E%3C/svg%3E") repeat;
+  }
+  @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+  .float { animation: float 5s ease-in-out infinite; }
+
+  /* ── Ashoka wheel spin ── */
+  @keyframes spin-slow { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+  .wheel-spin { animation: spin-slow 40s linear infinite; }
+
+  /* ── Scroll reveal ── */
+  .fade-in { opacity: 0; transform: translateY(36px); transition: opacity .65s ease, transform .65s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .fade-left  { opacity: 0; transform: translateX(-40px); transition: opacity .65s ease, transform .65s ease; }
+  .fade-left.visible  { opacity: 1; transform: translateX(0); }
+  .fade-right { opacity: 0; transform: translateX(40px);  transition: opacity .65s ease, transform .65s ease; }
+  .fade-right.visible { opacity: 1; transform: translateX(0); }
+
+  /* ── Creator card ── */
+  .creator-card {
+    background: white;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,33,71,.08);
+    transition: transform .35s, box-shadow .35s;
+    position: relative;
+  }
+  .creator-card:hover { transform: translateY(-10px); box-shadow: 0 24px 56px rgba(0,33,71,.16); }
+  .creator-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold), var(--green));
+    transform: scaleX(0); transform-origin: left; transition: transform .35s;
+  }
+  .creator-card:hover::after { transform: scaleX(1); }
+
+  .avatar-ring {
+    width: 140px; height: 140px; border-radius: 50%;
+    border: 5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.6rem;
+    background: var(--cream);
+    margin: 0 auto;
+    box-shadow: 0 0 0 8px rgba(201,168,76,.15);
+    transition: transform .3s;
+    overflow: hidden;
+    object-fit: cover;
+  }
+  .avatar-ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .creator-card:hover .avatar-ring { transform: scale(1.07); }
+
+  .role-badge {
+    display: inline-block;
+    padding: .3rem .9rem; border-radius: 999px;
+    font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+  }
+
+  /* ── Social links ── */
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    border: 1.5px solid transparent;
+  }
+
+  .social-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    opacity: 0.92;
+  }
+
+  .social-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .social-btn img {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .social-btn.linkedin {
+    background: #0A66C2;
+    color: white;
+    border-color: #0A66C2;
+  }
+
+  .social-btn.instagram {
+    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+    border-color: transparent;
+  }
+
+  .social-btn.researchgate {
+    background: #00CCBB;
+    color: white;
+    border-color: #00CCBB;
+  }
+
+  .social-btn.scholar {
+    background: #4285F4;
+    color: white;
+    border-color: #4285F4;
+  }
+
+  .social-btn.mono-black {
+    background: #0a0a0a;
+    color: #ffffff;
+    border-color: #0a0a0a;
+  }
+
+  .social-btn.mono-white {
+    background: #ffffff;
+    color: #0a0a0a;
+    border-color: #0a0a0a;
+  }
+
+  /* placeholder state — grayed out with lock icon feel */
+  .social-btn.disabled-social {
+    background: #f3f4f6;
+    color: #9ca3af;
+    border-color: #e5e7eb;
+    cursor: default;
+    pointer-events: none;
+  }
+  .social-btn.disabled-social:hover {
+    transform: none;
+    box-shadow: none;
+    opacity: 1;
+  }
+
+  /* ── Timeline dots ── */
+  .tl-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 3px solid white;
+    flex-shrink: 0; margin-top: 4px;
+  }
+
+  /* ── Stat card ── */
+  .stat-card {
+    background: white; border-radius: 1.25rem; padding: 1.75rem;
+    text-align: center; box-shadow: 0 2px 16px rgba(0,0,0,.06);
+    transition: transform .3s;
+  }
+  .stat-card:hover { transform: translateY(-4px); }
+
+  /* ── Quote pull ── */
+  .pull-quote {
+    border-left: 5px solid var(--gold);
+    padding: 1.5rem 2rem;
+    background: white;
+    border-radius: 0 1rem 1rem 0;
+    font-family: 'Noto Serif', serif;
+    font-style: italic;
+  }
+
+  /* ── Course tag ── */
+  .course-tag {
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    color: white; border-radius: 999px;
+    padding: .4rem 1.1rem; font-size: .78rem; font-weight: 700;
+    display: inline-block;
+  }
+
+  /* ── Page feature icon ── */
+  .page-icon-card {
+    background: white; border-radius: 1rem; padding: 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    transition: all .3s;
+  }
+  .page-icon-card:hover { transform: translateX(6px); box-shadow: 0 6px 20px rgba(0,33,71,.1); }
+
+  /* ── Gold underline ── */
+  .gold-ul { border-bottom: 3px solid var(--gold); padding-bottom: 4px; display: inline; }
+  .saffron-ul { border-bottom: 3px solid var(--saffron); padding-bottom: 4px; display: inline; }
+  .green-ul { border-bottom: 3px solid var(--green); padding-bottom: 4px; display: inline; }
+</style>
+</head>
+<body>
+
+<!-- Tricolor strip -->
+<div class="tricolor"></div>
+
+<!-- ══════════════════════════  NAVBAR  ══════════════════════════ -->
+<nav class="sticky top-0 z-50 px-6 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="/" class="font-display text-white text-xl font-bold inline-flex items-center gap-2">
+      <img src="/assets/icons/india-flag.svg" alt="Indian flag" class="w-6 h-4 rounded-sm object-cover"/>
+      <span>Samvidhan</span>
+    </a>
+    <div class="hidden lg:flex items-center gap-6 text-white text-sm font-medium">
+      <a href="/"    class="hover:text-yellow-300 transition-colors">Home</a>
+      <a href="/rights/"   class="hover:text-yellow-300 transition-colors">Rights & Duties</a>
+      <a href="/articles/" class="hover:text-yellow-300 transition-colors">Articles</a>
+      <a href="/quiz/"     class="hover:text-yellow-300 transition-colors">Quiz</a>
+      <a href="/helpline/" class="hover:text-yellow-300 transition-colors">Helpline</a>
+      <a href="/survey/" class="bg-saffron text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition" style="background:var(--saffron)">Survey</a>
+    </div>
+    <button id="hamburger" class="lg:hidden text-white p-2 text-2xl">☰</button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu lg:hidden">
+    <div class="max-w-7xl mx-auto px-6 pb-5 flex flex-col gap-3 text-white text-sm mt-4">
+      <a href="/"    class="py-2 border-b border-white border-opacity-20">Home</a>
+      <a href="/rights/"   class="py-2 border-b border-white border-opacity-20">Rights & Duties</a>
+      <a href="/articles/" class="py-2 border-b border-white border-opacity-20">Articles</a>
+      <a href="/cases/"    class="py-2 border-b border-white border-opacity-20">Case Reports</a>
+      <a href="/crimes/"   class="py-2 border-b border-white border-opacity-20">Crimes & Law</a>
+      <a href="/quiz/"     class="py-2 border-b border-white border-opacity-20">Quiz</a>
+      <a href="/helpline/" class="py-2 border-b border-white border-opacity-20">Helpline</a>
+      <a href="/survey/"   class="py-2 border-b border-white border-opacity-20">Survey</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════  HERO  ══════════════════════════ -->
+<section class="hero-bg min-h-screen flex items-center justify-center relative py-24 px-6">
+
+  <div class="relative max-w-4xl mx-auto text-center text-white z-10">
+    <!-- Course badge -->
+    <div class="fade-in visible inline-flex items-center gap-2 mb-6 px-5 py-2 rounded-full border border-yellow-400 border-opacity-40 bg-white bg-opacity-5 backdrop-blur-sm">
+      <span class="text-yellow-300 text-sm">🎓</span>
+      <span class="text-yellow-200 text-xs uppercase tracking-widest font-semibold">VAC · Constitutional Values & Fundamental Duties</span>
+    </div>
+
+    <h1 class="font-display text-5xl md:text-7xl font-black leading-tight mb-6 fade-in visible" style="transition-delay:.1s">
+      Meet our <span style="color:var(--saffron)">Team</span>
+    </h1>
+
+    <p class="font-serif italic text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 fade-in visible" style="transition-delay:.25s">
+      "The Constitution is not a mere lawyers' document — it is a vehicle of Life, and its spirit is always the spirit of an Age."
+      <span class="block mt-2 text-sm not-italic text-yellow-300">— Dr. B.R. Ambedkar</span>
+    </p>
+
+    <div class="fade-in visible flex flex-col sm:flex-row gap-4 justify-center" style="transition-delay:.4s">
+      <a href="#team"  class="px-8 py-3 rounded-full text-white font-semibold hover:opacity-90 transition" style="background:var(--saffron)">Meet Team ↓</a>
+      <a href="#motive"    class="px-8 py-3 rounded-full border border-white text-white font-semibold hover:bg-black hover:text-navy transition">Our Motive ↓</a>
+    </div>
+
+    <!-- Floating badge -->
+    <div class="float mt-14 inline-block px-6 py-3 rounded-2xl bg-white bg-opacity-10 backdrop-blur border border-white border-opacity-20">
+      <p class="text-xs text-gray-300 mb-1 uppercase tracking-widest">Academic Assignment</p>
+      <p class="font-display text-white font-bold text-lg">Constitutional Values & Fundamental Duties</p>
+      <p class="text-yellow-300 text-sm mt-1">Value Addition Course (VAC)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════  ABOUT THE PROJECT  ══════════════════════════ -->
+<section id="motive" class="py-24 px-6" style="background:white;">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="text-center mb-16 fade-in">
+      <span class="course-tag mb-4">📚 The Project</span>
+      <h2 class="font-display text-4xl md:text-5xl font-bold mt-4 mb-4" style="color:var(--navy)">
+        Why We Built <span class="gold-ul">Samvidhan</span>
+      </h2>
+      <p class="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
+        A digital platform born from academic purpose, built with patriotic passion.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+      <!-- Left: Story -->
+      <div class="fade-left space-y-6">
+        <div class="pull-quote">
+          <p class="text-gray-700 leading-relaxed text-base">
+            This website — <strong>Samvidhan</strong> — was created as part of our academic assignment for the subject
+            <strong>"Constitutional Values and Fundamental Duties"</strong>, which is offered under the
+            <strong>Value Addition Course (VAC)</strong> programme of our university curriculum.
+          </p>
+        </div>
+        <p class="text-gray-600 leading-relaxed">
+          The VAC programme is designed to go beyond textbook learning, encouraging students to create meaningful,
+          real-world projects that contribute to society. Our subject challenged us to understand the Constitution
+          deeply — not just read it, but <em>live</em> it, and help others understand it too.
+        </p>
+        <p class="text-gray-600 leading-relaxed">
+          We chose to build a comprehensive, interactive website because we believe knowledge of the Constitution
+          should not be locked inside textbooks or courtrooms. Every citizen — student, farmer, professional,
+          homemaker — deserves to know their rights, their duties, and the values that make India a nation.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <span class="role-badge" style="background:#fff3e0;color:var(--saffron)">📖 VAC Subject</span>
+          <span class="role-badge" style="background:#e8f5e9;color:var(--green)">🏫 University Assignment</span>
+          <span class="role-badge" style="background:#e3f2fd;color:#1565c0">💡 Student Initiative</span>
+          <span class="role-badge" style="background:#fce4ec;color:#c62828;display:inline-flex;align-items:center;gap:6px;">
+            <img src="/assets/icons/india-flag.svg" alt="Indian flag" class="w-4 h-3 rounded-sm object-cover">
+            <span>Patriotic Project</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Right: Info cards -->
+      <div class="fade-right space-y-4">
+        <div class="stat-card border-l-4" style="border-color:var(--saffron);text-align:left;">
+          <div class="flex items-center gap-4">
+            <span class="text-4xl">🎓</span>
+            <div>
+              <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">Subject</p>
+              <p class="font-display text-xl font-bold" style="color:var(--navy)">Constitutional Values & Fundamental Duties</p>
+            </div>
+          </div>
+        </div>
+        <div class="stat-card border-l-4" style="border-color:var(--green);text-align:left;">
+          <div class="flex items-center gap-4">
+            <span class="text-4xl">📋</span>
+            <div>
+              <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">Course Type</p>
+              <p class="font-display text-xl font-bold" style="color:var(--navy)">Value Addition Course (VAC)</p>
+            </div>
+          </div>
+        </div>
+        <div class="stat-card border-l-4" style="border-color:var(--gold);text-align:left;">
+          <div class="flex items-center gap-4">
+            <span class="text-4xl">🖥️</span>
+            <div>
+              <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">Project Type</p>
+              <p class="font-display text-xl font-bold" style="color:var(--navy)">Interactive Educational Website</p>
+            </div>
+          </div>
+        </div>
+        <div class="stat-card border-l-4" style="border-color:var(--navy);text-align:left;">
+          <div class="flex items-center gap-4">
+            <span class="text-4xl">🌐</span>
+            <div>
+              <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">Technology</p>
+              <p class="font-display text-xl font-bold" style="color:var(--navy)">HTML · Tailwind CSS · Vanilla JS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Motive pillars -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 fade-in">
+      <div class="rounded-2xl p-8 text-center" style="background:var(--cream);">
+        <div class="text-5xl mb-4">💡</div>
+        <h3 class="font-display text-xl font-bold mb-3" style="color:var(--navy)">The Idea</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          To make the Indian Constitution accessible, engaging, and understandable for every citizen — especially the youth who will shape India's future.
+        </p>
+      </div>
+      <div class="rounded-2xl p-8 text-center" style="background:var(--cream);">
+        <div class="text-5xl mb-4">🎯</div>
+        <h3 class="font-display text-xl font-bold mb-3" style="color:var(--navy)">The Goal</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Bridge the gap between constitutional literacy and the common person. Rights are only powerful when citizens know them and exercise them responsibly.
+        </p>
+      </div>
+      <div class="rounded-2xl p-8 text-center" style="background:var(--cream);">
+        <img src="/assets/icons/india-flag.svg" alt="Indian flag" class="w-14 h-10 object-cover rounded-md mx-auto mb-4">
+        <h3 class="font-display text-xl font-bold mb-3" style="color:var(--navy)">The Vision</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          An India where every citizen understands the Preamble, knows their rights, fulfils their duties, and contributes to a just, equal, and fraternal society.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════  TEAM HEADER  ══════════════════════════ -->
+<section id="team" class="pt-16 px-6" style="background:var(--cream);">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-4 fade-in">
+      <span class="course-tag">👥 Team</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════  OUR MENTORS  ══════════════════════════ -->
+<section id="mentors" class="pb-16 px-6" style="background:var(--cream);">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16 fade-in">
+      <h2 class="font-display text-4xl md:text-5xl font-bold mt-0 mb-3" style="color:var(--navy)">
+        Our <span class="saffron-ul">Mentors</span>
+      </h2>
+      <p class="text-gray-500 max-w-xl mx-auto">Mentors who guided us to turn constitutional learning into meaningful action and informed citizenship.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-5xl mx-auto">
+
+      <!-- Mentor 1 — Devender Takhar -->
+      <div class="creator-card fade-in" style="transition-delay:.05s">
+        <div class="h-2" style="background:linear-gradient(90deg,#8e44ad,#9b59b6)"></div>
+        <div class="p-8 text-center">
+          <div class="avatar-ring mb-4" style="background:linear-gradient(135deg,#f3e5f5,#ce93d8)">
+            <img src="https://res.cloudinary.com/dmzjlfnuz/image/upload/q_auto/f_auto/v1775175603/Devender_Takhar_ukdv4r.jpg" alt="Devender Takhar" loading="Mentor 1">
+          </div>
+          <span class="role-badge mb-3" style="background:#f3e5f5;color:#6a1b9a">Faculty Guide · Mentor</span>
+          <h3 class="font-display text-2xl font-bold mt-3 mb-1" style="color:var(--navy)">Devender Takhar</h3>
+          <p class="text-gray-400 text-sm mb-4">Department of Physics / VAC Faculty</p>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Provided constant mentorship throughout the project, encouraged thoughtful discussions on constitutional values, and helped the team refine the educational direction of the website.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-100 flex flex-wrap gap-2 justify-center">
+            <span class="text-xs px-3 py-1 rounded-full bg-purple-50 text-purple-600 font-medium">Faculty Guide</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 font-medium">Mentor</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-blue-50 text-blue-600 font-medium">VAC Instructor</span>
+          </div>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/devender-takhar-ba4315100/" class="social-btn linkedin" title="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://www.researchgate.net/profile/Devender-Takhar" class="social-btn researchgate" title="ResearchGate" target="_blank" rel="noopener">
+              <img src="https://cdn.simpleicons.org/researchgate/ffffff" alt="ResearchGate logo" loading="lazy"/>
+              ResearchGate
+            </a>
+            <a href="https://scholar.google.com/citations?user=SyQHpCgAAAAJ&hl=en" class="social-btn scholar" title="Google Scholar" target="_blank" rel="noopener">
+              <img src="https://cdn.simpleicons.org/googlescholar/ffffff" alt="Google Scholar logo" loading="lazy"/>
+              Google Scholar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mentor 2 — Pawan Sir -->
+      <div class="creator-card fade-in" style="transition-delay:.15s">
+        <div class="h-2" style="background:linear-gradient(90deg,var(--gold),#d6b35a)"></div>
+        <div class="p-8 text-center">
+          <div class="avatar-ring mb-4" style="background:linear-gradient(135deg,#fff8dc,#ffe9a8)">
+            <img src="https://media-del2-2.cdn.whatsapp.net/v/t61.24694-24/611659028_1308892514595942_1546911388115069947_n.jpg?ccb=11-4&oh=01_Q5Aa4QEN5NfAB457l7WIcYhOxu7WJpWoMFh4hBGi-MV8BXxe2g&oe=69EE96D6&_nc_sid=5e03e0&_nc_cat=104" alt="PK" loading="Mentor 2">
+          </div>
+          <span class="role-badge mb-3" style="background:#fff8dc;color:#8a6d1d">Faculty Guide · Mentor</span>
+          <h3 class="font-display text-2xl font-bold mt-3 mb-1" style="color:var(--navy)">Pawan Kumar</h3>
+          <p class="text-gray-400 text-sm mb-4">Department of Physics / VAC Faculty Mentor</p>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Our faculty guide who provided valuable direction, helped us understand the deeper meaning of constitutional values, and guided us in structuring this project meaningfully.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-100 flex flex-wrap gap-2 justify-center">
+            <span class="text-xs px-3 py-1 rounded-full bg-yellow-50 text-yellow-700 font-medium">Faculty Guide</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-orange-50 text-orange-600 font-medium">Mentor</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-lime-50 text-lime-700 font-medium">Academic Support</span>
+          </div>
+          <div class="social-links">
+            <a href="https://www.researchgate.net/profile/Pawan-Kumar-314" class="social-btn researchgate" title="ResearchGate" target="_blank" rel="noopener">
+              <img src="https://cdn.simpleicons.org/researchgate/ffffff" alt="ResearchGate logo" loading="lazy"/>
+              ResearchGate
+            </a>
+            <a href="https://scholar.google.com/citations?user=ZfWjwcgAAAAJ&hl=en" class="social-btn scholar" title="Google Scholar" target="_blank" rel="noopener">
+              <img src="https://cdn.simpleicons.org/googlescholar/ffffff" alt="Google Scholar logo" loading="lazy"/>
+              Google Scholar
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════  CREATORS  ══════════════════════════ -->
+<section id="creators" class="pt-8 pb-24 px-6" style="background:var(--cream);">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16 fade-in">
+      <h2 class="font-display text-4xl md:text-5xl font-bold mt-4 mb-3" style="color:var(--navy)">
+        The <span class="saffron-ul">Creators</span>
+      </h2>
+      <p class="text-gray-500 max-w-xl mx-auto">Students who believed that understanding the Constitution is not just an assignment — it is a responsibility.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="creatorsGrid">
+
+      <!-- Creator 1 — Kaleem -->
+      <div class="creator-card fade-in" style="transition-delay:.25s">
+        <div class="h-2" style="background:linear-gradient(90deg,var(--navy),#f5e507)"></div>
+        <div class="p-8 text-center">
+          <div class="avatar-ring mb-4" style="background:linear-gradient(135deg,#fde3f9,#90caf9)">
+            <img src="https://res.cloudinary.com/dmzjlfnuz/image/upload/q_auto/f_auto/v1775177960/Kaleem_cq4ryu.jpg" alt="Kaleem" loading="lazy">
+          </div>
+          <span class="role-badge mb-3" style="background:#cebb10;color:#1565c0">Founder · Owner</span>
+          <h3 class="font-display text-2xl font-bold mt-3 mb-1" style="color:var(--navy)">Kaleem</h3>
+          <p class="text-gray-400 text-sm mb-4">Roll No. : 251229</p>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Played a leading role in shaping the vision and direction of the Samvidhan project. Managed the overall concept, guided the team, and ensured the project remained creative, meaningful, and impactful from start to finish.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-100 flex flex-wrap gap-2 justify-center">
+            <span class="text-xs px-3 py-1 rounded-full bg-purple-50 text-purple-600 font-medium">Leadership</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-pink-50 text-pink-600 font-medium">Project Vision</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-red-100 text-red-600 font-medium">Management</span>
+          </div>
+          <!-- Social Links -->
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/kaleem-421509383/" class="social-btn linkedin" title="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creator 2 — Sachin -->
+      <div class="creator-card fade-in" style="transition-delay:.15s">
+        <div class="h-2" style="background:linear-gradient(90deg,var(--green),#2ecc40)"></div>
+        <div class="p-8 text-center">
+          <div class="avatar-ring mb-4" style="background:linear-gradient(135deg,#e8f5e9,#a8d8a8)">
+            <img src="https://res.cloudinary.com/dmzjlfnuz/image/upload/q_auto/f_auto/v1775212186/WhatsApp_Image_2026-04-03_at_1.00.50_PM_mrjlzb.jpg" alt="Sachin" loading="lazy">
+          </div>
+          <span class="role-badge mb-3" style="background:#e8f5e9;color:var(--green)">Content Writer · Researcher</span>
+          <h3 class="font-display text-2xl font-bold mt-3 mb-1" style="color:var(--navy)">Sachin</h3>
+          <p class="text-gray-400 text-sm mb-4">Roll No. : 251256</p>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Researched and wrote all the content — from constitutional articles and case studies to freedom fighter stories and the quiz questions with detailed explanations.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-100 flex flex-wrap gap-2 justify-center">
+            <span class="text-xs px-3 py-1 rounded-full bg-green-50 text-green-600 font-medium">Research</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-purple-50 text-purple-600 font-medium">Content Writing</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-yellow-50 text-yellow-600 font-medium">Fact-Checking</span>
+          </div>
+          <!-- Social Links -->
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/sachin-98573a332/" class="social-btn linkedin" title="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://www.instagram.com/_sachin.sachin_0000/" class="social-btn instagram" title="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creator 3 — Mukul Sharma -->
+      <div class="creator-card fade-in" style="transition-delay:.25s">
+        <div class="h-2" style="background:linear-gradient(90deg,var(--navy),#1a5c99)"></div>
+        <div class="p-8 text-center">
+          <div class="avatar-ring mb-4" style="background:linear-gradient(135deg,#e3f2fd,#90caf9)">
+            <img src="https://res.cloudinary.com/dmzjlfnuz/image/upload/v1775157244/WhatsApp_Image_2026-04-02_at_11.49.38_PM_wc27im.jpg" alt="Mukul Sharma" loading="lazy">
+          </div>
+          <span class="role-badge mb-3" style="background:#e3f2fd;color:#1565c0">Designer · Tester</span>
+          <h3 class="font-display text-2xl font-bold mt-3 mb-1" style="color:var(--navy)">Mukul Sharma</h3>
+          <p class="text-gray-400 text-sm mb-4">Roll No. : 251240</p>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Handled the visual design system — color palette, typography, animations, and the patriotic aesthetic. Also tested all pages across devices for responsiveness.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-100 flex flex-wrap gap-2 justify-center">
+            <span class="text-xs px-3 py-1 rounded-full bg-purple-50 text-purple-600 font-medium">Visual Design</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-pink-50 text-pink-600 font-medium">Animations</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-gray-100 text-gray-600 font-medium">QA Testing</span>
+          </div>
+          <!-- Social Links -->
+          <div class="social-links">
+            <a href="https://www.instagram.com/sh_mukul45/" class="social-btn instagram" title="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creator 4 — Bhavesh Kumar -->
+      <div class="creator-card fade-in" style="transition-delay:.05s">
+        <div class="h-2" style="background:linear-gradient(90deg,var(--gold),#e8b84b)"></div>
+        <div class="p-8 text-center">
+          <div class="avatar-ring mb-4" style="background:linear-gradient(135deg,#fffde7,#ffe082)">
+            <img src="https://res.cloudinary.com/dmzjlfnuz/image/upload/q_auto/f_auto/v1775172125/WhatsApp_Image_2026-04-03_at_12.58.20_AM_h5bdzh.jpg" alt="Bhavesh Kumar" loading="lazy">
+          </div>
+          <span class="role-badge mb-3" style="background:#fffde7;color:#b8860b">Researcher · Logic</span>
+          <h3 class="font-display text-2xl font-bold mt-3 mb-1" style="color:var(--navy)">Bhavesh Kumar</h3>
+          <p class="text-gray-400 text-sm mb-4">Roll No. : 251219</p>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Built the interactive features — the quiz engine, Local results page, audio recording functionality, and all JavaScript-driven interactions.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-100 flex flex-wrap gap-2 justify-center">
+            <span class="text-xs px-3 py-1 rounded-full bg-yellow-50 text-yellow-600 font-medium">JavaScript</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-red-50 text-red-600 font-medium">Quiz Engine</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 font-medium">Forms & Storage</span>
+          </div>
+          <!-- Social Links -->
+          <div class="social-links">
+            <a href="https://www.instagram.com/bhaveshk_07/" class="social-btn instagram" title="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creator 5 — Vishnu Singh Rathore -->
+      <div class="creator-card fade-in" style="transition-delay:.15s">
+        <div class="h-2" style="background:linear-gradient(90deg,#e74c3c,#c0392b)"></div>
+        <div class="p-8 text-center">
+          <div class="avatar-ring mb-4" style="background:linear-gradient(135deg,#fce4ec,#f48fb1)">
+            <img src="https://res.cloudinary.com/dmzjlfnuz/image/upload/q_auto/f_auto/v1775157245/WhatsApp_Image_2026-04-01_at_11.04.59_PM_1_jkjbw6.jpg" alt="Vishnu Singh Rathore" loading="lazy">
+          </div>
+          <span class="role-badge mb-3" style="background:#fce4ec;color:#c62828">Presenter · Coordinator</span>
+          <h3 class="font-display text-2xl font-bold mt-3 mb-1" style="color:var(--navy)">Vishnu Singh Rathore</h3>
+          <p class="text-gray-400 text-sm mb-4">Roll No. : 251288</p>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Coordinated the team meetings, managed deadlines, prepared the project presentation, and ensured all constitutional facts were verified against reliable sources.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-100 flex flex-wrap gap-2 justify-center">
+            <span class="text-xs px-3 py-1 rounded-full bg-red-50 text-red-600 font-medium">Coordination</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-orange-50 text-orange-600 font-medium">Presentation</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-teal-50 text-teal-600 font-medium">Verification</span>
+          </div>
+          <!-- Social Links -->
+          <div class="social-links">
+            <a href="https://www.instagram.com/vishnu0000vsr/" class="social-btn instagram" title="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creator 6 — Shoaib Akhtar Ansari -->
+      <div class="creator-card fade-in" style="transition-delay:.25s">
+        <div class="h-2" style="background:linear-gradient(90deg,var(--navy),#1a5c99)"></div>
+        <div class="p-8 text-center">
+          <div class="avatar-ring mb-4" style="background:linear-gradient(135deg,#e3f2fd,#90caf9)">
+            <img src="https://res.cloudinary.com/dmzjlfnuz/image/upload/q_auto/f_auto/v1775157244/WhatsApp_Image_2026-04-02_at_12.05.07_AM_lk8p53.jpg" alt="Shoaib" loading="lazy">
+          </div>
+          <span class="role-badge mb-3" style="background:#e3f2fd;color:#1565c0">Creator · Idea & Creativity</span>
+          <h3 class="font-display text-2xl font-bold mt-3 mb-1" style="color:var(--navy)">Shoaib Akhtar Ansari</h3>
+          <p class="text-gray-400 text-sm mb-4">Roll No. : 251262</p>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            The mastermind behind the creativity and concept of the Samvidhan Survey. Designed the idea, flow, and engaging elements that make the survey interactive, fun, and impactful.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-100 flex flex-wrap gap-2 justify-center">
+            <span class="text-xs px-3 py-1 rounded-full bg-purple-50 text-purple-600 font-medium">Creativity</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-pink-50 text-pink-600 font-medium">Idea Design</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-gray-100 text-gray-600 font-medium">Concept Planning</span>
+          </div>
+          <!-- Social Links -->
+          <div class="social-links">
+            <a href="https://www.instagram.com/shoaibakhtar__09/" class="social-btn instagram" title="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creator 7 — Laxmi Narayan Verma -->
+      <div class="creator-card fade-in" style="transition-delay:.05s">
+        <div class="h-2" style="background:linear-gradient(90deg,#000000,#1a1a1a)"></div>
+        <div class="p-8 text-center">
+          <img src="https://res.cloudinary.com/dmzjlfnuz/image/upload/v1786804087/photo_6055369220226224390_w_mdjylo.jpg" alt="LNV" class="avatar-ring mb-4" style="background:linear-gradient(135deg,#070606,#0c0406);border-color:#000000;box-shadow:0 0 0 8px rgba(0,0,0,.15)">
+          <span class="role-badge mb-3" style="background:#050505;color:var(--white)">Team Lead · Developer</span>
+          <h3 class="font-display text-2xl font-bold mt-3 mb-1" style="color:var(--navy)">Laxmi Narayan Verma</h3>
+          <p class="text-gray-400 text-sm mb-4">Roll No. : 251235</p>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Led the overall structure and development of the website. Designed the homepage, timeline, navigation, and ensured a cohesive visual identity across all pages.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-100 flex flex-wrap gap-2 justify-center">
+            <span class="text-xs px-3 py-1 rounded-full bg-violet-50 text-black-600 font-medium">Frontend Dev</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-blue-50 text-black-600 font-medium">UI/UX Design</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-green-50 text-black-600 font-medium">Project Lead</span>
+          </div>
+          <!-- Social Links -->
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/laxmi-narayan-verma-b91634379/" class="social-btn mono-black" title="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/lakshminarayanverma91-bot" class="social-btn mono-white" title="GitHub" target="_blank" rel="noopener">
+              <img src="https://cdn.simpleicons.org/github/000000" alt="GitHub logo" loading="lazy"/>
+              GitHub
+            </a>
+          </div>
+          <div class="social-links mt-2">
+            <a href="https://www.researchgate.net/profile/Laxmi-Verma-4" class="social-btn mono-black" title="ResearchGate" target="_blank" rel="noopener">
+              <img src="https://cdn.simpleicons.org/researchgate/ffffff" alt="ResearchGate logo" loading="lazy"/>
+              ResearchGate
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════  WHAT'S INSIDE  ══════════════════════════ -->
+<section class="py-24 px-6" style="background:white;">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-in">
+      <span class="course-tag">🗺️ Website Map</span>
+      <h2 class="font-display text-4xl md:text-5xl font-bold mt-4 mb-3" style="color:var(--navy)">
+        What's <span class="green-ul">Inside</span> Samvidhan
+      </h2>
+      <p class="text-gray-500 max-w-xl mx-auto">Every page was thoughtfully designed to serve a specific educational purpose.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 fade-in">
+      <a href="/" class="page-icon-card">
+        <span class="text-3xl flex-shrink-0">🏠</span>
+        <div>
+          <p class="font-semibold text-sm" style="color:var(--navy)">Home Page</p>
+          <p class="text-xs text-gray-500">Hero, Timeline, Core Values overview</p>
+        </div>
+      </a>
+      <a href="/rights/" class="page-icon-card">
+        <span class="text-3xl flex-shrink-0">⚖️</span>
+        <div>
+          <p class="font-semibold text-sm" style="color:var(--navy)">Rights & Duties</p>
+          <p class="text-xs text-gray-500">All 6 Fundamental Rights + 11 Duties</p>
+        </div>
+      </a>
+      <a href="/articles/" class="page-icon-card">
+        <span class="text-3xl flex-shrink-0">📜</span>
+        <div>
+          <p class="font-semibold text-sm" style="color:var(--navy)">Articles & Schedules</p>
+          <p class="text-xs text-gray-500">Key articles with simple explanations</p>
+        </div>
+      </a>
+      <a href="/freedom/" class="page-icon-card">
+        <span class="text-3xl flex-shrink-0">🧾</span>
+        <div>
+          <p class="font-semibold text-sm" style="color:var(--navy)">Freedom Fighters</p>
+          <p class="text-xs text-gray-500">Stories of those who built India free</p>
+        </div>
+      </a>
+      <a href="/cases/" class="page-icon-card">
+        <span class="text-3xl flex-shrink-0">📑</span>
+        <div>
+          <p class="font-semibold text-sm" style="color:var(--navy)">Case Reports</p>
+          <p class="text-xs text-gray-500">5 landmark Supreme Court judgments</p>
+        </div>
+      </a>
+      <a href="/crimes/" class="page-icon-card">
+        <span class="text-3xl flex-shrink-0">🚔</span>
+        <div>
+          <p class="font-semibold text-sm" style="color:var(--navy)">Crimes & Punishments</p>
+          <p class="text-xs text-gray-500">Laws, punishments & awareness</p>
+        </div>
+      </a>
+      <a href="/quiz/" class="page-icon-card">
+        <span class="text-3xl flex-shrink-0">🧠</span>
+        <div>
+          <p class="font-semibold text-sm" style="color:var(--navy)">Constitution Quiz</p>
+          <p class="text-xs text-gray-500">10 MCQs with instant feedback</p>
+        </div>
+      </a>
+      <a href="/helpline/" class="page-icon-card">
+        <span class="text-3xl flex-shrink-0">📞</span>
+        <div>
+          <p class="font-semibold text-sm" style="color:var(--navy)">Emergency Helpline</p>
+          <p class="text-xs text-gray-500">All India emergency numbers</p>
+        </div>
+      </a>
+      <a href="/survey/" class="page-icon-card">
+        <span class="text-3xl flex-shrink-0">📝</span>
+        <div>
+          <p class="font-semibold text-sm" style="color:var(--navy)">Survey + Results</p>
+          <p class="text-xs text-gray-500">Voice & text survey with live results</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════  WHAT WE LEARNED  ══════════════════════════ -->
+<section class="py-24 px-6" style="background:var(--navy);">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16 fade-in">
+      <span class="course-tag">🌱 Takeaways</span>
+      <h2 class="font-display text-4xl md:text-5xl font-bold mt-4 mb-3 text-white">
+        What We <span style="color:var(--gold)">Learned</span>
+      </h2>
+      <p class="text-gray-400 max-w-xl mx-auto">Building this website taught us far more than any lecture could.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white bg-opacity-5 border border-white border-opacity-10 rounded-2xl p-7 fade-left hover:bg-opacity-10 transition">
+        <div class="text-4xl mb-4">📖</div>
+        <h3 class="font-display text-xl font-bold text-white mb-3">The Constitution is Alive</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">We learned that the Constitution isn't a static document — it has been amended 106 times and continues to evolve. Landmark cases like Kesavananda Bharati show how courts breathe life into it.</p>
+      </div>
+      <div class="bg-white bg-opacity-5 border border-white border-opacity-10 rounded-2xl p-7 fade-right hover:bg-opacity-10 transition">
+        <div class="text-4xl mb-4">🤝</div>
+        <h3 class="font-display text-xl font-bold text-white mb-3">Rights Come with Duties</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">You cannot claim a right without accepting its corresponding duty. A citizen who demands free speech must also accept the duty to promote harmony and not incite hatred.</p>
+      </div>
+      <div class="bg-white bg-opacity-5 border border-white border-opacity-10 rounded-2xl p-7 fade-left hover:bg-opacity-10 transition">
+        <div class="text-4xl mb-4">🌍</div>
+        <h3 class="font-display text-xl font-bold text-white mb-3">India's Unique Diversity</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">No other Constitution in the world serves such a diverse population — 22 official languages, hundreds of dialects, multiple religions, and vast economic inequality. Yet one document unites us all.</p>
+      </div>
+      <div class="bg-white bg-opacity-5 border border-white border-opacity-10 rounded-2xl p-7 fade-right hover:bg-opacity-10 transition">
+        <div class="text-4xl mb-4">⚡</div>
+        <h3 class="font-display text-xl font-bold text-white mb-3">Awareness Changes Everything</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Most violations of rights happen because people don't know they have those rights. If every Indian knew Article 21, they could fight for their dignity. Knowledge is the greatest weapon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════  ACKNOWLEDGEMENT  ══════════════════════════ -->
+<section class="py-20 px-6" style="background:var(--cream);">
+  <div class="max-w-4xl mx-auto text-center fade-in">
+    <div class="text-6xl mb-6">🙏</div>
+    <h2 class="font-display text-4xl font-bold mb-6" style="color:var(--navy)">
+      Acknowledgements
+    </h2>
+    <div class="bg-white rounded-2xl p-10 shadow-md text-left space-y-5">
+      <p class="font-serif text-gray-700 leading-relaxed text-base">
+        We express our deepest gratitude to our Faculty Guide, <strong> Devender Sir </strong>and <strong>Pawan Sir </strong> for their invaluable guidance and support throughout this project. Their expertise in constitutional law and education helped us shape this website into a meaningful learning resource.
+      </p>
+      <p class="font-serif text-gray-700 leading-relaxed text-base">
+        We thank <strong>Delhi University</strong> for introducing the Value Addition Course (VAC) on Constitutional Values and Fundamental Duties — a subject that every Indian student should study. This course expanded our understanding of citizenship beyond academics.
+      </p>
+      <p class="font-serif text-gray-700 leading-relaxed text-base">
+        We acknowledge the contributions of India's <strong>Constituent Assembly Members</strong>, especially Dr. B.R. Ambedkar, Jawaharlal Nehru, and Sardar Patel, whose vision created the framework we explored in this project.
+      </p>
+      <p class="font-serif text-gray-700 leading-relaxed text-base">
+        Finally, we thank every <strong>Freedom Fighter</strong> who sacrificed their comfort, liberty, and lives so that we could sit in classrooms and study the Constitution they helped bring into existence. This project is, in a small way, our tribute to them.
+      </p>
+      <div class="pt-4 border-t border-gray-100 text-center">
+        <p class="font-display text-2xl font-bold" style="color:var(--saffron)">जय हिन्द</p>
+        <p class="text-gray-400 text-sm mt-1">Jai Bhim · Jai Samvidhan</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════  STATS BANNER  ══════════════════════════ -->
+<section class="py-16 px-6" style="background:white; border-top:1px solid #f3f4f6;">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 fade-in">
+      <div class="stat-card">
+        <div class="font-display counter-number text-5xl font-black mb-2" data-target="11" style="color:var(--saffron)">11</div>
+        <p class="text-sm text-gray-500">Pages Built</p>
+      </div>
+      <div class="stat-card">
+        <div class="font-display counter-number text-5xl font-black mb-2" data-target="448" style="color:var(--green)">448</div>
+        <p class="text-sm text-gray-500">Articles Studied</p>
+      </div>
+      <div class="stat-card">
+        <div class="font-display counter-number text-5xl font-black mb-2" data-target="5" style="color:var(--navy)">5</div>
+        <p class="text-sm text-gray-500">Landmark Cases</p>
+      </div>
+      <div class="stat-card">
+        <div class="font-display counter-number text-5xl font-black mb-2" data-target="infinite" style="color:var(--gold)">∞</div>
+        <p class="text-sm text-gray-500">Passion for India</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════  FOOTER  ══════════════════════════ -->
+<footer style="background:var(--navy)" class="text-white py-16 px-6">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+    <div class="md:col-span-2">
+      <h3 class="font-display text-2xl font-bold mb-4" style="color:var(--gold)">Samvidhan</h3>
+      <p class="text-gray-300 text-sm leading-relaxed mb-4">An educational website on the Indian Constitution — created as part of the VAC subject <em>Constitutional Values and Fundamental Duties</em> by a team of university students.</p>
+      <p class="text-xs text-gray-500">Jai Hind 🇮🇳 · Jai Bhim · Jai Samvidhan</p>
+    </div>
+    <div>
+      <h4 class="text-sm uppercase tracking-widest mb-4" style="color:var(--saffron)">Explore</h4>
+      <ul class="space-y-2 text-gray-300 text-sm">
+        <li><a href="/"    class="hover:text-white transition">Home</a></li>
+        <li><a href="/rights/"   class="hover:text-white transition">Rights & Duties</a></li>
+        <li><a href="/articles/" class="hover:text-white transition">Articles</a></li>
+        <li><a href="/freedom/"  class="hover:text-white transition">Freedom Fighters</a></li>
+        <li><a href="/cases/"    class="hover:text-white transition">Case Reports</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-sm uppercase tracking-widest mb-4" style="color:var(--green)">More</h4>
+      <ul class="space-y-2 text-gray-300 text-sm">
+        <li><a href="/crimes/"   class="hover:text-white transition">Crimes & Law</a></li>
+        <li><a href="/quiz/"     class="hover:text-white transition">Quiz</a></li>
+        <li><a href="/helpline/" class="hover:text-white transition">Emergency Helpline</a></li>
+        <li><a href="/survey/"   class="hover:text-white transition">Survey</a></li>
+        <li><a href="/about/"    class="hover:text-white transition text-yellow-300">About Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tricolor mt-12"></div>
+  <p class="text-center text-xs text-gray-500 mt-6">© 2024 Samvidhan — VAC Project · Constitutional Values & Fundamental Duties · For Educational Use Only</p>
+</footer>
+
+<script>
+/* ── Hamburger ── */
+document.getElementById('hamburger').addEventListener('click', () => {
+  const mobileMenu = document.getElementById('mobileMenu');
+  const hamburger = document.getElementById('hamburger');
+  
+  mobileMenu.classList.toggle('open');
+  hamburger.textContent = mobileMenu.classList.contains('open') ? '✕' : '☰';
+});
+
+/* ── Smooth scrolling for anchor links ── */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+/* ── Scroll reveal animations ── */
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in, .fade-left, .fade-right').forEach(el => {
+  observer.observe(el);
+});
+
+/* ── Navbar scroll effect ── */
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 100) {
+    nav.style.background = 'rgba(0,33,71,0.98)';
+    nav.style.backdropFilter = 'blur(20px)';
+  } else {
+    nav.style.background = 'rgba(0,33,71,0.97)';
+    nav.style.backdropFilter = 'blur(10px)';
+  }
+});
+
+/* ── Creator cards stagger animation ── */
+const creatorCards = document.querySelectorAll('#creatorsGrid .creator-card');
+creatorCards.forEach((card, index) => {
+  card.style.transitionDelay = `${index * 0.1}s`;
+});
+
+/* ── Page icon cards hover effect ── */
+document.querySelectorAll('.page-icon-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.style.transform = 'translateX(8px)';
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'translateX(0)';
+  });
+});
+
+/* ── Stat cards counter animation ── */
+function animateCounter(el, target, duration = 2000) {
+  if (!Number.isFinite(target) || target < 0) return;
+  let start = 0;
+  const increment = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += increment;
+    if (start >= target) {
+      start = target;
+      clearInterval(timer);
+    }
+    el.textContent = Math.floor(start);
+  }, 16);
+}
+
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const numEl = entry.target.querySelector('.counter-number');
+      if (!numEl) { statObserver.unobserve(entry.target); return; }
+      const targetAttr = numEl.dataset.target;
+      if (targetAttr === 'infinite') {
+        numEl.textContent = '∞';
+      } else {
+        const target = Number(targetAttr);
+        if (Number.isFinite(target)) animateCounter(numEl, target);
+      }
+      statObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter-number').forEach(el => {
+  const card = el.closest('.stat-card');
+  if (card) statObserver.observe(card);
+});
+
+/* ── Ashoka wheel responsiveness ── */
+function updateWheelSize() {
+  const wheel = document.querySelector('.wheel-spin');
+  if (!wheel) return;
+  if (window.innerWidth < 768) {
+    wheel.style.width = '400px';
+    wheel.style.height = '400px';
+  } else {
+    wheel.style.width = '600px';
+    wheel.style.height = '600px';
+  }
+}
+window.addEventListener('resize', updateWheelSize);
+updateWheelSize();
+
+/* ── Close mobile menu on link click ── */
+document.querySelectorAll('#mobileMenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').textContent = '☰';
+  });
+});
+
+/* ── Parallax effect for hero ── */
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const hero = document.querySelector('.hero-bg');
+  const rate = scrolled * -0.5;
+  hero.style.transform = `translateY(${rate}px)`;
+});
+
+/* ── Active nav link highlighting ── */
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    document.querySelectorAll('.fade-in').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 100);
+    });
+  }, 300);
+  
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('nav a').forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('text-yellow-300', 'border-b', 'border-yellow-300', 'pb-0.5');
+    }
+  });
+});
+</script>
+
+</body>
+</html>

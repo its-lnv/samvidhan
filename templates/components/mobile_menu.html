@@ -1,0 +1,18 @@
+<div id="mobileMenu" class="mobile-menu lg:hidden" data-mobile-menu>
+  <div class="max-w-7xl mx-auto px-6 pb-4 flex flex-col gap-3 text-white text-sm mt-4">
+    <a href="{% url 'home' %}" class="py-2 border-b border-white/20">Home</a>
+    <a href="{% url 'about' %}" class="py-2 border-b border-white/20">About</a>
+    <a href="{% url 'rights' %}" class="py-2 border-b border-white/20">Rights &amp; Duties</a>
+    <a href="{% url 'articles' %}" class="py-2 border-b border-white/20">Articles</a>
+    <a href="{% url 'cases' %}" class="py-2 border-b border-white/20">Cases</a>
+    <a href="{% url 'crimes' %}" class="py-2 border-b border-white/20">Crimes &amp; Law</a>
+    <a href="{% url 'freedom' %}" class="py-2 border-b border-white/20">Freedom Fighters</a>
+    <a href="{% url 'quiz' %}" class="py-2 border-b border-white/20">Quiz</a>
+    <a href="{% url 'helpline' %}" class="py-2 border-b border-white/20">Helpline</a>
+    <a href="{% url 'survey' %}" class="py-2">Survey</a>
+    {% if request.user.is_staff %}<a href="{% url 'results' %}" class="py-2 border-b border-white/20">Results</a>{% endif %}
+    {% if request.user.is_authenticated %}
+    <form action="{% url 'logout' %}" method="post">{% csrf_token %}<button type="submit" class="mobile-logout-btn">Logout</button></form>
+    {% else %}<a href="{% url 'login' %}" class="py-2 border-b border-white/20">Log in</a><a href="{% url 'register' %}" class="py-2">Register</a>{% endif %}
+  </div>
+</div>

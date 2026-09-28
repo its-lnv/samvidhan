@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Log in - Samvidhan{% endblock %}
+{% block fonts %}<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />{% endblock %}
+{% block extra_css %}<style>
+  .account-page{min-height:70vh;background:radial-gradient(ellipse at 80% 0,#20385a 0,transparent 45%),#0b1e3d;display:grid;place-items:center;padding:48px 18px;font-family:'DM Sans',sans-serif}
+  .account-card{width:min(470px,100%);padding:38px;background:#fff;border-radius:16px;box-shadow:0 25px 80px #0004;color:#1c1914}
+  .account-kicker{color:#e8650a;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+  .account-card h1{font:42px/1.1 'DM Serif Display',serif;color:#0b1e3d;margin:10px 0}
+  .account-intro{color:#777;font-size:14px;line-height:1.6;margin:0 0 24px}
+  .account-field{margin:0 0 16px}.account-field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+  .account-field input{width:100%;padding:12px 13px;border:1px solid #d9d5ce;border-radius:7px;font:15px 'DM Sans',sans-serif;background:#fff;color:#1c1914}
+  .account-field input:focus{outline:2px solid #e8650a55;border-color:#e8650a}
+  .account-errors,.account-message{padding:11px 13px;border-radius:7px;background:#fff0ee;color:#a5362b;font-size:13px;margin-bottom:15px}
+  .account-message.success{background:#eaf6ef;color:#17633d}
+  .account-submit,.google-submit{width:100%;border:0;border-radius:7px;padding:12px 16px;font:700 15px 'DM Sans',sans-serif;cursor:pointer;text-align:center;text-decoration:none;display:block}
+  .account-submit{background:#e8650a;color:white}.account-submit:hover{background:#c95608}
+  .account-divider{display:flex;align-items:center;gap:12px;color:#999;font-size:12px;margin:18px 0}.account-divider:before,.account-divider:after{content:'';height:1px;background:#e5e1da;flex:1}
+  .google-submit{border:1px solid #d9d5ce;color:#242321;background:white}.google-submit:hover{background:#f7f6f3}
+  .account-switch{text-align:center;color:#777;font-size:13px;margin:20px 0 0}.account-switch a{color:#b94d08;font-weight:700}
+  @media(max-width:520px){.account-card{padding:30px 22px}.account-card h1{font-size:36px}}
+</style>{% endblock %}
+{% block content %}<main class="account-page"><section class="account-card">
+  <div class="account-kicker">Welcome back</div><h1>Log in</h1><p class="account-intro">Log in to take the Samvidhan quiz or submit a survey response.</p>
+  {% if registered %}<div class="account-message success">Your account is ready. Log in with your new credentials.</div>{% endif %}
+  {% for message in messages %}<div class="account-message">{{ message }}</div>{% endfor %}
+  <form method="post" novalidate>{% csrf_token %}<input type="hidden" name="next" value="{{ next }}">
+    {% if form_error %}<div class="account-errors">{{ form_error }}</div>{% endif %}
+    <div class="account-field"><label for="login-username">Username or email</label><input id="login-username" name="username" type="text" autocomplete="username" value="{{ request.POST.username }}" required></div>
+    <div class="account-field"><label for="login-password">Password</label><input id="login-password" name="password" type="password" autocomplete="current-password" required></div>
+    <button class="account-submit" type="submit">Log in</button>
+  </form>
+  <div class="account-divider">or</div><a class="google-submit" href="{% url 'google_login' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Continue with Google</a>
+  {% if not google_login_enabled %}<p class="account-switch">Google sign-in needs the site’s OAuth credentials to be configured.</p>{% endif %}
+  <p class="account-switch">New here? <a href="{% url 'register' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Create an account</a></p>
+</section></main>{% endblock %}

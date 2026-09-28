@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/static/css/readable.css"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Unity & Integrity – Samvidhan</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/static/css/global.css"/>
+<link rel="stylesheet" href="/static/css/components.css"/>
+<script src="/static/js/main.js" defer></script><script src="/static/js/navigation.js" defer></script><script src="/static/js/animations.js" defer></script>
+<style>
+:root{--saffron:#FF9933;--green:#138808;--navy:#002147;--gold:#C9A84C;--cream:#FDF8F0;}
+*{box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);overflow-x:hidden;}
+.font-display{font-family:'Cormorant Garamond',serif;}
+.tricolor{height:5px;background:linear-gradient(to right,var(--saffron) 33.33%,white 33.33%,white 66.66%,var(--green) 66.66%);}
+nav{background:rgba(0,33,71,.97);}
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.vis{opacity:1;transform:translateY(0);}
+.mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s;}
+.mobile-menu.open{max-height:600px;}
+.card{background:white;border-radius:1.25rem;padding:1.75rem;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s;}
+.card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.12);}
+.expand-body{max-height:0;overflow:hidden;transition:max-height .5s;}
+.expand-body.open{max-height:600px;}
+.map-pin{display:flex;align-items:center;gap:.75rem;background:white;border-radius:.75rem;padding:1rem 1.25rem;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+</style>
+</head>
+<body>
+<div class="tricolor"></div>
+<nav class="sticky top-0 z-50 px-6 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="/" class="font-display text-white text-xl font-bold inline-flex items-center gap-2">
+      <img src="/assets/icons/india-flag.svg" alt="Indian flag" class="w-6 h-4 rounded-sm object-cover"/>
+      <span>Samvidhan</span>
+    </a>
+    <div class="hidden lg:flex gap-5 text-white text-sm">
+      <a href="/" class="hover:text-yellow-300">Home</a>
+      <a href="/rights/" class="hover:text-yellow-300">Rights</a>
+      <a href="/articles/" class="hover:text-yellow-300">Articles</a>
+      <a href="/cases/" class="hover:text-yellow-300">Cases</a>
+      <a href="/crimes/" class="hover:text-yellow-300">Crimes</a>
+      <a href="/freedom/" class="hover:text-yellow-300">Freedom Fighters</a>
+      <a href="/quiz/" class="hover:text-yellow-300">Quiz</a>
+      <a href="/helpline/" class="hover:text-yellow-300">Helpline</a>
+      <a href="/survey/" class="bg-orange-500 px-4 py-1 rounded-full">Survey</a>
+    </div>
+    <button id="hamburger" class="lg:hidden text-white p-2">☰</button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu lg:hidden">
+    <div class="max-w-7xl mx-auto px-6 pb-4 flex flex-col gap-3 text-white text-sm mt-4">
+      <a href="/" class="py-2 border-b border-white/20">Home</a>
+      <a href="/rights/" class="py-2 border-b border-white/20">Rights</a>
+      <a href="/quiz/" class="py-2 border-b border-white/20">Quiz</a>
+      <a href="/survey/" class="py-2">Survey</a>
+    </div>
+  </div>
+</nav>
+
+<section style="background:linear-gradient(160deg,#003300,#005500,#006600)" class="py-32 px-6 text-center text-white overflow-hidden relative">
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none">
+    <div style="position:absolute;top:10%;left:5%;font-size:3rem;opacity:.1">🗺️</div>
+    <div style="position:absolute;top:30%;right:8%;font-size:3rem;opacity:.1">🏔️</div>
+    <div style="position:absolute;bottom:20%;left:15%;font-size:3rem;opacity:.1">🌊</div>
+    <div style="position:absolute;bottom:10%;right:20%;font-size:3rem;opacity:.1">🌴</div>
+  </div>
+  <div class="max-w-4xl mx-auto relative z-10 fade-up vis">
+    <div class="inline-block px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-widest mb-6" style="background:rgba(201,168,76,.2);color:var(--gold)">Core Constitutional Value</div>
+    <h1 class="font-display text-6xl md:text-8xl font-bold mb-6 text-white leading-tight">Unity &amp; Integrity</h1>
+    <p class="text-xl text-green-100 max-w-2xl mx-auto leading-relaxed">28 states, 8 union territories, 1600+ languages, dozens of religions, and one nation. India's unity in diversity is its greatest strength.</p>
+    <div class="mt-8 h-px w-32 mx-auto bg-green-300/40"></div>
+    <p class="mt-6 font-display text-xl italic text-green-200">"Unity is strength... when there is teamwork and collaboration, wonderful things can be achieved."</p>
+  </div>
+</section>
+
+<div class="bg-white border-b border-gray-100 py-4 px-6 overflow-x-auto">
+  <div class="flex gap-2 max-w-7xl mx-auto min-w-max">
+    <a href="/values/sovereignty/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Sovereignty</a>
+    <a href="/values/secularism/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Secularism</a>
+    <a href="/values/socialism/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Socialism</a>
+    <a href="/values/democracy/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Democracy</a>
+    <a href="/values/republic/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Republic</a>
+    <a href="/values/justice/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Justice</a>
+    <a href="/values/liberty/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Liberty</a>
+    <a href="/values/equality/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Equality</a>
+    <a href="/values/fraternity/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Fraternity</a>
+    <a href="/values/dignity/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Dignity</a>
+    <a href="/values/unity/" class="px-4 py-2 rounded-full text-sm font-medium text-white" style="background:var(--navy)">Unity</a>
+  </div>
+</div>
+
+<div class="max-w-5xl mx-auto px-6 py-16">
+
+  <!-- Stats -->
+  <div class="fade-up grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+    <div class="bg-white rounded-2xl p-6 text-center shadow-sm"><p class="font-display text-5xl font-bold mb-2" style="color:var(--saffron)">28</p><p class="text-sm text-gray-500">States</p></div>
+    <div class="bg-white rounded-2xl p-6 text-center shadow-sm"><p class="font-display text-4xl font-bold mb-2" style="color:var(--green)">1600+</p><p class="text-sm text-gray-500">Languages</p></div>
+    <div class="bg-white rounded-2xl p-6 text-center shadow-sm"><p class="font-display text-5xl font-bold mb-2" style="color:var(--navy)">9</p><p class="text-sm text-gray-500">Major Religions</p></div>
+    <div class="bg-white rounded-2xl p-6 text-center shadow-sm"><p class="font-display text-4xl font-bold mb-2" style="color:var(--gold)">1</p><p class="text-sm text-gray-500">Nation, One Constitution</p></div>
+  </div>
+
+  <!-- What it means -->
+  <div class="fade-up grid md:grid-cols-2 gap-8 mb-16 items-start">
+    <div>
+      <p class="text-xs uppercase tracking-widest font-semibold mb-4" style="color:var(--green)">What It Means</p>
+      <h2 class="font-display text-5xl font-bold mb-6" style="color:var(--navy)">Unity in Diversity</h2>
+      <p class="text-gray-600 leading-relaxed mb-4">Unity means that despite India's extraordinary diversity — of language, religion, culture, ethnicity, and geography — all Indians belong to one nation, one constitutional framework, and one democratic republic.</p>
+      <p class="text-gray-600 leading-relaxed mb-4"><strong>Integrity</strong> refers to the territorial integrity of India — the principle that India's boundaries cannot be dismembered or separated. No state can secede from India, and no foreign power can claim Indian territory.</p>
+      <p class="text-gray-600 leading-relaxed">The phrase "Unity and Integrity" was added to the Preamble by the 42nd Amendment (1976) to emphasize that national unity is a constitutional value, not just a political aspiration.</p>
+    </div>
+    <div class="space-y-4">
+      <div class="card border-l-4" style="border-color:var(--green)">
+        <p class="font-semibold mb-2" style="color:var(--green)">Article 1 — Name and Territory</p>
+        <p class="text-sm text-gray-600">"India, that is Bharat, shall be a Union of States." The choice of "Union" rather than "Federation" was deliberate — it signals that the units of India cannot break away from the whole.</p>
+      </div>
+      <div class="card border-l-4" style="border-color:var(--saffron)">
+        <p class="font-semibold mb-2" style="color:var(--saffron)">Article 19(5) — Reasonable Restrictions</p>
+        <p class="text-sm text-gray-600">Freedom of movement can be restricted in the interests of the sovereignty and integrity of India — showing that unity and integrity can, when necessary, take priority over individual freedoms.</p>
+      </div>
+      <div class="card border-l-4" style="border-color:var(--navy)">
+        <p class="font-semibold mb-2" style="color:var(--navy)">Emergency Provisions (Articles 352–360)</p>
+        <p class="text-sm text-gray-600">In cases of external aggression or internal armed rebellion, the President can declare a National Emergency — a constitutional tool to protect unity and integrity.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- How unity is maintained -->
+  <div class="fade-up mb-16">
+    <h2 class="font-display text-4xl font-bold mb-8 text-center" style="color:var(--navy)">How India Holds Together</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="card"><div class="text-4xl mb-3">🗺️</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Federal Structure</h3><p class="text-sm text-gray-600 leading-relaxed">India is a quasi-federal state — states have significant autonomy over local matters, but the Centre has overriding powers to maintain national unity. This balance keeps diversity while ensuring integration.</p></div>
+      <div class="card"><div class="text-4xl mb-3">🚂</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Indian Railways</h3><p class="text-sm text-gray-600 leading-relaxed">Indian Railways connects every corner of the country — 67,000+ km of track, carrying 23 million passengers daily. More than a transport network, it is a physical expression of national unity.</p></div>
+      <div class="card"><div class="text-4xl mb-3">📻</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">All India Radio & Doordarshan</h3><p class="text-sm text-gray-600 leading-relaxed">Public broadcasters that transmit in dozens of languages to every corner of India — unifying the country's information ecosystem while preserving regional cultures.</p></div>
+      <div class="card"><div class="text-4xl mb-3">🛡️</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Armed Forces</h3><p class="text-sm text-gray-600 leading-relaxed">The Indian Army, Navy, and Air Force are voluntary services where soldiers from every state, caste, and religion serve together under one flag — the strongest expression of national unity.</p></div>
+      <div class="card"><div class="text-4xl mb-3">📜</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Common Citizenship</h3><p class="text-sm text-gray-600 leading-relaxed">Every Indian has a single citizenship (Article 5–11). A person from Tamil Nadu and a person from Ladakh hold the same Indian passport and have equal rights everywhere in India.</p></div>
+      <div class="card"><div class="text-4xl mb-3">🗳️</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">One Election Commission</h3><p class="text-sm text-gray-600 leading-relaxed">A single Election Commission manages elections for all 543 Lok Sabha and 4,000+ State Assembly seats — a unified democratic institution binding the nation together.</p></div>
+    </div>
+  </div>
+
+  <!-- Regional diversity celebrated -->
+  <div class="fade-up mb-16">
+    <h2 class="font-display text-4xl font-bold mb-4 text-center" style="color:var(--navy)">India's Regional Mosaic</h2>
+    <p class="text-gray-500 text-center mb-8">Unity doesn't mean uniformity. India celebrates its regional diversity within one constitutional framework.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+      <div class="map-pin"><span class="text-2xl">🏔️</span><div><p class="font-semibold text-sm" style="color:var(--navy)">Kashmir</p><p class="text-xs text-gray-400">Saffron & Snowfields</p></div></div>
+      <div class="map-pin"><span class="text-2xl">🐯</span><div><p class="font-semibold text-sm" style="color:var(--navy)">Rajasthan</p><p class="text-xs text-gray-400">Desert & Forts</p></div></div>
+      <div class="map-pin"><span class="text-2xl">🌊</span><div><p class="font-semibold text-sm" style="color:var(--navy)">Kerala</p><p class="text-xs text-gray-400">Backwaters & Spice</p></div></div>
+      <div class="map-pin"><span class="text-2xl">🌾</span><div><p class="font-semibold text-sm" style="color:var(--navy)">Punjab</p><p class="text-xs text-gray-400">Wheat & Bhangra</p></div></div>
+      <div class="map-pin"><span class="text-2xl">🎭</span><div><p class="font-semibold text-sm" style="color:var(--navy)">Tamil Nadu</p><p class="text-xs text-gray-400">Temples & Carnatic</p></div></div>
+      <div class="map-pin"><span class="text-2xl">🌿</span><div><p class="font-semibold text-sm" style="color:var(--navy)">Arunachal Pradesh</p><p class="text-xs text-gray-400">Forest & Tribes</p></div></div>
+      <div class="map-pin"><span class="text-2xl">🏙️</span><div><p class="font-semibold text-sm" style="color:var(--navy)">Maharashtra</p><p class="text-xs text-gray-400">Finance & Bollywood</p></div></div>
+      <div class="map-pin"><span class="text-2xl">🐟</span><div><p class="font-semibold text-sm" style="color:var(--navy)">West Bengal</p><p class="text-xs text-gray-400">Culture & Intellect</p></div></div>
+    </div>
+  </div>
+
+  <!-- Real examples -->
+  <div class="fade-up mb-16">
+    <h2 class="font-display text-4xl font-bold mb-8" style="color:var(--navy)">Unity in Action</h2>
+    <div class="space-y-4">
+      <div class="bg-white rounded-2xl p-6 shadow-sm cursor-pointer" onclick="toggleEx(0)">
+        <div class="flex items-center justify-between"><div class="flex items-center gap-4"><span class="text-2xl">🤝</span><div><h4 class="font-semibold" style="color:var(--navy)">Integration of Princely States (1947–48)</h4><p class="text-sm text-gray-400">Sardar Patel's greatest achievement</p></div></div><span id="arr0" class="text-gray-400 text-xl">＋</span></div>
+        <div class="expand-body" id="ex0"><p class="mt-4 text-gray-600 text-sm leading-relaxed pt-4 border-t border-gray-100">At independence, over 560 princely states each had their own ruler and could theoretically remain independent. Sardar Patel, through a combination of diplomacy, persuasion, and (in Hyderabad's case) military action, integrated all of them into the Indian Union within just a few years. Without this, India as we know it would not exist. It is history's greatest voluntary political integration.</p></div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm cursor-pointer" onclick="toggleEx(1)">
+        <div class="flex items-center justify-between"><div class="flex items-center gap-4"><span class="text-2xl">🚣</span><div><h4 class="font-semibold" style="color:var(--navy)">Kerala Floods (2018) — National Response</h4><p class="text-sm text-gray-400">India unites when it matters</p></div></div><span id="arr1" class="text-gray-400 text-xl">＋</span></div>
+        <div class="expand-body" id="ex1"><p class="mt-4 text-gray-600 text-sm leading-relaxed pt-4 border-t border-gray-100">When Kerala suffered its worst floods in a century in 2018, the response from across India was extraordinary. Fishermen from Keralite coastal communities rescued thousands using their boats. Funds, relief materials, and volunteers poured in from every state. The Indian Army and Navy deployed rescue teams. This spontaneous national solidarity is unity in its purest constitutional expression.</p></div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm cursor-pointer" onclick="toggleEx(2)">
+        <div class="flex items-center justify-between"><div class="flex items-center gap-4"><span class="text-2xl">🏏</span><div><h4 class="font-semibold" style="color:var(--navy)">India's World Cup Victories</h4><p class="text-sm text-gray-400">Cricket as the great unifier</p></div></div><span id="arr2" class="text-gray-400 text-xl">＋</span></div>
+        <div class="expand-body" id="ex2"><p class="mt-4 text-gray-600 text-sm leading-relaxed pt-4 border-t border-gray-100">When India wins a cricket match — and especially when Sachin Tendulkar played or when India won the 2011 World Cup — the celebrations were genuinely national. Every city, every village, every caste and religion celebrated together. For those moments, there were no divisions — only Indians. This is what the Constitution's unity looks like when it comes alive.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fade-up rounded-2xl p-10 text-white" style="background:linear-gradient(135deg,#003300,#005500)">
+    <h2 class="font-display text-4xl font-bold mb-6 text-white">Why Unity Matters Today</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div><p class="text-green-100 leading-relaxed mb-4">India's unity is not guaranteed — it must be earned and renewed by every generation. Secessionist movements, communal violence, and regional chauvinism are real threats. The constitutional commitment to unity is a reminder that India chose to be together, and must keep choosing it.</p><p class="text-green-100 leading-relaxed">The antidote to disunity is not suppression of diversity — it is the genuine celebration of difference within a shared constitutional framework of justice, liberty, and fraternity.</p></div>
+      <div class="space-y-3">
+        <div class="bg-white/10 rounded-xl p-4"><p class="font-semibold text-white mb-1">🚫 Anti-Secessionist Laws</p><p class="text-sm text-green-200">The Constitution makes it impossible for any state to unilaterally declare independence. The Union can even impose President's Rule (Article 356) in extreme cases.</p></div>
+        <div class="bg-white/10 rounded-xl p-4"><p class="font-semibold text-white mb-1">🌐 Inter-State Cooperation</p><p class="text-sm text-green-200">The Inter-State Council coordinates cooperation between states — resolving disputes over rivers, resources, and borders through dialogue, not force.</p></div>
+        <div class="bg-white/10 rounded-xl p-4"><p class="font-semibold text-white mb-1">🏫 National Integration</p><p class="text-sm text-green-200">Student exchange programs, NCC, NSS, and Kendriya Vidyalayas build national consciousness across regional divides.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Complete Values Summary -->
+<section class="py-16 px-6" style="background:var(--navy)">
+  <div class="max-w-5xl mx-auto text-center">
+    <div class="tricolor mb-8"></div>
+    <h2 class="font-display text-4xl font-bold mb-4" style="color:var(--gold)">All Constitutional Values</h2>
+    <p class="text-gray-300 mb-10 max-w-xl mx-auto">Explore the complete set of values that make India who she is.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+      <a href="/values/sovereignty/" class="bg-white/10 hover:bg-white/20 text-white rounded-xl p-4 transition text-center"><div class="text-2xl mb-1">🏛️</div><p class="text-sm font-medium">Sovereignty</p></a>
+      <a href="/values/secularism/" class="bg-white/10 hover:bg-white/20 text-white rounded-xl p-4 transition text-center"><div class="text-2xl mb-1">☮️</div><p class="text-sm font-medium">Secularism</p></a>
+      <a href="/values/socialism/" class="bg-white/10 hover:bg-white/20 text-white rounded-xl p-4 transition text-center"><div class="text-2xl mb-1">🌱</div><p class="text-sm font-medium">Socialism</p></a>
+      <a href="/values/democracy/" class="bg-white/10 hover:bg-white/20 text-white rounded-xl p-4 transition text-center"><div class="text-2xl mb-1">🗳️</div><p class="text-sm font-medium">Democracy</p></a>
+      <a href="/values/republic/" class="bg-white/10 hover:bg-white/20 text-white rounded-xl p-4 transition text-center"><div class="text-2xl mb-1">🦁</div><p class="text-sm font-medium">Republic</p></a>
+      <a href="/values/justice/" class="bg-white/10 hover:bg-white/20 text-white rounded-xl p-4 transition text-center"><div class="text-2xl mb-1">⚖️</div><p class="text-sm font-medium">Justice</p></a>
+      <a href="/values/liberty/" class="bg-white/10 hover:bg-white/20 text-white rounded-xl p-4 transition text-center"><div class="text-2xl mb-1">🕊️</div><p class="text-sm font-medium">Liberty</p></a>
+      <a href="/values/equality/" class="bg-white/10 hover:bg-white/20 text-white rounded-xl p-4 transition text-center"><div class="text-2xl mb-1">⚖️</div><p class="text-sm font-medium">Equality</p></a>
+      <a href="/values/fraternity/" class="bg-white/10 hover:bg-white/20 text-white rounded-xl p-4 transition text-center"><div class="text-2xl mb-1">🤝</div><p class="text-sm font-medium">Fraternity</p></a>
+      <a href="/values/dignity/" class="bg-white/10 hover:bg-white/20 text-white rounded-xl p-4 transition text-center"><div class="text-2xl mb-1">👤</div><p class="text-sm font-medium">Dignity</p></a>
+      <a href="/values/unity/" class="bg-white text-navy rounded-xl p-4 transition text-center" style="color:var(--navy)"><div class="text-2xl mb-1">🇮🇳</div><p class="text-sm font-bold">Unity</p></a>
+      <a href="/" class="bg-orange-500/80 hover:bg-orange-500 text-white rounded-xl p-4 transition text-center"><div class="text-2xl mb-1">🏠</div><p class="text-sm font-medium">Home</p></a>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#001030" class="text-white py-10 px-6 text-center">
+  <div class="tricolor mb-6"></div>
+  <a href="/" class="font-display text-2xl font-bold" style="color:var(--gold)">Samvidhan</a>
+  <p class="text-xs text-gray-600 mt-4">© 2026 Samvidhan | Jai Hind | For educational purposes</p>
+</footer>
+<script>
+function toggleEx(i){const el=document.getElementById('ex'+i);const arr=document.getElementById('arr'+i);el.classList.toggle('open');arr.textContent=el.classList.contains('open')?'－':'＋';}
+</script>
+</body>
+</html>

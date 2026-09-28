@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Thank You - Samvidhan Survey{% endblock %}
+{% block fonts %}<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />{% endblock %}
+{% block extra_css %}
+<style>
+  .thank-you-page{min-height:65vh;display:grid;place-items:center;padding:56px 20px;background:radial-gradient(ellipse at 50% 0,#1b3760 0,transparent 55%),#0b1e3d;color:white;text-align:center}
+  .thank-you-card{max-width:620px;padding:48px 40px;border:1px solid #ffffff1f;border-radius:18px;background:#ffffff0a;box-shadow:0 24px 80px #0003}
+  .thank-you-mark{width:64px;height:64px;display:grid;place-items:center;margin:0 auto 22px;border-radius:50%;background:#0f7a3c;color:white;font-size:32px}
+  .thank-you-card h1{font:clamp(36px,6vw,58px)/1.05 'DM Serif Display',serif;margin:0 0 16px}
+  .thank-you-card p{font:16px/1.7 'DM Sans',sans-serif;color:#c6d0df;margin:0 auto 24px;max-width:480px}
+  .thank-you-card .redirect-note{font-size:13px;color:#aab6c8;margin-bottom:20px}
+  .thank-you-home{display:inline-block;background:#e8650a;color:white;text-decoration:none;padding:12px 21px;border-radius:6px;font:600 14px 'DM Sans',sans-serif}
+  @media(max-width:560px){.thank-you-card{padding:38px 22px}.thank-you-card p{font-size:15px}}
+</style>
+{% endblock %}
+{% block content %}
+<main class="thank-you-page">
+  <section class="thank-you-card" aria-labelledby="thank-you-title">
+    <div class="thank-you-mark" aria-hidden="true">✓</div>
+    <h1 id="thank-you-title">Thank you for your submission!</h1>
+    <p>Your response has been received. Thank you for sharing your thoughts and helping build awareness about the Constitution of India.</p>
+    <p class="redirect-note">Taking you to the home page in <strong id="redirect-countdown">5</strong> seconds…</p>
+    <a class="thank-you-home" href="{% url 'home' %}">Go to Home</a>
+  </section>
+</main>
+{% endblock %}
+{% block extra_js %}
+<script>
+  (() => {
+    let remaining = 5;
+    const counter = document.getElementById('redirect-countdown');
+    const timer = window.setInterval(() => {
+      remaining -= 1;
+      counter.textContent = remaining;
+      if (remaining <= 0) {
+        window.clearInterval(timer);
+        window.location.assign("{% url 'home' %}");
+      }
+    }, 1000);
+  })();
+</script>
+{% endblock %}

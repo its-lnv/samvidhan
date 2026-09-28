@@ -1,0 +1,90 @@
+/* Shared readability baseline for the legacy static pages. */
+html {
+  font-size: 16px;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
+h1 { font-size: clamp(2rem, 4vw, 3.25rem); }
+h2 { font-size: clamp(1.65rem, 3vw, 2.35rem); }
+h3 { font-size: clamp(1.3rem, 2vw, 1.75rem); }
+h4 { font-size: 1.2rem; }
+h5,
+h6 { font-size: 1.05rem; }
+
+p,
+li,
+label,
+input,
+select,
+textarea,
+button,
+td,
+th {
+  font-size: 1rem !important;
+  line-height: 1.5;
+}
+
+.text-xs {
+  font-size: .875rem !important;
+}
+
+.text-sm {
+  font-size: 1rem !important;
+}
+
+small {
+  font-size: .875rem;
+}
+
+nav a,
+.nav-links a,
+.mobile-menu a,
+.tag,
+.badge,
+.value-tag,
+.value-pill {
+  font-size: 1rem !important;
+}
+
+.nav-logo,
+.site-nav .nav-logo,
+nav .font-display.text-xl {
+  font-size: 1.3rem !important;
+}
+
+.survey-btn,
+.site-nav .survey-btn {
+  font-size: 1rem !important;
+}
+
+.q-label,
+.q-input,
+.q-select,
+.q-textarea,
+.opt-label,
+.yn-btn,
+.scale-btn,
+.nav-btn,
+.page-subtitle,
+.page-header p {
+  font-size: 1rem !important;
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: .98rem;
+  }
+}

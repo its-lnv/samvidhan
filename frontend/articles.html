@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/static/css/readable.css"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Articles & Schedules – Samvidhan</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--saffron:#FF9933;--green:#138808;--navy:#002147;--gold:#C9A84C;--cream:#FDF8F0;}
+body{font-family:'Inter',sans-serif;background:var(--cream);overflow-x:hidden;}
+.font-display{font-family:'Playfair Display',serif;}
+.tricolor{height:6px;background:linear-gradient(to right,var(--saffron) 33.33%,white 33.33%,white 66.66%,var(--green) 66.66%);}
+nav{background:rgba(0,33,71,.97);}
+.article-card{
+  background:white;border-radius:1.25rem;padding:1.5rem;
+  border-left:5px solid var(--saffron);
+  transition:all .3s;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+}
+.article-card:hover{transform:translateX(6px);box-shadow:0 8px 32px rgba(0,33,71,.1);}
+.article-num-big{
+  font-family:'Playfair Display',serif;
+  font-size:3.5rem;font-weight:900;
+  line-height:1;color:rgba(201,168,76,.2);
+}
+.schedule-card{
+  background:white;border-radius:1.25rem;overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+  transition:all .3s;
+}
+.schedule-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,33,71,.1);}
+.fade-in{opacity:0;transform:translateY(30px);transition:all .6s;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.filter-btn{
+  padding:.5rem 1.25rem;border-radius:999px;font-size:.85rem;font-weight:500;
+  border:2px solid #e5e7eb;background:white;cursor:pointer;transition:all .2s;
+}
+.filter-btn.active{border-color:var(--saffron);background:var(--saffron);color:white;}
+.article-item{display:block;}
+.article-item.hidden-item{display:none;}
+.mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.mobile-menu.open{max-height:600px;}
+</style>
+</head>
+<body>
+<div class="tricolor"></div>
+<nav class="sticky top-0 z-50 px-6 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="/" class="font-display text-white text-xl font-bold inline-flex items-center gap-2">
+      <img src="/assets/icons/india-flag.svg" alt="Indian flag" class="w-6 h-4 rounded-sm object-cover"/>
+      <span>Samvidhan</span>
+    </a>
+    <div class="hidden lg:flex gap-6 text-white text-sm">
+      <a href="/" class="hover:text-yellow-300">Home</a>
+      <a href="/rights/" class="hover:text-yellow-300">Rights & Duties</a>
+      <a href="/articles/" class="text-yellow-300">Articles</a>
+      <a href="/freedom/" class="hover:text-yellow-300">Freedom Fighters</a>
+      <a href="/cases/" class="hover:text-yellow-300">Cases</a>
+      <a href="/crimes/" class="hover:text-yellow-300">Crimes</a>
+      <a href="/quiz/" class="hover:text-yellow-300">Quiz</a>
+      <a href="/helpline/" class="hover:text-yellow-300">Helpline</a>
+      <a href="/survey/" class="bg-orange-500 px-4 py-1 rounded-full">Survey</a>
+    </div>
+    <button id="hamburger" class="lg:hidden text-white p-2">☰</button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu lg:hidden">
+    <div class="max-w-7xl mx-auto px-6 pb-4 flex flex-col gap-3 text-white text-sm mt-4">
+      <a href="/" class="py-2 border-b border-white border-opacity-20">Home</a>
+      <a href="/articles/" class="py-2 border-b border-white border-opacity-20">Articles</a>
+      <a href="/quiz/" class="py-2 border-b border-white border-opacity-20">Quiz</a>
+      <a href="/helpline/" class="py-2">Helpline</a>
+    </div>
+  </div>
+</nav>
+
+<section style="background:linear-gradient(135deg,var(--navy),#1a5c99)" class="py-24 px-6 text-center text-white">
+  <div class="max-w-3xl mx-auto fade-in visible">
+    <p class="text-xs uppercase tracking-widest mb-4" style="color:var(--gold)">The Framework of Governance</p>
+    <h1 class="font-display text-5xl font-black mb-4">Articles & <span style="color:var(--saffron)">Schedules</span></h1>
+    <p class="text-gray-300 max-w-xl mx-auto">448 articles, 12 schedules. The most important ones explained simply.</p>
+  </div>
+</section>
+
+<div class="max-w-6xl mx-auto px-6 py-16">
+
+  <!-- Stats -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 fade-in">
+    <div class="bg-white rounded-2xl p-6 text-center shadow-sm">
+      <div class="font-display text-4xl font-black mb-2" style="color:var(--saffron)">448</div>
+      <p class="text-sm text-gray-500">Articles (as amended)</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 text-center shadow-sm">
+      <div class="font-display text-4xl font-black mb-2" style="color:var(--green)">12</div>
+      <p class="text-sm text-gray-500">Schedules</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 text-center shadow-sm">
+      <div class="font-display text-4xl font-black mb-2" style="color:var(--navy)">22</div>
+      <p class="text-sm text-gray-500">Parts</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 text-center shadow-sm">
+      <div class="font-display text-4xl font-black mb-2" style="color:var(--gold)">106</div>
+      <p class="text-sm text-gray-500">Amendments (till 2023)</p>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="fade-in mb-8">
+    <h2 class="font-display text-3xl font-bold mb-6" style="color:var(--navy)">Important <span style="border-bottom:3px solid var(--saffron);padding-bottom:3px">Articles</span></h2>
+    <div class="flex flex-wrap gap-3 mb-8">
+      <button class="filter-btn active" onclick="filterArticles('all',this)">All</button>
+      <button class="filter-btn" onclick="filterArticles('rights',this)">Fundamental Rights</button>
+      <button class="filter-btn" onclick="filterArticles('govt',this)">Government Structure</button>
+      <button class="filter-btn" onclick="filterArticles('emergency',this)">Emergency</button>
+      <button class="filter-btn" onclick="filterArticles('amendment',this)">Amendment</button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-16" id="articlesGrid"></div>
+
+  <!-- Schedules -->
+  <div class="fade-in">
+    <h2 class="font-display text-3xl font-bold mb-6" style="color:var(--navy)">The 12 <span style="border-bottom:3px solid var(--green);padding-bottom:3px">Schedules</span></h2>
+    <p class="text-gray-500 mb-8">Schedules are supplementary provisions that support the main articles of the Constitution.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="schedulesGrid"></div>
+  </div>
+
+</div>
+
+<footer style="background:var(--navy)" class="text-white py-10 px-6 text-center">
+  <div class="tricolor mb-6"></div>
+  <a href="/" class="font-display text-xl font-bold" style="color:var(--gold)">Samvidhan</a>
+  <p class="text-xs text-gray-500 mt-2">© 2026 Samvidhan</p>
+</footer>
+
+<script>
+const articles=[
+  {num:"14",part:"Part III",tag:"rights",title:"Equality before Law",color:"#ef4444",
+   desc:"The State shall not deny to any person equality before the law or equal protection of the laws within India.",
+   importance:"Foundation of equality — no discrimination in law for any person, citizen or foreigner."},
+  {num:"15",part:"Part III",tag:"rights",title:"Prohibition of Discrimination",color:"#ef4444",
+   desc:"The State shall not discriminate against any citizen on grounds of religion, race, caste, sex or place of birth.",
+   importance:"Prevents the government from treating people differently based on identity."},
+  {num:"17",part:"Part III",tag:"rights",title:"Abolition of Untouchability",color:"#ef4444",
+   desc:"Untouchability is abolished and its practice in any form is forbidden. Its enforcement is an offence punishable by law.",
+   importance:"Revolutionary social reform — caste-based discrimination made a criminal offence."},
+  {num:"19",part:"Part III",tag:"rights",title:"Freedom of Speech & Expression",color:"#ef4444",
+   desc:"All citizens have freedom of speech and expression, peaceful assembly, forming associations, free movement, and right to practise any profession.",
+   importance:"Protects press freedom, right to protest, right to choose one's career."},
+  {num:"21",part:"Part III",tag:"rights",title:"Right to Life & Personal Liberty",color:"#ef4444",
+   desc:"No person shall be deprived of his life or personal liberty except according to procedure established by law.",
+   importance:"Most expansive right — courts have extended it to cover privacy, dignity, shelter, health, and more."},
+  {num:"21A",part:"Part III",tag:"rights",title:"Right to Education",color:"#ef4444",
+   desc:"The State shall provide free and compulsory education to all children aged 6 to 14 years.",
+   importance:"Added by 86th Amendment (2002). Every child has a constitutional right to education."},
+  {num:"32",part:"Part III",tag:"rights",title:"Constitutional Remedies",color:"#ef4444",
+   desc:"The right to move the Supreme Court for enforcement of Fundamental Rights is guaranteed. The Supreme Court may issue writs.",
+   importance:"Called the 'heart and soul' by Ambedkar. Makes all other rights enforceable."},
+  {num:"51A",part:"Part IVA",tag:"rights",title:"Fundamental Duties",color:"#16a34a",
+   desc:"It shall be the duty of every citizen to abide by the Constitution, protect sovereignty, promote harmony, protect environment, and strive for excellence.",
+   importance:"Added by 42nd Amendment. Citizens' responsibilities corresponding to their rights."},
+  {num:"74",part:"Part V",tag:"govt",title:"Council of Ministers",color:"#3b82f6",
+   desc:"There shall be a Council of Ministers headed by the Prime Minister to aid and advise the President.",
+   importance:"Establishes that the PM leads the executive. President acts on Council's advice."},
+  {num:"112",part:"Part V",tag:"govt",title:"Annual Financial Statement",color:"#3b82f6",
+   desc:"The President shall in every year lay before Parliament a statement of estimated receipts and expenditure (Budget).",
+   importance:"Constitutional basis for the Union Budget presented every year."},
+  {num:"124",part:"Part V",tag:"govt",title:"Supreme Court",color:"#3b82f6",
+   desc:"There shall be a Supreme Court of India. It shall consist of the Chief Justice of India and other judges.",
+   importance:"Establishes India's apex court — guardian of the Constitution."},
+  {num:"343",part:"Part XVII",tag:"govt",title:"Official Language",color:"#3b82f6",
+   desc:"The official language of the Union shall be Hindi in Devanagari script. English shall also be used for official purposes.",
+   importance:"Language policy that recognizes India's diversity while establishing Hindi and English."},
+  {num:"352",part:"Part XVIII",tag:"emergency",title:"Proclamation of Emergency",color:"#8b5cf6",
+   desc:"If the President is satisfied that the security of India is threatened by war, external aggression or armed rebellion, he may make a Proclamation of Emergency.",
+   importance:"Allows temporary suspension of certain rights during genuine national security crises."},
+  {num:"356",part:"Part XVIII",tag:"emergency",title:"President's Rule in States",color:"#8b5cf6",
+   desc:"If the President is satisfied that government in a State cannot be carried on in accordance with provisions of the Constitution, he may issue a proclamation.",
+   importance:"Allows Centre to take over states — but courts can review misuse (S.R. Bommai case)."},
+  {num:"360",part:"Part XVIII",tag:"emergency",title:"Financial Emergency",color:"#8b5cf6",
+   desc:"If the President is satisfied that the financial stability of India or any part is threatened, he may proclaim a Financial Emergency.",
+   importance:"Never used in India's history — shows the robustness of India's financial institutions."},
+  {num:"368",part:"Part XX",tag:"amendment",title:"Power to Amend the Constitution",color:"#f59e0b",
+   desc:"Parliament may amend the Constitution by passing a bill in each House with a special majority, subject to the Basic Structure Doctrine.",
+   importance:"Allows the Constitution to evolve — but the Basic Structure (Kesavananda Bharati) cannot be destroyed."},
+];
+
+const schedules=[
+  {num:"1st",title:"States & Union Territories",desc:"Lists all 28 states and 8 Union Territories of India."},
+  {num:"2nd",title:"Salaries & Allowances",desc:"Emoluments of constitutional functionaries — President, Governors, SC Judges."},
+  {num:"3rd",title:"Forms of Oaths",desc:"Oath forms for constitutional offices — President, Vice-President, Ministers, MPs."},
+  {num:"4th",title:"Allocation of Seats in Rajya Sabha",desc:"Seats allocated to each state in the Council of States (Rajya Sabha)."},
+  {num:"5th",title:"Administration of Scheduled Areas",desc:"Provisions for governance of Scheduled Areas and Scheduled Tribes."},
+  {num:"6th",title:"Administration of Tribal Areas",desc:"Special provisions for tribal areas in Assam, Meghalaya, Tripura, Mizoram."},
+  {num:"7th",title:"Union, State & Concurrent Lists",desc:"Division of legislative powers — Union List (97 subjects), State List (66 subjects), Concurrent List (52 subjects)."},
+  {num:"8th",title:"Official Languages",desc:"Lists 22 scheduled languages of India including Hindi, Bengali, Tamil, Telugu, Urdu, etc."},
+  {num:"9th",title:"Validation of Certain Acts",desc:"Acts and regulations not subject to Fundamental Rights challenges. Added by 1st Amendment."},
+  {num:"10th",title:"Anti-Defection Law",desc:"Disqualification of MPs/MLAs on grounds of defection from their party. Added by 52nd Amendment."},
+  {num:"11th",title:"Panchayati Raj",desc:"Powers and functions of Panchayats. Added by 73rd Amendment (1992)."},
+  {num:"12th",title:"Municipal Bodies",desc:"Powers and functions of Municipalities. Added by 74th Amendment (1992)."},
+];
+
+const grid=document.getElementById('articlesGrid');
+articles.forEach(a=>{
+  const div=document.createElement('div');
+  div.className=`article-card article-item`;
+  div.dataset.tag=a.tag;
+  div.innerHTML=`
+    <div class="flex items-start gap-4">
+      <div>
+        <div class="article-num-big">${a.num}</div>
+      </div>
+      <div class="flex-1">
+        <div class="text-xs font-semibold uppercase tracking-widest mb-1" style="color:${a.color}">${a.part}</div>
+        <h3 class="font-display text-lg font-bold mb-2" style="color:var(--navy)">Article ${a.num}: ${a.title}</h3>
+        <p class="text-sm text-gray-600 mb-3 leading-relaxed">${a.desc}</p>
+        <div class="bg-orange-50 rounded-lg p-3">
+          <p class="text-xs font-semibold mb-1" style="color:var(--saffron)">Why It Matters</p>
+          <p class="text-xs text-gray-600">${a.importance}</p>
+        </div>
+      </div>
+    </div>
+  `;
+  grid.appendChild(div);
+});
+
+const scheGrid=document.getElementById('schedulesGrid');
+schedules.forEach(s=>{
+  const div=document.createElement('div');
+  div.className='schedule-card fade-in';
+  div.innerHTML=`
+    <div class="h-2" style="background:linear-gradient(90deg,var(--saffron),var(--gold))"></div>
+    <div class="p-6">
+      <div class="font-display text-4xl font-black mb-2" style="color:rgba(201,168,76,.25)">${s.num}</div>
+      <h3 class="font-display text-lg font-bold mb-2" style="color:var(--navy)">${s.title}</h3>
+      <p class="text-sm text-gray-600 leading-relaxed">${s.desc}</p>
+    </div>
+  `;
+  scheGrid.appendChild(div);
+});
+
+function filterArticles(tag, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.article-item').forEach(el=>{
+    if(tag==='all'||el.dataset.tag===tag){el.classList.remove('hidden-item');}
+    else{el.classList.add('hidden-item');}
+  });
+}
+
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+const observer=new IntersectionObserver(e=>e.forEach(el=>el.isIntersecting&&el.target.classList.add('visible')),{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

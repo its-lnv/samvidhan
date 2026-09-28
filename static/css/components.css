@@ -1,0 +1,19 @@
+.site-nav { background: rgba(0, 33, 71, .97); backdrop-filter: blur(10px); }
+.site-nav .nav-inner { max-width: 80rem; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+.site-nav .nav-logo { display: inline-flex; align-items: center; gap: .5rem; color: var(--white); text-decoration: none; font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; }
+.site-nav .nav-flag { width: 1.5rem; height: 1rem; border-radius: .125rem; object-fit: cover; }
+.site-nav .nav-links { display: flex; align-items: center; gap: 1.4rem; }
+.site-nav .nav-links a { color: rgba(255, 255, 255, .8); text-decoration: none; font-size: .82rem; transition: color .2s; }
+.site-nav .nav-links a:hover, .site-nav .nav-links a.active { color: #FFC107; }
+.site-nav .nav-links a.active { font-weight: 600; }
+.site-nav .nav-auth-form { margin: 0; }
+.site-nav .nav-auth-form button.nav-logout-btn { border: 1px solid rgba(255,255,255,.55); border-radius: 999px; padding: .3rem .8rem; color: #fff; background: transparent; cursor: pointer; font-size: .82rem; }
+.site-nav .nav-auth-form button.nav-logout-btn:hover { border-color: var(--saffron); background: var(--saffron); color: #fff; }
+.mobile-logout-btn { border: 1px solid rgba(255,255,255,.55); border-radius: 999px; padding: .45rem 1rem; color: #fff; background: transparent; cursor: pointer; }
+.mobile-logout-btn:hover { border-color: var(--saffron); background: var(--saffron); }
+.site-nav .survey-btn { padding: .25rem 1rem; border-radius: 999px; color: var(--white) !important; background: var(--saffron); font-weight: 600; }
+.site-nav .menu-toggle { display: none; border: 0; color: var(--white); background: transparent; cursor: pointer; }
+.value-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+.value-pill { display: inline-flex; align-items: center; min-height: 2.25rem; padding: .35rem .8rem; border: 1px solid rgba(201, 168, 76, .35); border-radius: 999px; color: var(--navy); background: var(--white); text-decoration: none; transition: color .2s, background-color .2s, border-color .2s; }
+.value-pill:hover, .value-pill.active { color: var(--white); background: var(--navy); border-color: var(--navy); }
+@media (max-width: 1023px) { .site-nav .nav-links { display: none; } .site-nav .menu-toggle { display: inline-flex; } }

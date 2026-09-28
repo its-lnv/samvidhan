@@ -1,0 +1,28 @@
+{% load static %}
+<div class="tricolor"></div>
+<nav class="site-nav sticky top-0 z-50" aria-label="Primary navigation">
+  <div class="nav-inner">
+    <a href="{% url 'home' %}" class="nav-logo">
+      <img src="{% static 'assets/icons/india-flag.svg' %}" alt="Indian flag" class="nav-flag" />
+      <span>Samvidhan</span>
+    </a>
+    <div class="nav-links">
+      <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'rights' %}">Rights &amp; Duties</a>
+      <a href="{% url 'articles' %}">Articles</a>
+      <a href="{% url 'cases' %}">Cases</a>
+      <a href="{% url 'crimes' %}">Crimes &amp; Law</a>
+      <a href="{% url 'freedom' %}">Freedom Fighters</a>
+      <a href="{% url 'quiz' %}">Quiz</a>
+      <a href="{% url 'helpline' %}">Helpline</a>
+      <a href="{% url 'survey' %}" class="survey-btn">Survey</a>
+      {% if request.user.is_staff %}<a href="{% url 'results' %}">Results</a>{% endif %}
+      {% if request.user.is_authenticated %}
+      <form action="{% url 'logout' %}" method="post" class="nav-auth-form">{% csrf_token %}<button class="nav-logout-btn" type="submit">Logout</button></form>
+      {% else %}<a href="{% url 'login' %}">Log in</a><a href="{% url 'register' %}" class="survey-btn">Register</a>{% endif %}
+    </div>
+    <button type="button" class="menu-toggle" data-menu-toggle aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">☰</button>
+  </div>
+  {% include "components/mobile_menu.html" %}
+</nav>

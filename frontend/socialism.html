@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/static/css/readable.css"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Socialism – Samvidhan</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/static/css/global.css"/>
+<link rel="stylesheet" href="/static/css/components.css"/>
+<script src="/static/js/main.js" defer></script><script src="/static/js/navigation.js" defer></script><script src="/static/js/animations.js" defer></script>
+<style>
+:root{--saffron:#FF9933;--green:#138808;--navy:#002147;--gold:#C9A84C;--cream:#FDF8F0;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);overflow-x:hidden;}
+.font-display{font-family:'Cormorant Garamond',serif;}
+.tricolor{height:5px;background:linear-gradient(to right,var(--saffron) 33.33%,white 33.33%,white 66.66%,var(--green) 66.66%);}
+nav{background:rgba(0,33,71,.97);}
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.vis{opacity:1;transform:translateY(0);}
+.mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s;}
+.mobile-menu.open{max-height:600px;}
+.card{background:white;border-radius:1.25rem;padding:1.75rem;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s;}
+.card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.12);}
+.expand-body{max-height:0;overflow:hidden;transition:max-height .5s;}
+.expand-body.open{max-height:500px;}
+</style>
+</head>
+<body>
+<div class="tricolor"></div>
+<nav class="sticky top-0 z-50 px-6 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="/" class="font-display text-white text-xl font-bold inline-flex items-center gap-2">
+      <img src="/assets/icons/india-flag.svg" alt="Indian flag" class="w-6 h-4 rounded-sm object-cover"/>
+      <span>Samvidhan</span>
+    </a>
+    <div class="hidden lg:flex gap-5 text-white text-sm">
+      <a href="/" class="hover:text-yellow-300">Home</a>
+      <a href="/rights/" class="hover:text-yellow-300">Rights</a>
+      <a href="/articles/" class="hover:text-yellow-300">Articles</a>
+      <a href="/cases/" class="hover:text-yellow-300">Cases</a>
+      <a href="/crimes/" class="hover:text-yellow-300">Crimes</a>
+      <a href="/freedom/" class="hover:text-yellow-300">Freedom Fighters</a>
+      <a href="/quiz/" class="hover:text-yellow-300">Quiz</a>
+      <a href="/helpline/" class="hover:text-yellow-300">Helpline</a>
+      <a href="/survey/" class="bg-orange-500 px-4 py-1 rounded-full">Survey</a>
+    </div>
+    <button id="hamburger" class="lg:hidden text-white p-2">☰</button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu lg:hidden">
+    <div class="max-w-7xl mx-auto px-6 pb-4 flex flex-col gap-3 text-white text-sm mt-4">
+      <a href="/" class="py-2 border-b border-white/20">Home</a>
+      <a href="/rights/" class="py-2 border-b border-white/20">Rights</a>
+      <a href="/quiz/" class="py-2 border-b border-white/20">Quiz</a>
+      <a href="/survey/" class="py-2">Survey</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section style="background:linear-gradient(160deg,#003d00,#006400,#007a00)" class="py-32 px-6 text-center text-white overflow-hidden relative">
+  <div class="max-w-4xl mx-auto relative z-10 fade-up vis">
+    <div class="inline-block px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-widest mb-6" style="background:rgba(255,255,255,.1);color:#bbf7d0">Core Constitutional Value</div>
+    <h1 class="font-display text-7xl md:text-8xl font-bold mb-6 text-white">Socialism</h1>
+    <p class="text-xl text-green-100 max-w-2xl mx-auto leading-relaxed">India strives for a society where wealth and opportunity are distributed fairly — where no one is left behind.</p>
+    <div class="mt-8 h-px w-32 mx-auto bg-green-300/40"></div>
+    <p class="mt-6 font-display text-xl italic text-green-200">"Equal pay for equal work; social security for all."</p>
+  </div>
+</section>
+
+<!-- Value pills -->
+<div class="bg-white border-b border-gray-100 py-4 px-6 overflow-x-auto">
+  <div class="flex gap-2 max-w-7xl mx-auto min-w-max">
+    <a href="/values/sovereignty/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Sovereignty</a>
+    <a href="/values/secularism/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Secularism</a>
+    <a href="/values/socialism/" class="px-4 py-2 rounded-full text-sm font-medium text-white" style="background:var(--navy)">Socialism</a>
+    <a href="/values/democracy/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Democracy</a>
+    <a href="/values/republic/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Republic</a>
+    <a href="/values/justice/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Justice</a>
+    <a href="/values/liberty/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Liberty</a>
+    <a href="/values/equality/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Equality</a>
+    <a href="/values/fraternity/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Fraternity</a>
+    <a href="/values/dignity/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Dignity</a>
+    <a href="/values/unity/" class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Unity</a>
+  </div>
+</div>
+
+<div class="max-w-5xl mx-auto px-6 py-16">
+
+  <div class="fade-up grid md:grid-cols-2 gap-8 mb-16 items-center">
+    <div>
+      <p class="text-xs uppercase tracking-widest font-semibold mb-4" style="color:var(--green)">What It Means</p>
+      <h2 class="font-display text-5xl font-bold mb-6" style="color:var(--navy)">India's Democratic Socialism</h2>
+      <p class="text-gray-600 leading-relaxed mb-4">Indian socialism is <strong>not</strong> Soviet-style communism where the state owns everything. India chose a "mixed economy" model — private enterprise is allowed and encouraged, but the state actively works to reduce inequality and provide for basic needs.</p>
+      <p class="text-gray-600 leading-relaxed mb-4">The word "Socialist" was added to the Preamble by the 42nd Amendment in 1976. It directs the state to strive for a social order where justice — social, economic, and political — pervades all institutions of national life.</p>
+      <p class="text-gray-600 leading-relaxed">Key socialist principles are found in the Directive Principles of State Policy (Part IV, Articles 36–51) — these are instructions to the government on how to build a just society.</p>
+    </div>
+    <div class="space-y-4">
+      <div class="card border-l-4" style="border-color:var(--green)">
+        <p class="font-semibold mb-2" style="color:var(--green)">Article 39(b) & (c)</p>
+        <p class="text-sm text-gray-600">The state shall ensure the material resources of the community are distributed to serve the common good, and the economic system does not result in concentration of wealth.</p>
+      </div>
+      <div class="card border-l-4" style="border-color:var(--saffron)">
+        <p class="font-semibold mb-2" style="color:var(--saffron)">Article 41</p>
+        <p class="text-sm text-gray-600">The state shall make provision for securing the right to work, education, and public assistance in cases of unemployment, old age, and sickness.</p>
+      </div>
+      <div class="card border-l-4" style="border-color:var(--navy)">
+        <p class="font-semibold mb-2" style="color:var(--navy)">Article 43</p>
+        <p class="text-sm text-gray-600">Workers are entitled to a living wage and conditions of work ensuring a decent standard of life.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- How socialism works in India -->
+  <div class="fade-up mb-16">
+    <h2 class="font-display text-4xl font-bold mb-8 text-center" style="color:var(--navy)">Socialism in Practice</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="card"><div class="text-4xl mb-3">🍚</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Public Distribution System</h3><p class="text-sm text-gray-600">Subsidized food grains (rice, wheat, pulses) distributed to 800+ million people through ration cards under the National Food Security Act.</p></div>
+      <div class="card"><div class="text-4xl mb-3">🏥</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Ayushman Bharat</h3><p class="text-sm text-gray-600">Free health insurance of ₹5 lakh per family per year for 500 million poor and vulnerable people — the world's largest health protection scheme.</p></div>
+      <div class="card"><div class="text-4xl mb-3">🏠</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Pradhan Mantri Awas Yojana</h3><p class="text-sm text-gray-600">Government scheme to provide affordable housing to the urban and rural poor, giving every Indian a roof over their head.</p></div>
+      <div class="card"><div class="text-4xl mb-3">👩‍🌾</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">MGNREGA</h3><p class="text-sm text-gray-600">Guarantees 100 days of wage employment per year to every rural household — the world's largest employment guarantee program.</p></div>
+      <div class="card"><div class="text-4xl mb-3">📚</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Right to Education</h3><p class="text-sm text-gray-600">Free and compulsory education for all children aged 6–14 (Article 21A). Midday Meal Scheme feeds millions of school children daily.</p></div>
+      <div class="card"><div class="text-4xl mb-3">💰</div><h3 class="font-display text-xl font-bold mb-2" style="color:var(--navy)">Progressive Taxation</h3><p class="text-sm text-gray-600">Higher income earners pay higher tax rates. Revenue is redistributed to fund welfare schemes for the poor and marginalized.</p></div>
+    </div>
+  </div>
+
+  <!-- Real examples -->
+  <div class="fade-up mb-16">
+    <h2 class="font-display text-4xl font-bold mb-8" style="color:var(--navy)">Real-Life Examples</h2>
+    <div class="space-y-4">
+      <div class="bg-white rounded-2xl p-6 shadow-sm cursor-pointer" onclick="toggleEx(0)">
+        <div class="flex items-center justify-between"><div class="flex items-center gap-4"><span class="text-2xl">🔒</span><div><h4 class="font-semibold" style="color:var(--navy)">Right to Minimum Wage</h4><p class="text-sm text-gray-400">Every worker is protected</p></div></div><span id="arr0" class="text-gray-400 text-xl">＋</span></div>
+        <div class="expand-body" id="ex0"><p class="mt-4 text-gray-600 text-sm leading-relaxed pt-4 border-t border-gray-100">The Minimum Wages Act (and now the Code on Wages, 2019) ensures no employer can pay workers below a government-set floor. A construction worker in Delhi, a domestic worker in Mumbai, or a farm labourer in Punjab all have the right to minimum wages — a socialist protection against exploitation.</p></div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm cursor-pointer" onclick="toggleEx(1)">
+        <div class="flex items-center justify-between"><div class="flex items-center gap-4"><span class="text-2xl">💊</span><div><h4 class="font-semibold" style="color:var(--navy)">Jan Aushadhi Scheme</h4><p class="text-sm text-gray-400">Medicines at 50–90% lower prices</p></div></div><span id="arr1" class="text-gray-400 text-xl">＋</span></div>
+        <div class="expand-body" id="ex1"><p class="mt-4 text-gray-600 text-sm leading-relaxed pt-4 border-t border-gray-100">The Pradhan Mantri Bharatiya Jan Aushadhi Pariyojana provides quality generic medicines at 50–90% less than branded prices through 10,000+ stores. A diabetic who cannot afford branded insulin can access the same quality medicine at a fraction of the price — this is India's socialism at work.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why it matters -->
+  <div class="fade-up rounded-2xl p-10 text-white" style="background:linear-gradient(135deg,#003d00,#005a00)">
+    <h2 class="font-display text-4xl font-bold mb-6 text-white">Why Socialism Matters Today</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div><p class="text-green-100 leading-relaxed mb-4">India is one of the most unequal societies on earth. The top 1% own more than 40% of the country's wealth. In this context, the socialist directive to reduce inequality and provide for the basic needs of all citizens is more important than ever.</p><p class="text-green-100 leading-relaxed">True democracy cannot function when vast inequality means only the wealthy have real power. Socialism ensures that political freedom is matched by economic opportunity.</p></div>
+      <div class="space-y-3">
+        <div class="bg-white/10 rounded-xl p-4"><p class="font-semibold text-white mb-1">🎯 Reducing Poverty</p><p class="text-sm text-green-200">India has lifted 415 million people out of multi-dimensional poverty in 15 years — a socialist success story.</p></div>
+        <div class="bg-white/10 rounded-xl p-4"><p class="font-semibold text-white mb-1">⚖️ Social Justice</p><p class="text-sm text-green-200">Reservation policies for SC/ST/OBC communities are a form of affirmative socialism — correcting centuries of inequality.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--navy)" class="text-white py-10 px-6 text-center">
+  <div class="tricolor mb-6"></div>
+  <a href="/" class="font-display text-2xl font-bold" style="color:var(--gold)">Samvidhan</a>
+  <p class="text-xs text-gray-600 mt-4">© 2026 Samvidhan | For educational purposes</p>
+</footer>
+<script>
+function toggleEx(i){const el=document.getElementById('ex'+i);const arr=document.getElementById('arr'+i);el.classList.toggle('open');arr.textContent=el.classList.contains('open')?'－':'＋';}
+</script>
+</body>
+</html>
