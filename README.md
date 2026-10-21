@@ -101,3 +101,7 @@ The educational content is served from `frontend/` through Django routes. Accoun
 Survey submissions are stored as `SurveyResponse` records in `db.sqlite3`. The results dashboard uses those records and calculates summary values from the database. Create a staff user with `createsuperuser` to access `/results/` and `/admin/`; regular accounts cannot access the results dashboard or audio endpoint.
 
 The project `.gitignore` excludes `.env`, the local SQLite database, Python bytecode, and the virtual environment.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
