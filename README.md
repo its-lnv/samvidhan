@@ -56,6 +56,12 @@ Open <http://127.0.0.1:8000/>. After changing `.env`, stop and restart the serve
 | `GOOGLE_REDIRECT_URI` | Local callback, normally `http://127.0.0.1:8000/accounts/google/callback/` |
 | `GEMINI_API_KEY` | API key used by Django for quiz generation and scoring |
 | `GEMINI_MODEL` | Gemini model name; the current example uses `gemini-3.8-flash` |
+| `ADMIN_USERNAME` | Username to use when creating the Django administrator account |
+| `ADMIN_PASSWORD` | Password to use when creating the Django administrator account |
+
+The admin variables are stored for local setup reference; they are not used to
+automatically create or update a user. Run `createsuperuser` and enter these
+values when initializing the database.
 
 ### Google sign-in setup
 
