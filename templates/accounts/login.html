@@ -16,6 +16,7 @@
   .account-submit{background:#e8650a;color:white}.account-submit:hover{background:#c95608}
   .account-divider{display:flex;align-items:center;gap:12px;color:#999;font-size:12px;margin:18px 0}.account-divider:before,.account-divider:after{content:'';height:1px;background:#e5e1da;flex:1}
   .google-submit{border:1px solid #d9d5ce;color:#242321;background:white}.google-submit:hover{background:#f7f6f3}
+  .google-submit.disabled{color:#999;background:#f7f6f3;cursor:not-allowed}
   .account-switch{text-align:center;color:#777;font-size:13px;margin:20px 0 0}.account-switch a{color:#b94d08;font-weight:700}
   @media(max-width:520px){.account-card{padding:30px 22px}.account-card h1{font-size:36px}}
 </style>{% endblock %}
@@ -29,7 +30,8 @@
     <div class="account-field"><label for="login-password">Password</label><input id="login-password" name="password" type="password" autocomplete="current-password" required></div>
     <button class="account-submit" type="submit">Log in</button>
   </form>
-  <div class="account-divider">or</div><a class="google-submit" href="{% url 'google_login' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Continue with Google</a>
-  {% if not google_login_enabled %}<p class="account-switch">Google sign-in needs the site’s OAuth credentials to be configured.</p>{% endif %}
+  <div class="account-divider">or</div>
+  {% if google_login_enabled %}<a class="google-submit" href="{% url 'google_login' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Continue with Google</a>
+  {% else %}<span class="google-submit disabled" aria-disabled="true">Google sign-in unavailable</span><p class="account-switch">Configure the Google OAuth credentials in the local <code>.env</code> file to enable sign-in.</p>{% endif %}
   <p class="account-switch">New here? <a href="{% url 'register' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Create an account</a></p>
 </section></main>{% endblock %}

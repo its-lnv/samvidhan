@@ -1,7 +1,12 @@
 .venv/
+.vscode/
 __pycache__/
 *.py[cod]
 db.sqlite3
 .env
+.env.*
+!.env.example
+*.db
+*.log
 staticfiles/
 *.sqlite3-journal
