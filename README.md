@@ -79,6 +79,17 @@ http://127.0.0.1:8000/accounts/google/callback/
 
 Copy the client ID and secret into `.env`. If the OAuth app is in testing mode, add the Google accounts that need to sign in as test users. For deployment, configure the deployed domain and callback URL in Google Cloud and update `GOOGLE_REDIRECT_URI` accordingly.
 
+If the login page says that Google sign-in is unavailable:
+
+1. In Google Cloud Console, create or select a project and configure the OAuth consent screen.
+2. Create an OAuth client ID with application type **Web application**.
+3. Add `http://127.0.0.1:8000` as an authorized JavaScript origin.
+4. Add `http://127.0.0.1:8000/accounts/google/callback/` as an authorized redirect URI.
+5. Copy the client ID and secret into a root-level `.env` file using `.env.example` as the template.
+6. Restart Django after changing `.env`.
+
+The redirect URI must match exactly, including the host, port, path, and trailing slash. Do not commit `.env` or share the client secret.
+
 ### Gemini quiz setup
 
 Create a Gemini API key and put it in `.env` as `GEMINI_API_KEY=...`. The key is sent only from Django to Google; it is not included in quiz-page JavaScript. The quiz makes a Gemini request when it loads and another when the user submits answers. Requests can use API quota. Temporary Gemini `503` responses are retried automatically up to three times.
